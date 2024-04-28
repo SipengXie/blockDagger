@@ -13,6 +13,8 @@ type Task struct {
 	Tx            erigonTypes.Transaction
 	ReadVersions  map[common.Address]map[common.Hash]*multiversion.Version
 	WriteVersions map[common.Address]map[common.Hash]*multiversion.Version
+
+	Priority uint64
 }
 
 func NewTask(id int, cost uint64, tx erigonTypes.Transaction) *Task {
