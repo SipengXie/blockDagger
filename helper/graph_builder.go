@@ -6,6 +6,7 @@ import (
 	"blockDagger/types"
 )
 
+// This generateGraph only used in the real environment
 func generateGraph(taskArray []*types.Task, rwAccessedBy *rwset.RwAccessedBy) *graph.Graph {
 	Graph := graph.NewGraph()
 	readBy := rwAccessedBy.ReadBy
