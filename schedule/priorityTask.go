@@ -15,6 +15,9 @@ type PriorityTaskQueue []*TaskWrapper
 func (pq PriorityTaskQueue) Len() int { return len(pq) }
 
 func (pq PriorityTaskQueue) Less(i, j int) bool {
+	if pq[i].Priority == pq[j].Priority {
+		return pq[i].Task.ID < pq[j].Task.ID
+	}
 	return pq[i].Priority > pq[j].Priority
 }
 

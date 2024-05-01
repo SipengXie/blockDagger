@@ -11,9 +11,9 @@ type Vertex struct {
 	OutDegree uint // OUT-DEGREE
 
 	// properties needed to schedule
-	Rank_u uint64
-	Rank_d uint64
-	CT     uint64
+	Rank_u uint64 // 算上自己的最大后续开销
+	Rank_d uint64 // 不计算自己的最大前序开销
+	CT     uint64 // 不算自己的最大后续开销
 }
 
 // UndirectedGraph 表示无向图
@@ -70,35 +70,6 @@ func (g *Graph) HasEdge(source, destination int) bool {
 
 	_, ok = g.AdjacencyMap[source][destination]
 	return ok
-}
-
-func (g *Graph) GetTopo() [][]int {
-	ans := make([][]int, 0)
-	degreeZero := make([]int, 0)
-	for id, v := range g.Vertices {
-		if v.InDegree == 0 {
-			degreeZero = append(degreeZero, id)
-		}
-	}
-	ans = append(ans, degreeZero)
-	for {
-		newDegreeZero := make([]int, 0)
-		for _, vid := range degreeZero {
-			for neighborid := range g.AdjacencyMap[vid] {
-				g.Vertices[neighborid].InDegree--
-				if g.Vertices[neighborid].InDegree == 0 {
-					newDegreeZero = append(newDegreeZero, neighborid)
-				}
-			}
-		}
-		degreeZero = newDegreeZero
-		if len(degreeZero) == 0 {
-			break
-		} else {
-			ans = append(ans, degreeZero)
-		}
-	}
-	return ans
 }
 
 // 由于是DAG，我们可以不判断visited

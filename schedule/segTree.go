@@ -43,7 +43,14 @@ func (t *SegTree) modify(cur *SegTreeNode, x, val uint64) {
 		}
 		t.modify(cur.rson, x, val)
 	}
-	cur.seg_max = max(cur.lson.seg_max, cur.rson.seg_max)
+	if cur.lson == nil {
+		cur.seg_max = cur.rson.seg_max
+	} else if cur.rson == nil {
+		cur.seg_max = cur.lson.seg_max
+	} else {
+		cur.seg_max = max(cur.lson.seg_max, cur.rson.seg_max)
+	}
+
 }
 
 // 寻找[L,R]中第一个大于等于threshold的位置

@@ -41,5 +41,5 @@ func (p *Processor) AddTask(tWrap *TaskWrapper, slotSt uint64, slotLength uint64
 	// 原先的slot长度变为0
 	// 新增的slot从EFT开始 长度为slotLength - length = slotSt + slotLength - EFT = slotLength - Task.Cost
 	p.SlotsMaintainer.modifySlot(slotSt, 0)
-	p.SlotsMaintainer.addSlot(tWrap.EFT, slotSt+slotLength-tWrap.EFT)
+	p.SlotsMaintainer.addSlot(tWrap.EFT, slotLength-tWrap.Task.Cost)
 }
