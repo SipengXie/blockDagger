@@ -7,10 +7,9 @@ import (
 type Status int
 
 const (
-	Unscheduled Status = iota // 尚未经过DAG Schedule
-	Scheduled                 // 已经被DAG Schedule
-	Committed                 // 在执行过程中被提交的版本
-	Ignore                    // 在执行过程中中止的版本
+	Pending   Status = iota // 尚未执行的版本
+	Committed               // 在执行过程中被提交的版本
+	Ignore                  // 在执行过程中中止的版本
 )
 
 type Version struct {

@@ -1,20 +1,25 @@
 package multiversion
 
 import (
+	"blockDagger/rwset"
 	"sync"
 
+	"github.com/holiman/uint256"
 	"github.com/ledgerwatch/erigon-lib/common"
+	"github.com/ledgerwatch/erigon/core/vm/evmtypes"
 )
 
-// 由于这个MVState可能被多个核心同时访问，我们保险起见使用Sync.Map
+// 由于这个MVState可能被多个processor同时访问，我们保险起见使用Sync.Map
 // 不用分开单个搞，就按照RwSet里的那几个Hash来搞
 type GlobalVersionChain struct {
-	ChainMap sync.Map // ChainMap: version chain per record: addr -> hash -> *VersionChain
+	ChainMap   sync.Map                 // ChainMap: version chain per record: addr -> hash -> *VersionChain
+	innerState evmtypes.IntraBlockState // 落盘的innerState
 }
 
-func NewGlobalVersionChain() *GlobalVersionChain {
+func NewGlobalVersionChain(ibs evmtypes.IntraBlockState) *GlobalVersionChain {
 	return &GlobalVersionChain{
-		ChainMap: sync.Map{},
+		ChainMap:   sync.Map{},
+		innerState: ibs,
 	}
 }
 
@@ -38,3 +43,47 @@ func (mvs *GlobalVersionChain) GetHeadVersion(addr common.Address, hash common.H
 
 // TODO: Garbage Collection WIP
 func (mvs *GlobalVersionChain) GarbageCollection() {}
+
+func setVersion(v *Version, innerState evmtypes.IntraBlockState, addr common.Address, hash common.Hash) {
+	switch hash {
+	case rwset.BALANCE:
+		v.Data = innerState.GetBalance(addr)
+	case rwset.NONCE:
+		v.Data = innerState.GetNonce(addr)
+	case rwset.CODE:
+		v.Data = innerState.GetCode(addr)
+	case rwset.CODEHASH:
+		v.Data = innerState.GetCodeHash(addr)
+	case rwset.ALIVE:
+		v.Data = !innerState.Selfdestruct(addr)
+	default:
+		ret := uint256.NewInt(0)
+		innerState.GetState(addr, &hash, ret)
+		v.Data = ret
+	}
+}
+
+func (gvc *GlobalVersionChain) SetHeadVersion(addr common.Address, hash common.Hash) {
+	v := gvc.GetHeadVersion(addr, hash)
+	if v.Data != nil {
+		// 这个判断是帮助以后的GC的，如果这个数据已经被预取过了，就不用再预取了
+		// 有助于流水线
+		return
+	}
+	setVersion(v, gvc.innerState, addr, hash)
+}
+
+// 这个预取如果ibs支持并发就可以并发
+// 这个函数暂且不用，我们使用SetHeadVersion来预取
+func (gvc *GlobalVersionChain) Prefetch(rwSets *rwset.RWSet) {
+	for addr, hashMap := range rwSets.ReadSet {
+		for hash := range hashMap {
+			gvc.SetHeadVersion(addr, hash)
+		}
+	}
+	for addr, hashMap := range rwSets.WriteSet {
+		for hash := range hashMap {
+			gvc.SetHeadVersion(addr, hash)
+		}
+	}
+}
