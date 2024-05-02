@@ -65,3 +65,10 @@ func (v *Version) updatePrev(iv *Version) bool {
 	}
 	return false
 }
+
+func (v *Version) GetVisible() *Version {
+	if v.Status != Committed {
+		return v.Prev.GetVisible()
+	}
+	return v
+}

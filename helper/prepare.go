@@ -9,11 +9,11 @@ import (
 
 // input: TransactionWarppers, rwAccessedBy
 // output Tasks, Graph, mvState
-func Prepare(txws []*types.TransactionWrapper, rwAccessedBy *rwset.RwAccessedBy) ([]*types.Task, *graph.Graph, *multiversion.MultiVersionState) {
-	mvState := multiversion.NewMultiVersionState()
+func Prepare(txws []*types.TransactionWrapper, rwAccessedBy *rwset.RwAccessedBy) ([]*types.Task, *graph.Graph, *multiversion.GlobalVersionChain) {
+	gVC := multiversion.NewGlobalVersionChain()
 	taskList := make([]*types.Task, len(txws))
 	for i, txw := range txws {
-		taskList[i] = transferTxToTask(*txw, mvState)
+		taskList[i] = transferTxToTask(*txw, gVC)
 	}
 	graph := generateGraph(taskList, rwAccessedBy)
 
@@ -34,5 +34,5 @@ func Prepare(txws []*types.TransactionWrapper, rwAccessedBy *rwset.RwAccessedBy)
 		}
 	}
 
-	return taskList, graph, mvState
+	return taskList, graph, gVC
 }
