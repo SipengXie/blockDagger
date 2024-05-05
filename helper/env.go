@@ -60,12 +60,8 @@ func PrepareEnv() (context.Context, kv.Tx, *freezeblocks.BlockReader) {
 	log.Info("Starting")
 	ctx := context.Background()
 
-	// ready stage
 	cfg := ethconfig.Defaults
-	// chainConfig := params.MainnetChainConfig
-	// db := OpenDB(ctx)
 	db := openDB()
-	// defer db.Close()
 	log.Info("DB opened")
 	dbTx, err := db.BeginRo(ctx)
 	if err != nil {

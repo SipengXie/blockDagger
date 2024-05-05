@@ -394,12 +394,14 @@ func gasCall(evm *EVM, contract *Contract, stack *stack.Stack, mem *Memory, memo
 		address        = libcommon.Address(stack.Back(1).Bytes20())
 	)
 	if evm.ChainRules().IsSpuriousDragon {
-		isEmpty, valid := evm.IntraBlockState().Empty(address) // dynamicGas比run还要先判断
-		if !valid {
-			return 0, ErrSystemAbort
-		}
-		if transfersValue && isEmpty {
-			gas += params.CallNewAccountGas
+		if transfersValue {
+			isEmpty, valid := evm.IntraBlockState().Empty(address) // dynamicGas比run还要先判断
+			if !valid {
+				return 0, ErrSystemAbort
+			}
+			if isEmpty {
+				gas += params.CallNewAccountGas
+			}
 		}
 	} else {
 		exist, valid := evm.IntraBlockState().Exist(address)

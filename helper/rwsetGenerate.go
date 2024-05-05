@@ -23,7 +23,7 @@ func generateRwSet(fulldb *StateWithRwSets, tx types.Transaction, header *types.
 	txCtx := originCore.NewEVMTxContext(msg)
 	evm.TxContext = txCtx
 
-	_, err = originCore.ApplyMessage(evm, msg, new(originCore.GasPool).AddGas(header.GasLimit), false /* refunds */, false /* gasBailout */)
+	_, err = originCore.ApplyMessage(evm, msg, new(originCore.GasPool).AddGas(header.GasLimit), true /* refunds */, false /* gasBailout */)
 
 	if err != nil {
 		return nil

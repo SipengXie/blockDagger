@@ -27,7 +27,7 @@ func NewGlobalVersionChain(ibs originEvmtypes.IntraBlockState) *GlobalVersionCha
 // addr : 地址
 // hash : BALANCE, NONCE, CODE, CODEHASH, ALIVE, SLOTS
 func (mvs *GlobalVersionChain) InsertVersion(addr common.Address, hash common.Hash, version *Version) {
-	cache, _ := mvs.ChainMap.LoadOrStore(addr, sync.Map{})
+	cache, _ := mvs.ChainMap.LoadOrStore(addr, &sync.Map{})
 	vc, _ := cache.(*sync.Map).LoadOrStore(hash, NewVersionChain())
 	vc.(*VersionChain).InstallVersion(version)
 }
@@ -36,7 +36,7 @@ func (mvs *GlobalVersionChain) InsertVersion(addr common.Address, hash common.Ha
 // addr : 地址
 // hash : BALANCE, NONCE, CODE, CODEHASH, ALIVE, SLOTS
 func (mvs *GlobalVersionChain) GetHeadVersion(addr common.Address, hash common.Hash) *Version {
-	cache, _ := mvs.ChainMap.LoadOrStore(addr, sync.Map{})
+	cache, _ := mvs.ChainMap.LoadOrStore(addr, &sync.Map{})
 	vc, _ := cache.(*sync.Map).LoadOrStore(hash, NewVersionChain())
 	return vc.(*VersionChain).Head
 }

@@ -86,9 +86,6 @@ func (fs *StateWithRwSets) GetState(addr common.Address, key *common.Hash, value
 }
 
 func (fs *StateWithRwSets) GetTransientState(addr common.Address, key common.Hash) uint256.Int {
-	if fs.RwSets != nil {
-		fs.RwSets.AddReadSet(addr, key)
-	}
 	return fs.StateDb.GetTransientState(addr, key)
 }
 
@@ -104,6 +101,11 @@ func (fs *StateWithRwSets) Exist(addr common.Address) bool {
 }
 
 func (fs *StateWithRwSets) Empty(addr common.Address) bool {
+	if fs.RwSets != nil {
+		fs.RwSets.AddReadSet(addr, rwset.BALANCE)
+		fs.RwSets.AddReadSet(addr, rwset.NONCE)
+		fs.RwSets.AddReadSet(addr, rwset.CODE)
+	}
 	return fs.StateDb.Empty(addr)
 }
 
@@ -117,11 +119,15 @@ func (fs *StateWithRwSets) SetRWSet(RwSets *rwset.RWSet) {
 }
 
 func (fs *StateWithRwSets) CreateAccount(addr common.Address, contractCreation bool) {
+	if fs.RwSets != nil {
+		fs.RwSets.AddWriteSet(addr, rwset.ALIVE)
+	}
 	fs.StateDb.CreateAccount(addr, contractCreation)
 }
 
 func (fs *StateWithRwSets) AddBalance(addr common.Address, amount *uint256.Int) {
 	if fs.RwSets != nil {
+		fs.RwSets.AddReadSet(addr, rwset.BALANCE)
 		fs.RwSets.AddWriteSet(addr, rwset.BALANCE)
 	}
 	fs.StateDb.AddBalance(addr, amount)
@@ -129,6 +135,7 @@ func (fs *StateWithRwSets) AddBalance(addr common.Address, amount *uint256.Int) 
 
 func (fs *StateWithRwSets) SubBalance(addr common.Address, amount *uint256.Int) {
 	if fs.RwSets != nil {
+		fs.RwSets.AddReadSet(addr, rwset.BALANCE)
 		fs.RwSets.AddWriteSet(addr, rwset.BALANCE)
 	}
 	fs.StateDb.SubBalance(addr, amount)
@@ -164,9 +171,6 @@ func (fs *StateWithRwSets) SetState(addr common.Address, key *common.Hash, value
 }
 
 func (fs *StateWithRwSets) SetTransientState(addr common.Address, key common.Hash, value uint256.Int) {
-	if fs.RwSets != nil {
-		fs.RwSets.AddWriteSet(addr, key)
-	}
 	fs.StateDb.SetTransientState(addr, key, value)
 }
 

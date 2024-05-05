@@ -191,9 +191,9 @@ func (evm *EVM) call(typ OpCode, caller ContractRef, addr libcommon.Address, inp
 
 	if !isPrecompile {
 		code, valid = evm.intraBlockState.GetCode(addr)
-	}
-	if !valid {
-		return nil, gas, ErrSystemAbort
+		if !valid {
+			return nil, gas, ErrSystemAbort
+		}
 	}
 
 	// !! No snapshot here, all snapshot goes to EOA

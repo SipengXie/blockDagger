@@ -248,9 +248,6 @@ func (in *EVMInterpreter) Run(contract *Contract, input []byte, readOnly bool) (
 	steps := 0
 	for {
 		steps++
-		// if steps == 614 {
-		// 	fmt.Println("Paused")
-		// }
 		if steps%1000 == 0 && in.evm.Cancelled() {
 			break
 		}
