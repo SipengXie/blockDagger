@@ -25,6 +25,7 @@ import (
 	libcommon "github.com/ledgerwatch/erigon-lib/common"
 
 	"blockDagger/core/vm/evmtypes"
+	"blockDagger/state"
 
 	"github.com/ledgerwatch/erigon/consensus"
 	"github.com/ledgerwatch/erigon/consensus/merge"
@@ -123,17 +124,29 @@ func GetHashFn(ref *types.Header, getHeader func(hash libcommon.Hash, number uin
 
 // CanTransfer checks whether there are enough funds in the address' account to make a transfer.
 // This does not take the necessary gas in to account to make the transfer valid.
-func CanTransfer(db evmtypes.IntraBlockState, addr libcommon.Address, amount *uint256.Int) bool {
-	// !! short curicuit for zero amount
-	if amount.Sign() == 0 {
-		return true
+func CanTransfer(db evmtypes.IntraBlockState, addr libcommon.Address, amount *uint256.Int) (bool, bool) {
+	if _, ok := db.(*state.State); ok {
+		// 正式执行
+		balance, valid := db.GetBalance(addr)
+		if !valid {
+			return false, false
+		}
+		return !balance.Lt(amount), true
+	} else {
+		// RwSet生成时
+		// !!直接返回，从而不产生读写
+		if amount.Sign() == 0 {
+			return true, true
+		}
+		balance, valid := db.GetBalance(addr)
+		return !balance.Lt(amount), valid
 	}
-	return !db.GetBalance(addr).Lt(amount)
 }
 
 // Transfer subtracts amount from sender and adds amount to recipient using the given Db
+// 因为CanTransfer已经判断过了，这里就不判断了
 func Transfer(db evmtypes.IntraBlockState, sender, recipient libcommon.Address, amount *uint256.Int, bailout bool) {
-	// !! short curicuit for zero amount
+	// !!直接返回，从而不产生读写
 	if amount.Sign() == 0 {
 		return
 	}

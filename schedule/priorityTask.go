@@ -36,3 +36,30 @@ func (pq *PriorityTaskQueue) Pop() interface{} {
 	*pq = old[0 : n-1]
 	return x
 }
+
+type ESTTaskQueue []*TaskWrapper
+
+func (pq ESTTaskQueue) Len() int { return len(pq) }
+
+func (pq ESTTaskQueue) Less(i, j int) bool {
+	if pq[i].EST == pq[j].EST {
+		return pq[i].Task.ID < pq[j].Task.ID
+	}
+	return pq[i].EST < pq[j].EST
+}
+
+func (pq ESTTaskQueue) Swap(i, j int) {
+	pq[i], pq[j] = pq[j], pq[i]
+}
+
+func (pq *ESTTaskQueue) Push(x interface{}) {
+	*pq = append(*pq, x.(*TaskWrapper))
+}
+
+func (pq *ESTTaskQueue) Pop() interface{} {
+	old := *pq
+	n := len(old)
+	x := old[n-1]
+	*pq = old[0 : n-1]
+	return x
+}

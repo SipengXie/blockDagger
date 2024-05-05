@@ -42,7 +42,10 @@ func makeGasSStoreFunc(clearingRefund uint64) gasFunc {
 			cost    = uint64(0)
 		)
 
-		evm.IntraBlockState().GetState(contract.Address(), &slot, &current)
+		valid := evm.IntraBlockState().GetState(contract.Address(), &slot, &current)
+		if !valid {
+			return 0, ErrSystemAbort
+		}
 		// If the caller cannot afford the cost, this change will be rolled back
 		if _, slotMod := evm.IntraBlockState().AddSlotToAccessList(contract.Address(), slot); slotMod {
 			cost = params.ColdSloadCostEIP2929
@@ -57,7 +60,10 @@ func makeGasSStoreFunc(clearingRefund uint64) gasFunc {
 		}
 		var original uint256.Int
 		slotCommited := libcommon.Hash(x.Bytes32())
-		evm.IntraBlockState().GetCommittedState(contract.Address(), &slotCommited, &original)
+		valid = evm.IntraBlockState().GetCommittedState(contract.Address(), &slotCommited, &original)
+		if !valid {
+			return 0, ErrSystemAbort
+		}
 		if original.Eq(&current) {
 			if original.IsZero() { // create slot (2.1.1)
 				return cost + params.SstoreSetGasEIP2200, nil
@@ -226,10 +232,22 @@ func makeSelfdestructGasFn(refundsEnabled bool) gasFunc {
 			gas = params.ColdAccountAccessCostEIP2929
 		}
 		// if empty and transfers value
-		if evm.IntraBlockState().Empty(address) && !evm.IntraBlockState().GetBalance(contract.Address()).IsZero() {
+		isEmpty, valid := evm.IntraBlockState().Empty(address)
+		if !valid {
+			return 0, ErrSystemAbort
+		}
+		balance, valid := evm.IntraBlockState().GetBalance(contract.Address())
+		if !valid {
+			return 0, ErrSystemAbort
+		}
+		if isEmpty && !balance.IsZero() {
 			gas += params.CreateBySelfdestructGas
 		}
-		if refundsEnabled && !evm.IntraBlockState().HasSelfdestructed(contract.Address()) {
+		hasSelfdestruct, valid := evm.IntraBlockState().Selfdestruct(address)
+		if !valid {
+			return 0, ErrSystemAbort
+		}
+		if refundsEnabled && !hasSelfdestruct {
 			evm.IntraBlockState().AddRefund(params.SelfdestructRefundGas)
 		}
 		return gas, nil

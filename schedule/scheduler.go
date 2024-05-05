@@ -2,8 +2,6 @@ package schedule
 
 import (
 	"blockDagger/graph"
-	"blockDagger/schedule/greedy"
-	"blockDagger/types"
 	"container/heap"
 )
 
@@ -171,63 +169,64 @@ func (s *Scheduler) CPOPSchedule() ([]*Processor, uint64) {
 }
 
 // Deprecated
-func (s *Scheduler) TopoSchedule() ([]*Processor, uint64) {
-	// Topo Sort, get levels
-	mapIndegree := make(map[int]uint)
-	degreeZero := make([]int, 0)
-	for _, v := range s.Graph.Vertices {
-		mapIndegree[v.Task.ID] = v.InDegree
-		if v.InDegree == 0 {
-			degreeZero = append(degreeZero, v.Task.ID)
-		}
-	}
-	levels := make([][]int, 0)
-	levels = append(levels, degreeZero)
+// func (s *Scheduler) TopoSchedule() ([]*Processor, uint64) {
+// 	// Topo Sort, get levels
+// 	mapIndegree := make(map[int]uint)
+// 	degreeZero := make([]int, 0)
+// 	for _, v := range s.Graph.Vertices {
+// 		mapIndegree[v.Task.ID] = v.InDegree
+// 		if v.InDegree == 0 {
+// 			degreeZero = append(degreeZero, v.Task.ID)
+// 		}
+// 	}
+// 	levels := make([][]int, 0)
+// 	levels = append(levels, degreeZero)
 
-	for {
-		newDegreeZero := make([]int, 0)
-		for _, vid := range degreeZero {
-			for succId := range s.Graph.AdjacencyMap[vid] {
-				mapIndegree[succId]--
-				if mapIndegree[succId] == 0 {
-					newDegreeZero = append(newDegreeZero, succId)
-				}
-			}
-		}
-		degreeZero = newDegreeZero
-		if len(degreeZero) == 0 {
-			break
-		} else {
-			levels = append(levels, degreeZero)
-		}
-	}
+// 	for {
+// 		newDegreeZero := make([]int, 0)
+// 		for _, vid := range degreeZero {
+// 			for succId := range s.Graph.AdjacencyMap[vid] {
+// 				mapIndegree[succId]--
+// 				if mapIndegree[succId] == 0 {
+// 					newDegreeZero = append(newDegreeZero, succId)
+// 				}
+// 			}
+// 		}
+// 		degreeZero = newDegreeZero
+// 		if len(degreeZero) == 0 {
+// 			break
+// 		} else {
+// 			levels = append(levels, degreeZero)
+// 		}
+// 	}
 
-	// converse Int in levels into types.Task
-	levelsTask := make([][]*types.Task, 0)
-	for _, level := range levels {
-		temp := make([]*types.Task, 0)
-		for _, id := range level {
-			temp = append(temp, s.Graph.Vertices[id].Task)
-		}
-		levelsTask = append(levelsTask, temp)
-	}
+// 	// converse Int in levels into types.Task
+// 	levelsTask := make([][]*types.Task, 0)
+// 	for _, level := range levels {
+// 		temp := make([]*types.Task, 0)
+// 		for _, id := range level {
+// 			temp = append(temp, s.Graph.Vertices[id].Task)
+// 		}
+// 		levelsTask = append(levelsTask, temp)
+// 	}
 
-	// A greedy algorithm to schedule tasks in levels
-	processors := make([]*Processor, s.NumWorkers)
-	for i := 0; i < s.NumWorkers; i++ {
-		processors[i] = NewProcessor(s.Graph.CriticalPathLen)
-	}
+// 	// A greedy algorithm to schedule tasks in levels
+// 	processors := make([]*Processor, s.NumWorkers)
+// 	for i := 0; i < s.NumWorkers; i++ {
+// 		processors[i] = NewProcessor(s.Graph.CriticalPathLen)
+// 	}
 
-	// 顺便计算makespan
-	var makespan uint64 = 0
-	for _, level := range levelsTask {
-		// TODO: 如果|level| < workers, 我们可以不走贪心
-		groups, maxSum := greedy.Greedy(level, s.NumWorkers)
-		makespan += maxSum
-		for i, group := range groups {
-			processors[i].Tasks = append(processors[i].Tasks, group...)
-		}
-	}
+// 	// 顺便计算makespan
+// 	var makespan uint64 = 0
+// 	for _, level := range levelsTask {
+// 		// TODO: 如果|level| < workers, 我们可以不走贪心
+// 		groups, maxSum := greedy.Greedy(level, s.NumWorkers)
+// 		makespan += maxSum
+// 		for i, group := range groups {
+// 			// TODO: 这里需要更改
+// 			// processors[i].Tasks = append(processors[i].Tasks, group...)
+// 		}
+// 	}
 
-	return processors, makespan
-}
+// 	return processors, makespan
+// }

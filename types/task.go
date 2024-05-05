@@ -38,3 +38,13 @@ func (t *Task) AddWriteVersion(addr common.Address, hash common.Hash, version *m
 	}
 	t.WriteVersions[addr][hash] = version
 }
+
+func (t *Task) Wait() {
+	for _, versions := range t.ReadVersions {
+		for _, version := range versions {
+			for version.Status == multiversion.Pending {
+				continue
+			}
+		}
+	}
+}

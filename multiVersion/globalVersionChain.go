@@ -6,17 +6,17 @@ import (
 
 	"github.com/holiman/uint256"
 	"github.com/ledgerwatch/erigon-lib/common"
-	"github.com/ledgerwatch/erigon/core/vm/evmtypes"
+	originEvmtypes "github.com/ledgerwatch/erigon/core/vm/evmtypes" // 这里不需要改动，你总要一个原汁原味的IBS
 )
 
 // 由于这个MVState可能被多个processor同时访问，我们保险起见使用Sync.Map
 // 不用分开单个搞，就按照RwSet里的那几个Hash来搞
 type GlobalVersionChain struct {
-	ChainMap   sync.Map                 // ChainMap: version chain per record: addr -> hash -> *VersionChain
-	innerState evmtypes.IntraBlockState // 落盘的innerState
+	ChainMap   sync.Map                       // ChainMap: version chain per record: addr -> hash -> *VersionChain
+	innerState originEvmtypes.IntraBlockState // 落盘的innerState
 }
 
-func NewGlobalVersionChain(ibs evmtypes.IntraBlockState) *GlobalVersionChain {
+func NewGlobalVersionChain(ibs originEvmtypes.IntraBlockState) *GlobalVersionChain {
 	return &GlobalVersionChain{
 		ChainMap:   sync.Map{},
 		innerState: ibs,
@@ -44,7 +44,7 @@ func (mvs *GlobalVersionChain) GetHeadVersion(addr common.Address, hash common.H
 // TODO: Garbage Collection WIP
 func (mvs *GlobalVersionChain) GarbageCollection() {}
 
-func setVersion(v *Version, innerState evmtypes.IntraBlockState, addr common.Address, hash common.Hash) {
+func setVersion(v *Version, innerState originEvmtypes.IntraBlockState, addr common.Address, hash common.Hash) {
 	switch hash {
 	case rwset.BALANCE:
 		v.Data = innerState.GetBalance(addr)

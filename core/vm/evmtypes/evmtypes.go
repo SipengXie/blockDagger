@@ -47,7 +47,7 @@ type TxContext struct {
 
 type (
 	// CanTransferFunc is the signature of a transfer guard function
-	CanTransferFunc func(IntraBlockState, common.Address, *uint256.Int) bool
+	CanTransferFunc func(IntraBlockState, common.Address, *uint256.Int) (bool, bool)
 	// TransferFunc is the signature of a transfer function
 	TransferFunc func(IntraBlockState, common.Address, common.Address, *uint256.Int, bool)
 	// GetHashFunc returns the nth block hash in the blockchain
@@ -56,42 +56,43 @@ type (
 )
 
 // IntraBlockState is an EVM database for full state querying.
+// TODO:
 type IntraBlockState interface {
-	CreateAccount(common.Address, bool)
+	CreateAccount(common.Address, bool) bool
 
-	SubBalance(common.Address, *uint256.Int)
-	AddBalance(common.Address, *uint256.Int)
-	GetBalance(common.Address) *uint256.Int
+	SubBalance(common.Address, *uint256.Int) bool
+	AddBalance(common.Address, *uint256.Int) bool
+	GetBalance(common.Address) (*uint256.Int, bool)
 
-	GetNonce(common.Address) uint64
-	SetNonce(common.Address, uint64)
+	GetNonce(common.Address) (uint64, bool)
+	SetNonce(common.Address, uint64) bool
 
-	GetCodeHash(common.Address) common.Hash
-	GetCode(common.Address) []byte
-	SetCode(common.Address, []byte)
-	GetCodeSize(common.Address) int
+	GetCodeHash(common.Address) (common.Hash, bool)
+	GetCode(common.Address) ([]byte, bool)
+	SetCode(common.Address, []byte) bool
+	GetCodeSize(common.Address) (int, bool)
 
 	AddRefund(uint64)
 	SubRefund(uint64)
 	GetRefund() uint64
 
-	GetCommittedState(common.Address, *common.Hash, *uint256.Int)
-	GetState(address common.Address, slot *common.Hash, outValue *uint256.Int)
-	SetState(common.Address, *common.Hash, uint256.Int)
+	GetCommittedState(common.Address, *common.Hash, *uint256.Int) bool
+	GetState(address common.Address, slot *common.Hash, outValue *uint256.Int) bool
+	SetState(common.Address, *common.Hash, uint256.Int) bool
 
 	GetTransientState(addr common.Address, key common.Hash) uint256.Int
 	SetTransientState(addr common.Address, key common.Hash, value uint256.Int)
 
-	Selfdestruct(common.Address) bool
-	HasSelfdestructed(common.Address) bool
-	Selfdestruct6780(common.Address)
+	Selfdestruct(common.Address) (bool, bool)
+	HasSelfdestructed(common.Address) (bool, bool)
+	Selfdestruct6780(common.Address) bool
 
 	// Exist reports whether the given account exists in state.
 	// Notably this should also return true for suicided accounts.
-	Exist(common.Address) bool
+	Exist(common.Address) (bool, bool)
 	// Empty returns whether the given account is empty. Empty
 	// is defined according to EIP161 (balance = nonce = code = 0).
-	Empty(common.Address) bool
+	Empty(common.Address) (bool, bool)
 
 	Prepare(rules *chain.Rules, sender, coinbase common.Address, dest *common.Address,
 		precompiles []common.Address, txAccesses types2.AccessList)
@@ -104,8 +105,8 @@ type IntraBlockState interface {
 	// even if the feature/fork is not active yet
 	AddSlotToAccessList(addr common.Address, slot common.Hash) (addrMod, slotMod bool)
 
-	RevertToSnapshot(int)
-	Snapshot() int
+	RevertToSnapshot()
+	Snapshot()
 
 	AddLog(*types.Log)
 }

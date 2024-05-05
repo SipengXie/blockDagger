@@ -163,9 +163,10 @@ func (evm *EVM) Interpreter() Interpreter {
 	return evm.interpreter
 }
 
+// TODO:
 func (evm *EVM) call(typ OpCode, caller ContractRef, addr libcommon.Address, input []byte, gas uint64, value *uint256.Int, bailout bool) (ret []byte, leftOverGas uint64, err error) {
 	depth := evm.interpreter.Depth()
-
+	var valid bool
 	if evm.config.NoRecursion && depth > 0 {
 		return nil, gas, nil
 	}
@@ -175,22 +176,35 @@ func (evm *EVM) call(typ OpCode, caller ContractRef, addr libcommon.Address, inp
 	}
 	if typ == CALL || typ == CALLCODE {
 		// Fail if we're trying to transfer more than the available balance
-		if !value.IsZero() && !evm.Context.CanTransfer(evm.intraBlockState, caller.Address(), value) {
-			if !bailout {
+		if !value.IsZero() {
+			canTransfer, valid := evm.Context.CanTransfer(evm.intraBlockState, caller.Address(), value)
+			if !valid {
+				return nil, gas, ErrSystemAbort
+			}
+			if !canTransfer && !bailout {
 				return nil, gas, ErrInsufficientBalance
 			}
 		}
 	}
 	p, isPrecompile := evm.precompile(addr)
 	var code []byte
+
 	if !isPrecompile {
-		code = evm.intraBlockState.GetCode(addr)
+		code, valid = evm.intraBlockState.GetCode(addr)
+	}
+	if !valid {
+		return nil, gas, ErrSystemAbort
 	}
 
-	snapshot := evm.intraBlockState.Snapshot()
+	// !! No snapshot here, all snapshot goes to EOA
+	// snapshot := evm.intraBlockState.Snapshot()
 
 	if typ == CALL {
-		if !evm.intraBlockState.Exist(addr) {
+		exist, valid := evm.intraBlockState.Exist(addr)
+		if !valid {
+			return nil, gas, ErrSystemAbort
+		}
+		if !exist {
 			if !isPrecompile && evm.chainRules.IsSpuriousDragon && value.IsZero() {
 				if evm.config.Debug {
 					v := value
@@ -208,7 +222,10 @@ func (evm *EVM) call(typ OpCode, caller ContractRef, addr libcommon.Address, inp
 				}
 				return nil, gas, nil
 			}
-			evm.intraBlockState.CreateAccount(addr, false)
+			valid = evm.intraBlockState.CreateAccount(addr, false)
+			if !valid {
+				return nil, gas, ErrSystemAbort
+			}
 		}
 		evm.Context.Transfer(evm.intraBlockState, caller.Address(), addr, value, bailout)
 	} else if typ == STATICCALL {
@@ -216,7 +233,11 @@ func (evm *EVM) call(typ OpCode, caller ContractRef, addr libcommon.Address, inp
 		// This doesn't matter on Mainnet, where all empties are gone at the time of Byzantium,
 		// but is the correct thing to do and matters on other networks, in tests, and potential
 		// future scenarios
-		evm.intraBlockState.AddBalance(addr, u256.Num0)
+		// TODO: 这里可以被优化掉吗
+		valid = evm.intraBlockState.AddBalance(addr, u256.Num0)
+		if !valid {
+			return nil, gas, ErrSystemAbort
+		}
 	}
 	if evm.config.Debug {
 		v := value
@@ -250,7 +271,10 @@ func (evm *EVM) call(typ OpCode, caller ContractRef, addr libcommon.Address, inp
 		addrCopy := addr
 		// Initialise a new contract and set the code that is to be used by the EVM.
 		// The contract is a scoped environment for this execution context only.
-		codeHash := evm.intraBlockState.GetCodeHash(addrCopy)
+		codeHash, valid := evm.intraBlockState.GetCodeHash(addrCopy)
+		if !valid {
+			return nil, gas, ErrSystemAbort
+		}
 		var contract *Contract
 		if typ == CALLCODE {
 			contract = NewContract(caller, caller.Address(), value, gas, evm.config.SkipAnalysis)
@@ -271,7 +295,8 @@ func (evm *EVM) call(typ OpCode, caller ContractRef, addr libcommon.Address, inp
 	// above we revert to the snapshot and consume any gas remaining. Additionally
 	// when we're in Homestead this also counts for code storage gas errors.
 	if err != nil || evm.config.RestoreState {
-		evm.intraBlockState.RevertToSnapshot(snapshot)
+		// !! 所有的snapshot都在EOA
+		// evm.intraBlockState.RevertToSnapshot(snapshot)
 		if err != ErrExecutionReverted {
 			gas = 0
 		}
@@ -330,11 +355,13 @@ func (c *codeAndHash) Hash() libcommon.Hash {
 	return c.hash
 }
 
+// TODO:
 // create creates a new contract using code as deployment code.
 func (evm *EVM) create(caller ContractRef, codeAndHash *codeAndHash, gas uint64, value *uint256.Int, address libcommon.Address, typ OpCode, incrementNonce bool) ([]byte, libcommon.Address, uint64, error) {
 	var ret []byte
 	var err error
 	var gasConsumption uint64
+	var valid bool
 	depth := evm.interpreter.Depth()
 
 	if evm.config.Debug {
@@ -357,17 +384,29 @@ func (evm *EVM) create(caller ContractRef, codeAndHash *codeAndHash, gas uint64,
 		err = ErrDepth
 		return nil, libcommon.Address{}, gas, err
 	}
-	if !evm.Context.CanTransfer(evm.intraBlockState, caller.Address(), value) {
+	canTransfer, valid := evm.Context.CanTransfer(evm.intraBlockState, caller.Address(), value)
+	if !valid {
+		return nil, libcommon.Address{}, gas, ErrSystemAbort
+	}
+	if !canTransfer {
 		err = ErrInsufficientBalance
 		return nil, libcommon.Address{}, gas, err
 	}
+	nonce, valid := evm.intraBlockState.GetNonce(caller.Address())
+	if !valid {
+		return nil, libcommon.Address{}, gas, ErrSystemAbort
+	}
+
 	if incrementNonce {
-		nonce := evm.intraBlockState.GetNonce(caller.Address())
 		if nonce+1 < nonce {
 			err = ErrNonceUintOverflow
 			return nil, libcommon.Address{}, gas, err
 		}
-		evm.intraBlockState.SetNonce(caller.Address(), nonce+1)
+		nonce++
+		valid = evm.intraBlockState.SetNonce(caller.Address(), nonce)
+		if !valid {
+			return nil, libcommon.Address{}, gas, ErrSystemAbort
+		}
 	}
 	// We add this to the access list _before_ taking a snapshot. Even if the creation fails,
 	// the access-list change should not be rolled back
@@ -375,16 +414,26 @@ func (evm *EVM) create(caller ContractRef, codeAndHash *codeAndHash, gas uint64,
 		evm.intraBlockState.AddAddressToAccessList(address)
 	}
 	// Ensure there's no existing contract already at the designated address
-	contractHash := evm.intraBlockState.GetCodeHash(address)
-	if evm.intraBlockState.GetNonce(address) != 0 || (contractHash != (libcommon.Hash{}) && contractHash != emptyCodeHash) {
+	contractHash, valid := evm.intraBlockState.GetCodeHash(address)
+	if !valid {
+		return nil, libcommon.Address{}, gas, ErrSystemAbort
+	}
+	if nonce != 0 || (contractHash != (libcommon.Hash{}) && contractHash != emptyCodeHash) {
 		err = ErrContractAddressCollision
 		return nil, libcommon.Address{}, 0, err
 	}
 	// Create a new account on the state
-	snapshot := evm.intraBlockState.Snapshot()
-	evm.intraBlockState.CreateAccount(address, true)
+	// !! No snapshot here, all snapshot goes to EOA
+	// snapshot := evm.intraBlockState.Snapshot()
+	valid = evm.intraBlockState.CreateAccount(address, true)
+	if !valid {
+		return nil, libcommon.Address{}, gas, ErrSystemAbort
+	}
 	if evm.chainRules.IsSpuriousDragon {
-		evm.intraBlockState.SetNonce(address, 1)
+		valid = evm.intraBlockState.SetNonce(address, 1)
+		if !valid {
+			return nil, libcommon.Address{}, gas, ErrSystemAbort
+		}
 	}
 	evm.Context.Transfer(evm.intraBlockState, caller.Address(), address, value, false /* bailout */)
 
@@ -419,7 +468,10 @@ func (evm *EVM) create(caller ContractRef, codeAndHash *codeAndHash, gas uint64,
 	if err == nil {
 		createDataGas := uint64(len(ret)) * params.CreateDataGas
 		if contract.UseGas(createDataGas) {
-			evm.intraBlockState.SetCode(address, ret)
+			valid = evm.intraBlockState.SetCode(address, ret)
+			if !valid {
+				return nil, libcommon.Address{}, gas, ErrSystemAbort
+			}
 		} else if evm.chainRules.IsHomestead {
 			err = ErrCodeStoreOutOfGas
 		}
@@ -429,7 +481,8 @@ func (evm *EVM) create(caller ContractRef, codeAndHash *codeAndHash, gas uint64,
 	// above we revert to the snapshot and consume any gas remaining. Additionally
 	// when we're in homestead this also counts for code storage gas errors.
 	if err != nil && (evm.chainRules.IsHomestead || err != ErrCodeStoreOutOfGas) {
-		evm.intraBlockState.RevertToSnapshot(snapshot)
+		// !! 所有的snapshot都在EOA
+		// evm.intraBlockState.RevertToSnapshot(snapshot)
 		if err != ErrExecutionReverted {
 			contract.UseGas(contract.Gas)
 		}
@@ -444,7 +497,11 @@ func (evm *EVM) create(caller ContractRef, codeAndHash *codeAndHash, gas uint64,
 // Create creates a new contract using code as deployment code.
 // DESCRIBED: docs/programmers_guide/guide.md#nonce
 func (evm *EVM) Create(caller ContractRef, code []byte, gas uint64, endowment *uint256.Int) (ret []byte, contractAddr libcommon.Address, leftOverGas uint64, err error) {
-	contractAddr = crypto.CreateAddress(caller.Address(), evm.intraBlockState.GetNonce(caller.Address()))
+	nonce, valid := evm.intraBlockState.GetNonce(caller.Address())
+	if !valid {
+		return nil, libcommon.Address{}, gas, ErrSystemAbort
+	}
+	contractAddr = crypto.CreateAddress(caller.Address(), nonce)
 	return evm.create(caller, &codeAndHash{code: code}, gas, endowment, contractAddr, CREATE, true /* incrementNonce */)
 }
 

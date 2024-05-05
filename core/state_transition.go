@@ -24,11 +24,12 @@ import (
 	"github.com/ledgerwatch/erigon-lib/txpool/txpoolcfg"
 	erigonTypes "github.com/ledgerwatch/erigon-lib/types"
 
+	"blockDagger/core/vm"
+	"blockDagger/core/vm/evmtypes"
+
 	cmath "github.com/ledgerwatch/erigon/common/math"
 	"github.com/ledgerwatch/erigon/common/u256"
 	"github.com/ledgerwatch/erigon/consensus/misc"
-	"github.com/ledgerwatch/erigon/core/vm"
-	"github.com/ledgerwatch/erigon/core/vm/evmtypes"
 	"github.com/ledgerwatch/erigon/crypto"
 	"github.com/ledgerwatch/erigon/params"
 )
@@ -242,9 +243,13 @@ func (st *StateTransition) buyGas(gasBailout bool) error {
 		}
 	}
 	var subBalance = false
-	if have, want := st.state.GetBalance(st.msg.From()), balanceCheck; have.Cmp(want) < 0 {
+	balance, valid := st.state.GetBalance(st.msg.From())
+	if !valid {
+		return vm.ErrSystemAbort
+	}
+	if balance.Cmp(balanceCheck) < 0 {
 		if !gasBailout {
-			return fmt.Errorf("%w: address %v have %v want %v", ErrInsufficientFunds, st.msg.From().Hex(), have, want)
+			return fmt.Errorf("%w: address %v have %v want %v", ErrInsufficientFunds, st.msg.From().Hex(), balance, balanceCheck)
 		}
 	} else {
 		subBalance = true
@@ -258,7 +263,10 @@ func (st *StateTransition) buyGas(gasBailout bool) error {
 	st.initialGas = st.msg.Gas()
 
 	if subBalance {
-		st.state.SubBalance(st.msg.From(), gasVal)
+		valid = st.state.SubBalance(st.msg.From(), gasVal)
+		if !valid {
+			return vm.ErrSystemAbort
+		}
 		st.state.SubBalance(st.msg.From(), blobGasVal)
 	}
 	return nil
@@ -280,7 +288,10 @@ func CheckEip1559TxGasFeeCap(from libcommon.Address, gasFeeCap, tip, baseFee *ui
 func (st *StateTransition) preCheck(gasBailout bool) error {
 	// Make sure this transaction's nonce is correct.
 	if st.msg.CheckNonce() {
-		stNonce := st.state.GetNonce(st.msg.From())
+		stNonce, valid := st.state.GetNonce(st.msg.From())
+		if !valid {
+			return vm.ErrSystemAbort
+		}
 		if msgNonce := st.msg.Nonce(); stNonce < msgNonce {
 			return fmt.Errorf("%w: address %v, tx: %d state: %d", ErrNonceTooHigh,
 				st.msg.From().Hex(), msgNonce, stNonce)
@@ -293,12 +304,16 @@ func (st *StateTransition) preCheck(gasBailout bool) error {
 		}
 
 		// Make sure the sender is an EOA (EIP-3607)
-		if codeHash := st.state.GetCodeHash(st.msg.From()); codeHash != emptyCodeHash && codeHash != (libcommon.Hash{}) {
+		codehash, valid := st.state.GetCodeHash(st.msg.From())
+		if !valid {
+			return vm.ErrSystemAbort
+		}
+		if codehash != emptyCodeHash && codehash != (libcommon.Hash{}) {
 			// libcommon.Hash{} means that the sender is not in the state.
 			// Historically there were transactions with 0 gas price and non-existing sender,
 			// so we have to allow that.
 			return fmt.Errorf("%w: address %v, codehash: %s", ErrSenderNoEOA,
-				st.msg.From().Hex(), codeHash)
+				st.msg.From().Hex(), codehash)
 		}
 	}
 
@@ -394,7 +409,11 @@ func (st *StateTransition) TransitionDb(refunds bool, gasBailout bool) (*Executi
 	var bailout bool
 	// Gas bailout (for trace_call) should only be applied if there is not sufficient balance to perform value transfer
 	if gasBailout {
-		if !msg.Value().IsZero() && !st.evm.Context.CanTransfer(st.state, msg.From(), msg.Value()) {
+		canTransfer, valid := st.evm.Context.CanTransfer(st.state, msg.From(), msg.Value())
+		if !valid {
+			return nil, vm.ErrSystemAbort
+		}
+		if !msg.Value().IsZero() && !canTransfer {
 			bailout = true
 		}
 	}
@@ -415,6 +434,7 @@ func (st *StateTransition) TransitionDb(refunds bool, gasBailout bool) (*Executi
 	)
 	// !! 看来这里需要一个Snapshot
 	// !! 同时Create和Call的返回需要增加一个systemAbort的返回值
+	st.state.Snapshot()
 	if contractCreation {
 		// The reason why we don't increment nonce here is that we need the original
 		// nonce to calculate the address of the contract that is being created
@@ -423,9 +443,24 @@ func (st *StateTransition) TransitionDb(refunds bool, gasBailout bool) (*Executi
 		ret, _, st.gas, vmerr = st.evm.Create(sender, st.data, st.gas, st.value)
 	} else {
 		// Increment the nonce for the next transaction
-		st.state.SetNonce(msg.From(), st.state.GetNonce(sender.Address())+1)
+		nonce, valid := st.state.GetNonce(sender.Address())
+		if !valid {
+			return nil, vm.ErrSystemAbort
+		}
+		valid = st.state.SetNonce(msg.From(), nonce+1)
+		if !valid {
+			return nil, vm.ErrSystemAbort
+		}
 		ret, st.gas, vmerr = st.evm.Call(sender, st.to(), st.data, st.gas, st.value, bailout)
 	}
+	if vmerr == vm.ErrSystemAbort {
+		return nil, vmerr
+	} else if vmerr != nil {
+		// 回滚进入VM之后的所有操作
+		st.state.RevertToSnapshot()
+	}
+	// !! 如果vmerr是systemAbort，我们需不需要收他的gas费呢？
+	// !! 不需要 直接abort
 	if refunds {
 		if rules.IsLondon {
 			// After EIP-3529: refunds are capped to gasUsed / 5
@@ -447,14 +482,15 @@ func (st *StateTransition) TransitionDb(refunds bool, gasBailout bool) (*Executi
 	amount.Mul(amount, effectiveTip) // gasUsed * effectiveTip = how much goes to the block producer (miner, validator)
 	// !! No need to transfer to the coinbase immediately
 	// st.state.AddBalance(coinbase, amount)
-	if !msg.IsFree() && rules.IsLondon {
-		// !! 一般而言也走不进来
-		burntContractAddress := st.evm.ChainConfig().GetBurntContract(st.evm.Context.BlockNumber)
-		if burntContractAddress != nil {
-			burnAmount := new(uint256.Int).Mul(new(uint256.Int).SetUint64(st.gasUsed()), st.evm.Context.BaseFee)
-			st.state.AddBalance(*burntContractAddress, burnAmount)
-		}
-	}
+
+	// if !msg.IsFree() && rules.IsLondon {
+	// 	// !! 一般而言也走不进来
+	// 	burntContractAddress := st.evm.ChainConfig().GetBurntContract(st.evm.Context.BlockNumber)
+	// 	if burntContractAddress != nil {
+	// 		burnAmount := new(uint256.Int).Mul(new(uint256.Int).SetUint64(st.gasUsed()), st.evm.Context.BaseFee)
+	// 		st.state.AddBalance(*burntContractAddress, burnAmount)
+	// 	}
+	// }
 	// if st.isBor {
 	// 	// Deprecating transfer log and will be removed in future fork. PLEASE DO NOT USE this transfer log going forward. Parameters won't get updated as expected going forward with EIP1559
 	// 	// add transfer log

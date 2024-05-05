@@ -82,7 +82,7 @@ func TestEFT(t *testing.T) {
 	for id, p := range processors {
 		fmt.Printf("Processor %d: ", id)
 		for _, task := range p.Tasks {
-			fmt.Printf("%d ", task.ID)
+			fmt.Printf("%d ", task.Task.ID)
 		}
 		fmt.Println()
 	}
@@ -92,7 +92,7 @@ func TestEFT(t *testing.T) {
 	for id, p := range processors {
 		fmt.Printf("Processor %d: ", id)
 		for _, task := range p.Tasks {
-			fmt.Printf("%d ", task.ID)
+			fmt.Printf("%d ", task.Task.ID)
 		}
 		fmt.Println()
 	}
@@ -102,7 +102,7 @@ func TestEFT(t *testing.T) {
 	for id, p := range processors {
 		fmt.Printf("Processor %d: ", id)
 		for _, task := range p.Tasks {
-			fmt.Printf("%d ", task.ID)
+			fmt.Printf("%d ", task.Task.ID)
 		}
 		fmt.Println()
 	}
@@ -112,19 +112,19 @@ func TestEFT(t *testing.T) {
 	for id, p := range processors {
 		fmt.Printf("Processor %d: ", id)
 		for _, task := range p.Tasks {
-			fmt.Printf("%d ", task.ID)
+			fmt.Printf("%d ", task.Task.ID)
 		}
 		fmt.Println()
 	}
 	fmt.Println("makespan: ", makespan)
 
-	processors, makespan = listScheduler.TopoSchedule()
-	for id, p := range processors {
-		fmt.Printf("Processor %d: ", id)
-		for _, task := range p.Tasks {
-			fmt.Printf("%d ", task.ID)
-		}
-		fmt.Println()
-	}
-	fmt.Println("makespan: ", makespan)
+	// processors, makespan = listScheduler.TopoSchedule()
+	// for id, p := range processors {
+	// 	fmt.Printf("Processor %d: ", id)
+	// 	for _, task := range p.Tasks {
+	// 		fmt.Printf("%d ", task.ID)
+	// 	}
+	// 	fmt.Println()
+	// }
+	// fmt.Println("makespan: ", makespan)
 }

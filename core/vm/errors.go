@@ -42,6 +42,8 @@ var (
 	ErrInvalidCode              = errors.New("invalid code")
 	ErrNonceUintOverflow        = errors.New("nonce uint64 overflow")
 
+	ErrSystemAbort = errors.New("system abort, the accesse operation is unexpected")
+
 	// errStopToken is an internal token indicating interpreter loop termination,
 	// never returned to outside callers.
 	errStopToken = errors.New("stop token")

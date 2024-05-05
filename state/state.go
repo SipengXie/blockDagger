@@ -18,7 +18,7 @@ type TaskContext struct {
 	WriteVersions map[common.Address]map[common.Hash]*multiversion.Version
 }
 
-func NewTaskContext(task types.Task) *TaskContext {
+func NewTaskContext(task *types.Task) *TaskContext {
 	return &TaskContext{
 		ID:            task.ID,
 		ReadVersions:  task.ReadVersions,
@@ -32,12 +32,15 @@ type State struct {
 	taskCtx    *TaskContext
 }
 
-func NewState(task types.Task) *State {
+func NewState() *State {
 	return &State{
 		localWrite: newLocalWrite(),
 		snapshot:   newLocalWrite(),
-		taskCtx:    NewTaskContext(task),
 	}
+}
+
+func (s *State) SetTaskContext(task *types.Task) {
+	s.taskCtx = NewTaskContext(task)
 }
 
 // --------------- 读写都不能超过Task的ReadVersions和WriteVersions ----------------
@@ -407,24 +410,36 @@ func (s *State) AddAddressToAccessList(addr common.Address) bool {
 // AddSlotToAccessList adds the given (address,slot) to the access list. This operation is safe to perform
 // even if the feature/fork is not active yet
 // ignore
-func (sfg *State) AddSlotToAccessList(addr common.Address, slot common.Hash) (bool, bool) {
+func (s *State) AddSlotToAccessList(addr common.Address, slot common.Hash) (bool, bool) {
 	return false, false
 	// TODO: Implement
 }
 
 // ignore
-func (sfg *State) Prepare(rules *chain.Rules, sender common.Address, coinbase common.Address, dest *common.Address, precompiles []common.Address, txAccesses erigonTypes.AccessList) {
+func (s *State) Prepare(rules *chain.Rules, sender common.Address, coinbase common.Address, dest *common.Address, precompiles []common.Address, txAccesses erigonTypes.AccessList) {
 	// TODO: Implement
 }
 
 // ignore
-func (sfg *State) AddLog(*coreTypes.Log) {
+func (s *State) AddLog(*coreTypes.Log) {
 	// TODO: Implement
 }
 
 // ignore
-func (sfg *State) AddPreimage(_ common.Hash, _ []byte) {
+func (s *State) AddPreimage(_ common.Hash, _ []byte) {
 	// TODO: Implement
+}
+
+// ignore
+func (s *State) AddressInAccessList(addr common.Address) bool {
+	// TODO: Implement
+	return true
+}
+
+// ignore
+func (s *State) SlotInAccessList(addr common.Address, slot common.Hash) (addressOk bool, slotOk bool) {
+	// TODO: Implement
+	return true, true
 }
 
 // 将所有writeVersion都设为ignore

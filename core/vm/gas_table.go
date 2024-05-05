@@ -104,7 +104,10 @@ func gasSStore(evm *EVM, contract *Contract, stack *stack.Stack, mem *Memory, me
 	value, x := stack.Back(1), stack.Back(0)
 	key := libcommon.Hash(x.Bytes32())
 	var current uint256.Int
-	evm.IntraBlockState().GetState(contract.Address(), &key, &current)
+	valid := evm.IntraBlockState().GetState(contract.Address(), &key, &current)
+	if !valid {
+		return 0, ErrSystemAbort
+	}
 	// The legacy gas metering only takes into consideration the current state
 	// Legacy rules should be applied if we are in Petersburg (removal of EIP-1283)
 	// OR Constantinople is not active
@@ -142,7 +145,10 @@ func gasSStore(evm *EVM, contract *Contract, stack *stack.Stack, mem *Memory, me
 		return params.NetSstoreNoopGas, nil
 	}
 	var original uint256.Int
-	evm.IntraBlockState().GetCommittedState(contract.Address(), &key, &original)
+	valid = evm.IntraBlockState().GetCommittedState(contract.Address(), &key, &original)
+	if !valid {
+		return 0, ErrSystemAbort
+	}
 	if original == current {
 		if original.IsZero() { // create slot (2.1.1)
 			return params.NetSstoreInitGas, nil
@@ -192,14 +198,20 @@ func gasSStoreEIP2200(evm *EVM, contract *Contract, stack *stack.Stack, mem *Mem
 	value, x := stack.Back(1), stack.Back(0)
 	key := libcommon.Hash(x.Bytes32())
 	var current uint256.Int
-	evm.IntraBlockState().GetState(contract.Address(), &key, &current)
+	valid := evm.IntraBlockState().GetState(contract.Address(), &key, &current)
+	if !valid {
+		return 0, ErrSystemAbort
+	}
 
 	if current.Eq(value) { // noop (1)
 		return params.SloadGasEIP2200, nil
 	}
 
 	var original uint256.Int
-	evm.IntraBlockState().GetCommittedState(contract.Address(), &key, &original)
+	valid = evm.IntraBlockState().GetCommittedState(contract.Address(), &key, &original)
+	if !valid {
+		return 0, ErrSystemAbort
+	}
 	if original == current {
 		if original.IsZero() { // create slot (2.1.1)
 			return params.SstoreSetGasEIP2200, nil
@@ -382,11 +394,21 @@ func gasCall(evm *EVM, contract *Contract, stack *stack.Stack, mem *Memory, memo
 		address        = libcommon.Address(stack.Back(1).Bytes20())
 	)
 	if evm.ChainRules().IsSpuriousDragon {
-		if transfersValue && evm.IntraBlockState().Empty(address) {
+		isEmpty, valid := evm.IntraBlockState().Empty(address) // dynamicGas比run还要先判断
+		if !valid {
+			return 0, ErrSystemAbort
+		}
+		if transfersValue && isEmpty {
 			gas += params.CallNewAccountGas
 		}
-	} else if !evm.IntraBlockState().Exist(address) {
-		gas += params.CallNewAccountGas
+	} else {
+		exist, valid := evm.IntraBlockState().Exist(address)
+		if !valid {
+			return 0, ErrSystemAbort
+		}
+		if !exist {
+			gas += params.CallNewAccountGas
+		}
 	}
 	if transfersValue {
 		gas += params.CallValueTransferGas
@@ -490,15 +512,33 @@ func gasSelfdestruct(evm *EVM, contract *Contract, stack *stack.Stack, mem *Memo
 
 		if evm.ChainRules().IsSpuriousDragon {
 			// if empty and transfers value
-			if evm.IntraBlockState().Empty(address) && !evm.IntraBlockState().GetBalance(contract.Address()).IsZero() {
+			isEmpty, valid := evm.IntraBlockState().Empty(address)
+			if !valid {
+				return 0, ErrSystemAbort
+			}
+			balance, valid := evm.IntraBlockState().GetBalance(contract.Address())
+			if !valid {
+				return 0, ErrSystemAbort
+			}
+			if isEmpty && !balance.IsZero() {
 				gas += params.CreateBySelfdestructGas
 			}
-		} else if !evm.IntraBlockState().Exist(address) {
-			gas += params.CreateBySelfdestructGas
+		} else {
+			exist, valid := evm.IntraBlockState().Exist(address)
+			if !valid {
+				return 0, ErrSystemAbort
+			}
+			if !exist {
+				gas += params.CreateBySelfdestructGas
+			}
 		}
-	}
 
-	if !evm.IntraBlockState().HasSelfdestructed(contract.Address()) {
+	}
+	hasSelfdestructed, valid := evm.IntraBlockState().HasSelfdestructed(contract.Address())
+	if !valid {
+		return 0, ErrSystemAbort
+	}
+	if !hasSelfdestructed {
 		evm.IntraBlockState().AddRefund(params.SelfdestructRefundGas)
 	}
 	return gas, nil
