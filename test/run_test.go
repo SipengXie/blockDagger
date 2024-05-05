@@ -14,15 +14,17 @@ func TestParallel(t *testing.T) {
 	_, graph, _, blkCtx := helper.PrepareforSingleBlock(18999999)
 	scheduler := schedule.NewScheduler(graph, runtime.NumCPU())
 
-	processors, makespan := scheduler.ListSchedule(schedule.EFT)
-	fmt.Println("makespan: ", makespan)
+	// processors, makespan := scheduler.ListSchedule(schedule.EFT)
+	// fmt.Println("makespan: ", makespan)
 
-	// _, makespan = scheduler.ListSchedule(schedule.CPTL)
+	// processors, makespan := scheduler.ListSchedule(schedule.CPTL)
 	// fmt.Println("makespan: ", makespan)
-	// _, makespan = scheduler.ListSchedule(schedule.CT)
+
+	// processors, makespan := scheduler.ListSchedule(schedule.CT)
 	// fmt.Println("makespan: ", makespan)
-	// _, makespan = scheduler.CPOPSchedule()
-	// fmt.Println("makespan: ", makespan)
+
+	processors, makespan := scheduler.CPOPSchedule()
+	fmt.Println("makespan: ", makespan)
 
 	var wg sync.WaitGroup
 	wg.Add(len(processors))
