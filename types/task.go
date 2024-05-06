@@ -43,6 +43,7 @@ func (t *Task) Wait() {
 	for _, versions := range t.ReadVersions {
 		for _, version := range versions {
 			for version.Status == multiversion.Pending {
+				// fmt.Println(t.ID, "waiting for read version", version.Tid)
 				continue
 			}
 		}

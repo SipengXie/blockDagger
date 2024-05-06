@@ -7,13 +7,13 @@ import (
 )
 
 // This generateGraph only used in the real environment
-func generateGraph(taskArray []*types.Task, rwAccessedBy *rwset.RwAccessedBy) *graph.Graph {
+func generateGraph(taskMap map[int]*types.Task, rwAccessedBy *rwset.RwAccessedBy) *graph.Graph {
 	Graph := graph.NewGraph()
 	readBy := rwAccessedBy.ReadBy
 	writeBy := rwAccessedBy.WriteBy
 
 	// 先添加所有的点,task顺序就是他的id顺序
-	for _, task := range taskArray {
+	for _, task := range taskMap {
 		Graph.AddVertex(task)
 	}
 
@@ -28,7 +28,8 @@ func generateGraph(taskArray []*types.Task, rwAccessedBy *rwset.RwAccessedBy) *g
 						// 构建数据依赖
 						Graph.AddEdge(wTx, rTx)
 						// 还应该据此建立多版本的依赖, 后读依赖先写
-						taskArray[rTx].AddReadVersion(addr, hash, taskArray[wTx].WriteVersions[addr][hash])
+						// 因为多个区块中TxID和TaskID不一定一一对应，我们需要将TaskArray转为TaskMap
+						taskMap[rTx].AddReadVersion(addr, hash, taskMap[wTx].WriteVersions[addr][hash])
 					}
 				}
 			}

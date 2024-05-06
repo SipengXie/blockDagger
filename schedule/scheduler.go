@@ -43,6 +43,9 @@ func (s *Scheduler) taskPrioritize(m Method) (timespan uint64, pq PriorityTaskQu
 		tWrap := &TaskWrapper{
 			Task:     v.Task,
 			Priority: priority,
+			AST:      0,
+			EST:      0,
+			EFT:      0,
 		}
 
 		pq = append(pq, tWrap)
@@ -68,39 +71,38 @@ func (s *Scheduler) processorSelection(timespan uint64, pq PriorityTaskQueue, tW
 			succTwrap := tWrapMap[succID]
 			succTwrap.EST = max(succTwrap.EST, tWrap.EFT)
 		}
+
 	}
-	makespan = tWrapMap[len(tWrapMap)-2].EFT
+	makespan = tWrapMap[graph.MAXINT].EST
 	return
 }
 
 func (s *Scheduler) selectBestProcessor(processors []*Processor, tWrap *TaskWrapper) {
+	if tWrap.Task.ID == -1 || tWrap.Task.ID == graph.MAXINT {
+		return
+	}
 	var pid int = 0       // 记录选中哪一个processor
 	var st, length uint64 // 记录选中该processor中哪一个slot
-
+	// if tWrap.Task.ID == 96 {
+	// 	//TODO:debug
+	// 	fmt.Println("Debug")
+	// }
 	var eft uint64 = MAXUINT64 // 记录最小EFT
 	for id, p := range processors {
-		// TODO:选择的时候如果多个EFT一样，我们尽量选择不产生新Slot的processor
-		// 在我们的实现中好像没区别，都要做一个modify和add
+		// if id == 1 {
+		// 	//TODO: debug
+		// 	fmt.Println("Debug")
+		// }
 		tempSt, tempLength, tempEft := p.FindEFT(tWrap.EST, tWrap.Task.Cost)
-		// !!注意在CT的情况下，由于processor是同质的，所以CT没有区别，最终还是比较EFT
 		if tempEft < eft {
 			pid = id
 			st = tempSt
 			length = tempLength
 			eft = tempEft
 		}
-		// 下面代码实现了这个TODO，但先不急
-		// else if tempEft == eft {
-		// 	if tempSt >= tWrap.EST {
-		// 		// 这个slot不会产生新的slot
-		// 		pid = id
-		// 		st = tempSt
-		// 		length = tempLength
-		// 		eft = tempEft
-		// 	}
-		// }
 	}
 	tWrap.EFT = eft
+	tWrap.AST = eft - tWrap.Task.Cost
 	processors[pid].AddTask(tWrap, st, length) // 添加任务
 }
 
@@ -135,6 +137,9 @@ func (s *Scheduler) cpopSchedule(retProcessors *[]*Processor, retMakespan *uint6
 		tWrap := &TaskWrapper{
 			Task:     v.Task,
 			Priority: priority,
+			AST:      0,
+			EST:      0,
+			EFT:      0,
 		}
 		tWrapMap[v.Task.ID] = tWrap
 	}
@@ -152,9 +157,10 @@ func (s *Scheduler) cpopSchedule(retProcessors *[]*Processor, retMakespan *uint6
 
 	for pq.Len() != 0 {
 		tWrap := heap.Pop(&pq).(*TaskWrapper)
-		if _, ok := isCP[tWrap.Task.ID]; ok {
+		if _, ok := isCP[tWrap.Task.ID]; ok && tWrap.Task.ID != -1 && tWrap.Task.ID != graph.MAXINT {
 			st, length, eft := cpProcesser.FindEFT(tWrap.EST, tWrap.Task.Cost)
 			tWrap.EFT = eft
+			tWrap.AST = eft - tWrap.Task.Cost
 			cpProcesser.AddTask(tWrap, st, length)
 		} else {
 			s.selectBestProcessor(processors, tWrap)
@@ -169,7 +175,7 @@ func (s *Scheduler) cpopSchedule(retProcessors *[]*Processor, retMakespan *uint6
 			}
 		}
 	}
-	makespan := tWrapMap[len(tWrapMap)-2].EFT
+	makespan := tWrapMap[graph.MAXINT].EST
 
 	*retProcessors = append(*retProcessors, processors...)
 	*retMakespan = makespan

@@ -4,6 +4,8 @@ import (
 	"blockDagger/types"
 )
 
+const MAXINT = int(^uint(0) >> 1)
+
 // Vertex 表示图中的顶点
 type Vertex struct {
 	Task      *types.Task
@@ -72,34 +74,91 @@ func (g *Graph) HasEdge(source, destination int) bool {
 	return ok
 }
 
-// 由于是DAG，我们可以不判断visited
-func (g *Graph) Dfs(vid int) {
-	for succid := range g.AdjacencyMap[vid] {
-		succ := g.Vertices[succid]
-		succ.Rank_d = max(succ.Rank_d, g.Vertices[vid].Rank_d+g.Vertices[vid].Task.Cost) // rank_d由pred更新，所以vid会更新succ的rank_d
-		g.Dfs(succid)
+func (g *Graph) getTopo(rev bool) []int {
+	mapDegree := make(map[int]uint)
+	degreeZero := make([]int, 0)
+	for id, v := range g.Vertices {
+		if rev {
+			mapDegree[id] = v.OutDegree
+		} else {
+			mapDegree[id] = v.InDegree
+		}
+		if mapDegree[id] == 0 {
+			degreeZero = append(degreeZero, id)
+		}
+	}
+
+	topo := make([]int, 0)
+	for {
+		newDegreeZero := make([]int, 0)
+		for _, vid := range degreeZero {
+			topo = append(topo, vid)
+			edges := g.AdjacencyMap[vid]
+			if rev {
+				edges = g.ReverseMap[vid]
+			}
+
+			for succId := range edges {
+				mapDegree[succId]--
+				if mapDegree[succId] == 0 {
+					newDegreeZero = append(newDegreeZero, succId)
+				}
+			}
+		}
+		degreeZero = newDegreeZero
+		if len(degreeZero) == 0 {
+			break
+		}
+	}
+	return topo
+}
+
+// 在获得topo序的基础上，计算rank_d
+func (g *Graph) calcRankD() {
+	topo := g.getTopo(false)
+	stid := topo[0]
+	g.Vertices[stid].Rank_d = 0
+	for i := 1; i < len(topo); i++ {
+		vid := topo[i]
+		curv := g.Vertices[vid]
+		// getmaxPredcessor
+		maxPred := uint64(0)
+		for predid := range g.ReverseMap[vid] {
+			pred := g.Vertices[predid]
+			maxPred = max(maxPred, pred.Rank_d+pred.Task.Cost)
+		}
+		curv.Rank_d = maxPred
 	}
 }
 
-// 由于是DAG，我们可以不判断visited
-func (g *Graph) RevDfs(vid int) {
-	cur := g.Vertices[vid]
-	for predid := range g.ReverseMap[vid] {
-		pred := g.Vertices[predid]
-		pred.Rank_u = max(pred.Rank_u, pred.Task.Cost+cur.Rank_u) //  rank_u由succ更新，所以vid会更新pred的rank_u
-		pred.CT = max(pred.CT, cur.CT+cur.Task.Cost)
-		g.RevDfs(predid)
+// 在获得逆topo序的基础上，计算rank_u, CT
+func (g *Graph) calcRankUCT() {
+	topo := g.getTopo(true)
+	edid := topo[0]
+	g.Vertices[edid].CT = g.Vertices[edid].Task.Cost
+	g.Vertices[edid].Rank_u = g.Vertices[edid].Task.Cost
+	for i := 0; i < len(topo); i++ {
+		vid := topo[i]
+		cur := g.Vertices[vid]
+		// getmaxSuccessor
+		maxRanku := uint64(0)
+		maxct := uint64(0)
+
+		for succid := range g.AdjacencyMap[vid] {
+			succ := g.Vertices[succid]
+			maxRanku = max(maxRanku, succ.Rank_u)
+			maxct = max(maxct, succ.CT+succ.Task.Cost)
+		}
+		cur.Rank_u = maxRanku + cur.Task.Cost
+		cur.CT = maxct
 	}
 }
 
 func (g *Graph) GenerateProperties() {
 	g.CriticalPathLen = 0
-	g.Dfs(-1)
-
-	// 点数 = 任务数 + 2
-	// -1 0 1 2 3
-	// Vend 为 3 【即任务数】
-	g.RevDfs(len(g.Vertices) - 2)
+	// 应该先得到topo序，然后再……
+	g.calcRankD()
+	g.calcRankUCT()
 
 	for _, v := range g.Vertices {
 		g.CriticalPathLen = max(g.CriticalPathLen, v.Rank_u+v.Rank_d)

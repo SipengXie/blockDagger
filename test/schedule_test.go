@@ -1,7 +1,7 @@
 package test
 
 import (
-	"blockDagger/graph"
+	dag "blockDagger/graph"
 	"blockDagger/schedule"
 	"blockDagger/types"
 	"fmt"
@@ -10,8 +10,8 @@ import (
 
 // 包括建图、测试两部分
 // 这是真实任务图，没加entry和end
-func generateTestGraph() *graph.Graph {
-	graph := graph.NewGraph()
+func generateTestGraph() *dag.Graph {
+	graph := dag.NewGraph()
 	taskList := make([]*types.Task, 10)
 
 	taskList[0] = types.NewTask(0, 13, nil)
@@ -60,19 +60,19 @@ func TestEFT(t *testing.T) {
 	graph := generateTestGraph()
 	// 增加entry与end
 	taskEntry := types.NewTask(-1, 0, nil)
-	taskEnd := types.NewTask(10, 0, nil)
+	taskEnd := types.NewTask(dag.MAXINT, 0, nil)
 
 	graph.AddVertex(taskEntry)
 	graph.AddVertex(taskEnd)
 
 	for id, v := range graph.Vertices {
-		if id == -1 || id == 10 {
+		if id == -1 || id == dag.MAXINT {
 			continue
 		}
 		if v.InDegree == 0 {
 			graph.AddEdge(-1, id)
 		} else if v.OutDegree == 0 {
-			graph.AddEdge(id, 10)
+			graph.AddEdge(id, dag.MAXINT)
 		}
 	}
 

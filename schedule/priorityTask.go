@@ -7,6 +7,7 @@ type TaskWrapper struct {
 	Task     *types.Task
 	Priority uint64
 	EST      uint64
+	AST      uint64
 	EFT      uint64
 }
 
@@ -37,26 +38,26 @@ func (pq *PriorityTaskQueue) Pop() interface{} {
 	return x
 }
 
-type ESTTaskQueue []*TaskWrapper
+type ASTTaskQueue []*TaskWrapper
 
-func (pq ESTTaskQueue) Len() int { return len(pq) }
+func (pq ASTTaskQueue) Len() int { return len(pq) }
 
-func (pq ESTTaskQueue) Less(i, j int) bool {
-	if pq[i].EST == pq[j].EST {
+func (pq ASTTaskQueue) Less(i, j int) bool {
+	if pq[i].AST == pq[j].AST {
 		return pq[i].Task.ID < pq[j].Task.ID
 	}
-	return pq[i].EST < pq[j].EST
+	return pq[i].AST < pq[j].AST
 }
 
-func (pq ESTTaskQueue) Swap(i, j int) {
+func (pq ASTTaskQueue) Swap(i, j int) {
 	pq[i], pq[j] = pq[j], pq[i]
 }
 
-func (pq *ESTTaskQueue) Push(x interface{}) {
+func (pq *ASTTaskQueue) Push(x interface{}) {
 	*pq = append(*pq, x.(*TaskWrapper))
 }
 
-func (pq *ESTTaskQueue) Pop() interface{} {
+func (pq *ASTTaskQueue) Pop() interface{} {
 	old := *pq
 	n := len(old)
 	x := old[n-1]

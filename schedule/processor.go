@@ -13,12 +13,12 @@ import (
 )
 
 type Processor struct {
-	Tasks           ESTTaskQueue
+	Tasks           ASTTaskQueue
 	SlotsMaintainer *SlotsMaintainer
 }
 
 func NewProcessor(timespan uint64) *Processor {
-	queue := make(ESTTaskQueue, 0)
+	queue := make(ASTTaskQueue, 0)
 	heap.Init(&queue)
 	return &Processor{
 		Tasks:           queue,
@@ -29,7 +29,9 @@ func NewProcessor(timespan uint64) *Processor {
 // 返回找到的St与Length以及对应的Task EFT
 func (p *Processor) FindEFT(EST, length uint64) (slotSt uint64, slotLength uint64, EFT uint64) {
 	slotSt, slotLength = p.SlotsMaintainer.findSlot(EST, length)
-	if slotSt <= EST {
+	if slotSt == MAXUINT64 {
+		EFT = MAXUINT64
+	} else if slotSt <= EST {
 		EFT = EST + length
 	} else {
 		EFT = slotSt + length
@@ -39,17 +41,17 @@ func (p *Processor) FindEFT(EST, length uint64) (slotSt uint64, slotLength uint6
 
 func (p *Processor) AddTask(tWrap *TaskWrapper, slotSt uint64, slotLength uint64) {
 	heap.Push(&p.Tasks, tWrap)
-	// slot包含EST
-	if slotSt <= tWrap.EST {
+	// slot包含AST
+	if slotSt <= tWrap.AST {
 		// 需要先更改再添加
-		// 原先的slot 长度变为EST-slotSt
-		p.SlotsMaintainer.modifySlot(slotSt, tWrap.EST-slotSt)
+		// 原先的slot 长度变为AST-slotSt
+		p.SlotsMaintainer.modifySlot(slotSt, tWrap.AST-slotSt)
 		// 新增的slot 从EFT开始 长度为Slot.ed-EFT=slotSt+slotLength-EFT的slot
 		p.SlotsMaintainer.addSlot(tWrap.EFT, slotSt+slotLength-tWrap.EFT)
 		return
 	}
 
-	// slot不包含EST
+	// slot不包含AST
 	// 原先的slot长度变为0
 	// 新增的slot从EFT开始 长度为slotLength - length = slotSt + slotLength - EFT = slotLength - Task.Cost
 	p.SlotsMaintainer.modifySlot(slotSt, 0)
@@ -79,11 +81,11 @@ func (p *Processor) Execute(blkCtx evmtypes.BlockContext, wg *sync.WaitGroup, er
 		msg.SetCheckNonce(false)
 		txCtx := core.NewEVMTxContext(msg)
 		evm.TxContext = txCtx
-
 		res, err := core.ApplyMessage(evm, msg, new(core.GasPool).AddGas(blkCtx.GasLimit), true /* refunds */, false /* gasBailout */)
 		if err != nil {
 			s.TotallyAbort()
 			errs[task.ID] = err
+			continue
 		} else if res.Err != nil {
 			errs[task.ID] = res.Err
 		}

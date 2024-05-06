@@ -89,6 +89,7 @@ func (n *BstNode) remove(st uint64) *BstNode {
 		if n.lson != nil && n.rson != nil {
 			minBstNode := n.rson.findMin()
 			n.st = minBstNode.st
+			n.length = minBstNode.length
 			n.rson = n.rson.remove(minBstNode.st)
 		} else if n.lson != nil {
 			n = n.lson

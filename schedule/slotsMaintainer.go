@@ -1,18 +1,24 @@
 package schedule
 
+import "fmt"
+
 type SlotsMaintainer struct {
-	Slots    *AVLBST
-	TimeSpan *SegTree
+	Slots       *AVLBST
+	TimeSpan    *SegTree
+	largestTime uint64
 }
 
+// TODO:这里可以把Timespan改为MAXUINT64
+// TODO:或者timespan<<1也可以
 func NewSlotsMaintainer(timespan uint64) *SlotsMaintainer {
 	bst := NewTree()
-	bst.Add(0, timespan)
-	segt := NewSegTree(0, timespan)
-	segt.Modify(0, timespan)
+	bst.Add(0, MAXUINT64)
+	segt := NewSegTree(0, MAXUINT64)
+	segt.Modify(0, MAXUINT64)
 	return &SlotsMaintainer{
-		Slots:    bst,
-		TimeSpan: segt,
+		Slots:       bst,
+		TimeSpan:    segt,
+		largestTime: MAXUINT64,
 	}
 }
 
@@ -26,13 +32,18 @@ func (sm *SlotsMaintainer) findSlot(EST, length uint64) (slotSt uint64, slotLeng
 	}
 
 	// 在[EST, MAXENDING]中找到第一个大于等于length的Slot的st
-	slotSt, slotLength = sm.TimeSpan.Query(EST, MAXUINT64, length)
+	slotSt, slotLength = sm.TimeSpan.Query(EST, sm.largestTime, length)
+	if slotSt == MAXUINT64 {
+		fmt.Println("Error: No slot found")
+	}
 	return
 }
 
 // 增加一个slot
 func (sm *SlotsMaintainer) addSlot(st, length uint64) {
-	sm.Slots.Add(st, length)
+	if length != 0 {
+		sm.Slots.Add(st, length)
+	}
 	sm.TimeSpan.Modify(st, length)
 }
 

@@ -1,6 +1,6 @@
 package schedule
 
-const MAXUINT64 = ^uint64(0)
+const MAXUINT64 = ^uint64(0) >> 1
 
 // 区间查询，单点修改的线段树
 type SegTreeNode struct {
@@ -65,23 +65,31 @@ func (t *SegTree) query(cur *SegTreeNode, L, R, threshold uint64) (uint64, uint6
 		// 快速返回
 		return MAXUINT64, 0
 	}
-
-	mid := (cur.L + cur.R) >> 1
-	if cur.L == L && cur.R == R {
-		if cur.seg_max >= threshold {
-			if L == R {
-				return L, cur.seg_max
-			}
-
-			if cur.lson != nil {
-				return t.query(cur.lson, L, mid, threshold)
-			}
-			if cur.rson != nil {
-				return t.query(cur.rson, mid+1, R, threshold)
-			}
-		}
-		return MAXUINT64, 0
+	if cur.L == cur.R {
+		return cur.L, cur.seg_max
 	}
+	mid := (cur.L + cur.R) >> 1
+
+	// if cur.L == L && cur.R == R {
+	// 	if cur.seg_max >= threshold {
+	// 		if L == R {
+	// 			return L, cur.seg_max
+	// 		}
+	// 		var ans uint64 = MAXUINT64
+	// 		var ansLength uint64 = 0
+	// 		if cur.lson != nil {
+	// 			ans, ansLength =  t.query(cur.lson, L, mid, threshold)
+	// 		}
+	// 		if ans != MAXUINT64 {
+	// 			return ans, ansLength
+	// 		}
+	// 		if cur.rson != nil {
+	// 			return t.query(cur.rson, mid+1, R, threshold)
+	// 		}
+	// 	}
+	// 	return MAXUINT64, 0
+	// }
+
 	// 你要查询我左边区间的最大值
 	if R <= mid {
 		if cur.lson != nil {

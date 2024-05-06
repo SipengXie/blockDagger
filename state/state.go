@@ -234,15 +234,25 @@ func (s *State) Empty(addr common.Address) (bool, bool) {
 	if !exist {
 		return true, true
 	}
-	balance, _ := s.GetBalance(addr)
+	balance, valid := s.GetBalance(addr)
+	if !valid {
+		return true, false
+	}
 	if balance.Sign() != 0 {
 		return false, true
 	}
-	nonce, _ := s.GetNonce(addr)
+	nonce, valid := s.GetNonce(addr)
+	if !valid {
+		return true, false
+	}
 	if nonce != 0 {
 		return false, true
 	}
-	codesize, _ := s.GetCodeSize(addr)
+	codesize, valid := s.GetCodeSize(addr)
+	if !valid {
+		return true, false
+
+	}
 	return codesize == 0, true
 }
 
@@ -457,6 +467,7 @@ func (s *State) CommitLocalWrite() {
 	for addr, data := range s.taskCtx.WriteVersions {
 		for hash, version := range data {
 			if s.localWrite.contains(addr, hash) {
+				// 这里version应该加锁
 				version.Status = multiversion.Committed
 				version.Data = s.localWrite.storage[addr][hash]
 			} else {
