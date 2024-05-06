@@ -78,7 +78,7 @@ func TestEFT(t *testing.T) {
 
 	graph.GenerateProperties()
 	listScheduler := schedule.NewScheduler(graph, 4)
-	processors, makespan := listScheduler.ListSchedule(schedule.EFT)
+	processors, makespan := listScheduler.Schedule()
 	for id, p := range processors {
 		fmt.Printf("Processor %d: ", id)
 		for _, task := range p.Tasks {
@@ -88,35 +88,45 @@ func TestEFT(t *testing.T) {
 	}
 	fmt.Println("makespan: ", makespan)
 
-	processors, makespan = listScheduler.ListSchedule(schedule.CPTL)
-	for id, p := range processors {
-		fmt.Printf("Processor %d: ", id)
-		for _, task := range p.Tasks {
-			fmt.Printf("%d ", task.Task.ID)
-		}
-		fmt.Println()
-	}
-	fmt.Println("makespan: ", makespan)
+	// processors, makespan := listScheduler.ListSchedule(schedule.EFT)
+	// for id, p := range processors {
+	// 	fmt.Printf("Processor %d: ", id)
+	// 	for _, task := range p.Tasks {
+	// 		fmt.Printf("%d ", task.Task.ID)
+	// 	}
+	// 	fmt.Println()
+	// }
+	// fmt.Println("makespan: ", makespan)
 
-	processors, makespan = listScheduler.ListSchedule(schedule.CT)
-	for id, p := range processors {
-		fmt.Printf("Processor %d: ", id)
-		for _, task := range p.Tasks {
-			fmt.Printf("%d ", task.Task.ID)
-		}
-		fmt.Println()
-	}
-	fmt.Println("makespan: ", makespan)
+	// processors, makespan = listScheduler.ListSchedule(schedule.CPTL)
+	// for id, p := range processors {
+	// 	fmt.Printf("Processor %d: ", id)
+	// 	for _, task := range p.Tasks {
+	// 		fmt.Printf("%d ", task.Task.ID)
+	// 	}
+	// 	fmt.Println()
+	// }
+	// fmt.Println("makespan: ", makespan)
 
-	processors, makespan = listScheduler.CPOPSchedule()
-	for id, p := range processors {
-		fmt.Printf("Processor %d: ", id)
-		for _, task := range p.Tasks {
-			fmt.Printf("%d ", task.Task.ID)
-		}
-		fmt.Println()
-	}
-	fmt.Println("makespan: ", makespan)
+	// processors, makespan = listScheduler.ListSchedule(schedule.CT)
+	// for id, p := range processors {
+	// 	fmt.Printf("Processor %d: ", id)
+	// 	for _, task := range p.Tasks {
+	// 		fmt.Printf("%d ", task.Task.ID)
+	// 	}
+	// 	fmt.Println()
+	// }
+	// fmt.Println("makespan: ", makespan)
+
+	// processors, makespan = listScheduler.CPOPSchedule()
+	// for id, p := range processors {
+	// 	fmt.Printf("Processor %d: ", id)
+	// 	for _, task := range p.Tasks {
+	// 		fmt.Printf("%d ", task.Task.ID)
+	// 	}
+	// 	fmt.Println()
+	// }
+	// fmt.Println("makespan: ", makespan)
 
 	// processors, makespan = listScheduler.TopoSchedule()
 	// for id, p := range processors {

@@ -3,6 +3,7 @@ package schedule
 import (
 	"blockDagger/graph"
 	"container/heap"
+	"sync"
 )
 
 type Method int
@@ -103,16 +104,20 @@ func (s *Scheduler) selectBestProcessor(processors []*Processor, tWrap *TaskWrap
 	processors[pid].AddTask(tWrap, st, length) // 添加任务
 }
 
-func (s *Scheduler) ListSchedule(m Method) ([]*Processor, uint64) {
+func (s *Scheduler) listSchedule(m Method, retProcessors *[]*Processor, retMakespan *uint64, wg *sync.WaitGroup) {
+	defer wg.Done()
 	// ------------------ task priority calculation ------------------
 	timespan, pq, tWrapMap := s.taskPrioritize(m)
 
 	// ------------------ processor selection ------------------
-	return s.processorSelection(timespan, pq, tWrapMap)
+	processors, makespan := s.processorSelection(timespan, pq, tWrapMap)
+
+	*retProcessors = append(*retProcessors, processors...)
+	*retMakespan = makespan
 }
 
-func (s *Scheduler) CPOPSchedule() ([]*Processor, uint64) {
-
+func (s *Scheduler) cpopSchedule(retProcessors *[]*Processor, retMakespan *uint64, wg *sync.WaitGroup) {
+	defer wg.Done()
 	tWrapMap := make(map[int]*TaskWrapper)
 	var timespan uint64 = 0
 
@@ -165,6 +170,34 @@ func (s *Scheduler) CPOPSchedule() ([]*Processor, uint64) {
 		}
 	}
 	makespan := tWrapMap[len(tWrapMap)-2].EFT
+
+	*retProcessors = append(*retProcessors, processors...)
+	*retMakespan = makespan
+}
+
+func (s *Scheduler) Schedule() ([]*Processor, uint64) {
+	retMakespans := make([]uint64, 4)
+	retProcessors := make([][]*Processor, 4)
+	for i := 0; i < 4; i++ {
+		retProcessors[i] = make([]*Processor, 0)
+	}
+	var wg sync.WaitGroup
+	wg.Add(4)
+	go s.listSchedule(EFT, &retProcessors[0], &retMakespans[0], &wg)
+	go s.listSchedule(CPTL, &retProcessors[1], &retMakespans[1], &wg)
+	go s.listSchedule(CT, &retProcessors[2], &retMakespans[2], &wg)
+	go s.cpopSchedule(&retProcessors[3], &retMakespans[3], &wg)
+	wg.Wait()
+
+	makespan := retMakespans[0]
+	processors := retProcessors[0]
+
+	for i := 1; i < 4; i++ {
+		if retMakespans[i] < makespan {
+			makespan = retMakespans[i]
+			processors = retProcessors[i]
+		}
+	}
 	return processors, makespan
 }
 

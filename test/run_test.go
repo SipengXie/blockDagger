@@ -23,7 +23,7 @@ func TestParallel(t *testing.T) {
 	// processors, makespan := scheduler.ListSchedule(schedule.CT)
 	// fmt.Println("makespan: ", makespan)
 
-	processors, makespan := scheduler.CPOPSchedule()
+	processors, makespan := scheduler.Schedule()
 	fmt.Println("makespan: ", makespan)
 
 	var wg sync.WaitGroup
@@ -42,19 +42,6 @@ func TestParallel(t *testing.T) {
 		}
 	}
 	fmt.Println("Parallel Execution Time: ", elapsed)
-	// processor := schedule.NewProcessor(0)
-	// for _, task := range tasks {
-	// 	processor.Tasks = append(processor.Tasks, &schedule.TaskWrapper{
-	// 		Task: task,
-	// 	})
-	// }
-
-	// var wg sync.WaitGroup
-	// wg.Add(1)
-	// errMaps := make(map[int]error)
-	// processor.Execute(blkCtx, &wg, errMaps)
-	// wg.Wait()
-	// fmt.Println("Processor has errors: ", errMaps)
 }
 
 func TestSerial(t *testing.T) {
