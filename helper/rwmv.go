@@ -5,7 +5,7 @@ import (
 	"blockDagger/types"
 )
 
-func transferTxToTask(txw types.TransactionWrapper, gVC *multiversion.GlobalVersionChain) *types.Task {
+func TransferTxToTask(txw types.TransactionWrapper, gVC *multiversion.GlobalVersionChain) *types.Task {
 	task := types.NewTask(txw.Tid, txw.Tx.GetGas(), txw.Tx)
 	for addr, readSet := range txw.RwSet.ReadSet {
 		for hash := range readSet {

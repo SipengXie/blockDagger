@@ -19,26 +19,27 @@ func prepare(txws []*types.TransactionWrapper, rwAccessedBy *rwset.RwAccessedBy,
 	gVC := multiversion.NewGlobalVersionChain(ibs)
 	taskMap := make(map[int]*types.Task)
 	for _, txw := range txws {
-		task := transferTxToTask(*txw, gVC)
+		task := TransferTxToTask(*txw, gVC)
 		taskMap[task.ID] = task
 	}
 	// 在For循环结束后已经完成了GVC的生成
-	graph := generateGraph(taskMap, rwAccessedBy)
+	graph := GenerateGraph(taskMap, rwAccessedBy)
 	return taskMap, graph, gVC
 }
 
 // 这是一个中间态函数，后面也许会被删除
-func prepareWithGVC(txws []*types.TransactionWrapper, rwAccessedBy *rwset.RwAccessedBy, gVC *multiversion.GlobalVersionChain) (map[int]*types.Task, *dag.Graph) {
+func prepareWithGVC(txws []*types.TransactionWrapper, gVC *multiversion.GlobalVersionChain) (map[int]*types.Task, *dag.Graph) {
 	// 这里是GVC更新流水线的例子
+	rwAccessedBy := GenerateAccessedBy(txws)
 	taskMap := make(map[int]*types.Task)
 	for _, txw := range txws {
-		task := transferTxToTask(*txw, gVC)
+		task := TransferTxToTask(*txw, gVC)
 		taskMap[task.ID] = task
 	}
 	gVC.UpdateLastBlockTail()
 
 	// 这里是建图流水线的例子
-	graph := generateGraph(taskMap, rwAccessedBy)
+	graph := GenerateGraph(taskMap, rwAccessedBy)
 	return taskMap, graph
 }
 
@@ -78,7 +79,7 @@ func prepareTxws(blockNum, k uint64) (txws []*types.TransactionWrapper, rwAccess
 }
 
 // for the test using
-func generateAccessedBy(txws []*types.TransactionWrapper) (rwAccessedBy *rwset.RwAccessedBy) {
+func GenerateAccessedBy(txws []*types.TransactionWrapper) (rwAccessedBy *rwset.RwAccessedBy) {
 	rwAccessedBy = rwset.NewRwAccessedBy()
 	for _, txw := range txws {
 		rwAccessedBy.Add(txw.RwSet, txw.Tid)

@@ -6,8 +6,8 @@ import (
 	"blockDagger/types"
 )
 
-// This generateGraph only used in the real environment
-func generateGraph(taskMap map[int]*types.Task, rwAccessedBy *rwset.RwAccessedBy) *dag.Graph {
+// This GenerateGraph only used in the real environment
+func GenerateGraph(taskMap map[int]*types.Task, rwAccessedBy *rwset.RwAccessedBy) *dag.Graph {
 	graph := dag.NewGraph()
 	readBy := rwAccessedBy.ReadBy
 	writeBy := rwAccessedBy.WriteBy

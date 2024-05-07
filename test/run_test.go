@@ -2,6 +2,7 @@ package test
 
 import (
 	"blockDagger/helper"
+	"blockDagger/pipeline"
 	"blockDagger/schedule"
 	"fmt"
 	"runtime"
@@ -58,8 +59,8 @@ func TestParallelMultipleBlocks(t *testing.T) {
 	fmt.Println("Parallel Execution Time: ", elapsed)
 }
 
-func TestPipeline(t *testing.T) {
-	_, graphGroup, blkCtx := helper.PreparePipeline(18999989, 11, 2)
+func TestPipelineSim(t *testing.T) {
+	_, graphGroup, blkCtx := helper.PreparePipelineSim(18999989, 11, 2)
 	// 这里是Schduler流水线的例子
 	schedulers := make([]*schedule.Scheduler, len(graphGroup))
 	processorsGroup, makespanGroup := make([][]*schedule.Processor, len(graphGroup)), make([]uint64, len(graphGroup))
@@ -87,6 +88,42 @@ func TestPipeline(t *testing.T) {
 			}
 		}
 	}
+}
+
+func TestPipeline(t *testing.T) {
+	//初始化执行环境与Channel
+	txwsGroup, blkCtx, gvc := helper.PreparePipeline(18999989, 11, 2)
+	txwsMsgChan := make(chan *pipeline.TxwsMessage, len(txwsGroup)+2)
+	taskMapsAndAccessedByChan := make(chan *pipeline.TaskMapsAndAccessedBy, len(txwsGroup)+2)
+	graphMsgChan := make(chan *pipeline.GraphMessage, len(txwsGroup)+2)
+	scheduleMsgChan := make(chan *pipeline.ScheduleMessage, len(txwsGroup)+2)
+
+	//初始化四条流水线
+	var wg sync.WaitGroup
+	gvcLine := pipeline.NewGVCLine(gvc, &wg, txwsMsgChan, taskMapsAndAccessedByChan)
+	graphLine := pipeline.NewGraphLine(&wg, taskMapsAndAccessedByChan, graphMsgChan)
+	scheduleLine := pipeline.NewScheduleLine(runtime.NumCPU(), &wg, graphMsgChan, scheduleMsgChan)
+	executeLine := pipeline.NewExecuteLine(blkCtx, &wg, scheduleMsgChan)
+
+	//向第一条流水线填充交易
+	for _, txws := range txwsGroup {
+		txwsMsgChan <- &pipeline.TxwsMessage{
+			Flag: pipeline.START,
+			Txws: txws,
+		}
+	}
+	txwsMsgChan <- &pipeline.TxwsMessage{
+		Flag: pipeline.END,
+	}
+	close(txwsMsgChan)
+
+	//启动四条流水线
+	wg.Add(4)
+	go gvcLine.Run()
+	go graphLine.Run()
+	go scheduleLine.Run()
+	go executeLine.Run()
+	wg.Wait()
 }
 
 func TestSerial(t *testing.T) {
