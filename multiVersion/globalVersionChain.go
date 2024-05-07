@@ -32,17 +32,50 @@ func (mvs *GlobalVersionChain) InsertVersion(addr common.Address, hash common.Ha
 	vc.(*VersionChain).InstallVersion(version)
 }
 
-// -------------------- Get Head Version --------------------
+// -------------------- Get LastBlockTail Version --------------------
 // addr : 地址
 // hash : BALANCE, NONCE, CODE, CODEHASH, ALIVE, SLOTS
-func (mvs *GlobalVersionChain) GetHeadVersion(addr common.Address, hash common.Hash) *Version {
+func (mvs *GlobalVersionChain) GetLastBlockTailVersion(addr common.Address, hash common.Hash) *Version {
 	cache, _ := mvs.ChainMap.LoadOrStore(addr, &sync.Map{})
 	vc, _ := cache.(*sync.Map).LoadOrStore(hash, NewVersionChain())
-	return vc.(*VersionChain).Head
+	return vc.(*VersionChain).LastBlockTail
 }
 
-// TODO: Garbage Collection WIP
-func (mvs *GlobalVersionChain) GarbageCollection() {}
+// TODO:我们不需要立刻实现它，在这里我们可以跳过
+func writeBack(v *Version, innerState originEvmtypes.IntraBlockState, addr common.Address, hash common.Hash) {
+	// switch hash {
+	// case rwset.BALANCE:
+	// 	innerState.SetBalance(addr, v.Data.(*uint256.Int))
+	// case rwset.NONCE:
+	// 	innerState.SetNonce(addr, v.Data.(uint64))
+	// case rwset.CODE:
+	// 	innerState.SetCode(addr, v.Data.([]byte))
+	// case rwset.CODEHASH:
+	// 	// innerState.SetCodeHash(addr, v.Data.(common.Hash))
+	// case rwset.ALIVE:
+	// 	if !v.Data.(bool) {
+	// 		innerState.Selfdestruct(addr)
+	// 	}
+	// default:
+	// 	innerState.SetState(addr, &hash, *v.Data.(*uint256.Int))
+	// }
+}
+
+// 针对每一条VersionChain进行gc并落盘
+func (mvs *GlobalVersionChain) GarbageCollection() {
+	mvs.ChainMap.Range(func(key, value interface{}) bool {
+		addr := key.(common.Address)
+		cache := value.(*sync.Map)
+		cache.Range(func(key, value interface{}) bool {
+			hash := key.(common.Hash)
+			vc := value.(*VersionChain)
+			newhead := vc.GarbageCollection()
+			writeBack(newhead, mvs.innerState, addr, hash)
+			return true
+		})
+		return true
+	})
+}
 
 func setVersion(v *Version, innerState originEvmtypes.IntraBlockState, addr common.Address, hash common.Hash) {
 	switch hash {
@@ -63,9 +96,10 @@ func setVersion(v *Version, innerState originEvmtypes.IntraBlockState, addr comm
 	}
 }
 
-func (gvc *GlobalVersionChain) SetHeadVersion(addr common.Address, hash common.Hash) {
-	v := gvc.GetHeadVersion(addr, hash)
-	if v.Data != nil {
+func (gvc *GlobalVersionChain) DoPrefetch(addr common.Address, hash common.Hash) {
+	v := gvc.GetLastBlockTailVersion(addr, hash)
+	if v.Data != nil || v.Tid != -1 {
+		// 如果v.Tid != -1，则代表被依赖的版本是上一个区块产生的，不需要预取【即必然有前序区块预取过了这条VC的-1版本】
 		// 这个判断是帮助以后的GC的，如果这个数据已经被预取过了，就不用再预取了
 		// 有助于流水线
 		return
@@ -73,17 +107,17 @@ func (gvc *GlobalVersionChain) SetHeadVersion(addr common.Address, hash common.H
 	setVersion(v, gvc.innerState, addr, hash)
 }
 
-// 这个预取如果ibs支持并发就可以并发
-// 这个函数暂且不用，我们使用SetHeadVersion来预取
-func (gvc *GlobalVersionChain) Prefetch(rwSets *rwset.RWSet) {
-	for addr, hashMap := range rwSets.ReadSet {
-		for hash := range hashMap {
-			gvc.SetHeadVersion(addr, hash)
-		}
-	}
-	for addr, hashMap := range rwSets.WriteSet {
-		for hash := range hashMap {
-			gvc.SetHeadVersion(addr, hash)
-		}
-	}
+// 在每一次建图结束后调用一次
+func (gvc *GlobalVersionChain) UpdateLastBlockTail() {
+	gvc.ChainMap.Range(func(key, value interface{}) bool {
+		// addr := key.(common.Address)
+		cache := value.(*sync.Map)
+		cache.Range(func(key, value interface{}) bool {
+			// hash := key.(common.Hash)
+			vc := value.(*VersionChain)
+			vc.UpdateLastBlockTail()
+			return true
+		})
+		return true
+	})
 }

@@ -7,11 +7,8 @@ import (
 	"blockDagger/rwset"
 	"blockDagger/types"
 	"fmt"
-	"time"
 
-	originCore "github.com/ledgerwatch/erigon/core"
 	originTypes "github.com/ledgerwatch/erigon/core/types"
-	originVm "github.com/ledgerwatch/erigon/core/vm"
 	originEvmTypes "github.com/ledgerwatch/erigon/core/vm/evmtypes"
 	"github.com/ledgerwatch/erigon/params"
 )
@@ -25,59 +22,29 @@ func prepare(txws []*types.TransactionWrapper, rwAccessedBy *rwset.RwAccessedBy,
 		task := transferTxToTask(*txw, gVC)
 		taskMap[task.ID] = task
 	}
+	// 在For循环结束后已经完成了GVC的生成
 	graph := generateGraph(taskMap, rwAccessedBy)
-
-	taskEntry := types.NewTask(-1, 0, nil)
-	taskEnd := types.NewTask(dag.MAXINT, 0, nil)
-
-	graph.AddVertex(taskEntry)
-	graph.AddVertex(taskEnd)
-
-	for id, v := range graph.Vertices {
-		if id == -1 || id == dag.MAXINT {
-			continue
-		}
-		if v.InDegree == 0 {
-			graph.AddEdge(-1, id)
-		}
-		if v.OutDegree == 0 {
-			graph.AddEdge(id, dag.MAXINT)
-		}
-	}
-	graph.GenerateProperties()
 	return taskMap, graph, gVC
 }
 
-func PrepareforSingleBlock(blockNum uint64) (map[int]*types.Task, *dag.Graph, *multiversion.GlobalVersionChain, evmtypes.BlockContext) {
-	ctx, dbTx, blkReader := PrepareEnv()
-
-	block, header := GetBlockAndHeader(blkReader, ctx, dbTx, blockNum)
-	originblkCtx := GetOriginBlockContext(blkReader, block, dbTx, header)
-	blkCtx := GetBlockContext(blkReader, block, dbTx, header)
-	txs := block.Transactions()
-
-	txsWrapper := make([]*types.TransactionWrapper, 0)
-	rwAccessedBy := rwset.NewRwAccessedBy()
-	for i, tx := range txs {
-		// 每个tx对应一个新的ibs
-		ibs := GetState(params.MainnetChainConfig, dbTx, blockNum)
-		fullstate := NewStateWithRwSets(ibs)
-		rwset := generateRwSet(fullstate, tx, header, originblkCtx)
-		if rwset == nil {
-			continue
-		}
-		rwAccessedBy.Add(rwset, i)
-		txsWrapper = append(txsWrapper, types.NewTransactionWrapper(tx, rwset, i))
+// 这是一个中间态函数，后面也许会被删除
+func prepareWithGVC(txws []*types.TransactionWrapper, rwAccessedBy *rwset.RwAccessedBy, gVC *multiversion.GlobalVersionChain) (map[int]*types.Task, *dag.Graph) {
+	// 这里是GVC更新流水线的例子
+	taskMap := make(map[int]*types.Task)
+	for _, txw := range txws {
+		task := transferTxToTask(*txw, gVC)
+		taskMap[task.ID] = task
 	}
+	gVC.UpdateLastBlockTail()
 
-	//需要一个初始ibs
-	ibs := GetState(params.MainnetChainConfig, dbTx, blockNum)
-	tasks, graph, gvc := prepare(txsWrapper, rwAccessedBy, ibs)
-
-	return tasks, graph, gvc, blkCtx
+	// 这里是建图流水线的例子
+	graph := generateGraph(taskMap, rwAccessedBy)
+	return taskMap, graph
 }
 
-func PrepareForKBlocks(blockNum, k uint64) (map[int]*types.Task, *dag.Graph, *multiversion.GlobalVersionChain, evmtypes.BlockContext) {
+// 返回带有RwSet的TransactionWrapper，RwAccessedBy，执行用的blockNum的BlockContext，以及从blockNum开始的IntraBlockState
+// rwAccessedBy不一定都会用，比如Pipeline就不会用，而是使用generateAccessedBy
+func prepareTxws(blockNum, k uint64) (txws []*types.TransactionWrapper, rwAccessedBy *rwset.RwAccessedBy, blkCtx evmtypes.BlockContext, ibs originEvmTypes.IntraBlockState) {
 	ctx, dbTx, blkReader := PrepareEnv()
 	txs := make(originTypes.Transactions, 0)
 
@@ -90,10 +57,9 @@ func PrepareForKBlocks(blockNum, k uint64) (map[int]*types.Task, *dag.Graph, *mu
 	// generating execution environment
 	block, header := GetBlockAndHeader(blkReader, ctx, dbTx, blockNum)
 	originblkCtx := GetOriginBlockContext(blkReader, block, dbTx, header)
-	blkCtx := GetBlockContext(blkReader, block, dbTx, header)
 
-	txsWrapper := make([]*types.TransactionWrapper, 0)
-	rwAccessedBy := rwset.NewRwAccessedBy()
+	txws = make([]*types.TransactionWrapper, 0)
+	rwAccessedBy = rwset.NewRwAccessedBy()
 	for i, tx := range txs {
 		// 每个tx对应一个新的ibs
 		ibs := GetState(params.MainnetChainConfig, dbTx, blockNum)
@@ -103,71 +69,21 @@ func PrepareForKBlocks(blockNum, k uint64) (map[int]*types.Task, *dag.Graph, *mu
 			continue
 		}
 		rwAccessedBy.Add(rwset, i)
-		txsWrapper = append(txsWrapper, types.NewTransactionWrapper(tx, rwset, i))
+		txws = append(txws, types.NewTransactionWrapper(tx, rwset, i))
 	}
-
-	//需要一个初始ibs
-	ibs := GetState(params.MainnetChainConfig, dbTx, blockNum)
-	tasks, graph, gvc := prepare(txsWrapper, rwAccessedBy, ibs)
-	fmt.Println("Transation count: ", len(txs), "Task count:", len(tasks))
-	return tasks, graph, gvc, blkCtx
+	ibs = GetState(params.MainnetChainConfig, dbTx, blockNum)
+	blkCtx = GetBlockContext(blkReader, block, dbTx, header)
+	fmt.Println("Transation count: ", len(txs), "Task count:", len(txws))
+	return
 }
 
-func SerialExecutionTime(blockNum uint64) time.Duration {
-	ctx, dbTx, blkReader := PrepareEnv()
-
-	block, header := GetBlockAndHeader(blkReader, ctx, dbTx, blockNum)
-	originblkCtx := GetOriginBlockContext(blkReader, block, dbTx, header)
-	ibs := GetState(params.MainnetChainConfig, dbTx, blockNum)
-	txs := block.Transactions()
-
-	evm := originVm.NewEVM(originblkCtx, originEvmTypes.TxContext{}, ibs, params.MainnetChainConfig, originVm.Config{})
-
-	st := time.Now()
-	for _, tx := range txs {
-		msg, _ := tx.AsMessage(*originTypes.LatestSigner(params.MainnetChainConfig), header.BaseFee, evm.ChainRules())
-
-		// Skip the nonce check!
-		msg.SetCheckNonce(false)
-		txCtx := originCore.NewEVMTxContext(msg)
-		evm.TxContext = txCtx
-
-		originCore.ApplyMessage(evm, msg, new(originCore.GasPool).AddGas(header.GasLimit), true /* refunds */, false /* gasBailout */)
+// for the test using
+func generateAccessedBy(txws []*types.TransactionWrapper) (rwAccessedBy *rwset.RwAccessedBy) {
+	rwAccessedBy = rwset.NewRwAccessedBy()
+	for _, txw := range txws {
+		rwAccessedBy.Add(txw.RwSet, txw.Tid)
 	}
-
-	return time.Since(st)
-}
-
-func SerialExecutionKBlocks(blockNum, k uint64) time.Duration {
-	ctx, dbTx, blkReader := PrepareEnv()
-
-	txs := make(originTypes.Transactions, 0)
-
-	// fetch transactions
-	for i := blockNum; i < blockNum+k; i++ {
-		block, _ := GetBlockAndHeader(blkReader, ctx, dbTx, i)
-		txs = append(txs, block.Transactions()...)
-	}
-
-	block, header := GetBlockAndHeader(blkReader, ctx, dbTx, blockNum)
-	originblkCtx := GetOriginBlockContext(blkReader, block, dbTx, header)
-	ibs := GetState(params.MainnetChainConfig, dbTx, blockNum)
-
-	evm := originVm.NewEVM(originblkCtx, originEvmTypes.TxContext{}, ibs, params.MainnetChainConfig, originVm.Config{})
-
-	st := time.Now()
-	for _, tx := range txs {
-		msg, _ := tx.AsMessage(*originTypes.LatestSigner(params.MainnetChainConfig), header.BaseFee, evm.ChainRules())
-
-		// Skip the nonce check!
-		msg.SetCheckNonce(false)
-		txCtx := originCore.NewEVMTxContext(msg)
-		evm.TxContext = txCtx
-
-		originCore.ApplyMessage(evm, msg, new(originCore.GasPool).AddGas(header.GasLimit), true /* refunds */, false /* gasBailout */)
-	}
-
-	return time.Since(st)
+	return
 }
 
 func TransactionCounting(blockNum, k uint64) {

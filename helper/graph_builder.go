@@ -1,20 +1,18 @@
 package helper
 
 import (
-	"blockDagger/graph"
+	dag "blockDagger/graph"
 	"blockDagger/rwset"
 	"blockDagger/types"
 )
 
 // This generateGraph only used in the real environment
-func generateGraph(taskMap map[int]*types.Task, rwAccessedBy *rwset.RwAccessedBy) *graph.Graph {
-	Graph := graph.NewGraph()
+func generateGraph(taskMap map[int]*types.Task, rwAccessedBy *rwset.RwAccessedBy) *dag.Graph {
+	graph := dag.NewGraph()
 	readBy := rwAccessedBy.ReadBy
 	writeBy := rwAccessedBy.WriteBy
-
-	// 先添加所有的点,task顺序就是他的id顺序
 	for _, task := range taskMap {
-		Graph.AddVertex(task)
+		graph.AddVertex(task)
 	}
 
 	for addr, wAccess := range writeBy {
@@ -26,7 +24,7 @@ func generateGraph(taskMap map[int]*types.Task, rwAccessedBy *rwset.RwAccessedBy
 				for _, wTx := range wTxs {
 					if rTx > wTx {
 						// 构建数据依赖
-						Graph.AddEdge(wTx, rTx)
+						graph.AddEdge(wTx, rTx)
 						// 还应该据此建立多版本的依赖, 后读依赖先写
 						// 因为多个区块中TxID和TaskID不一定一一对应，我们需要将TaskArray转为TaskMap
 						taskMap[rTx].AddReadVersion(addr, hash, taskMap[wTx].WriteVersions[addr][hash])
@@ -36,5 +34,25 @@ func generateGraph(taskMap map[int]*types.Task, rwAccessedBy *rwset.RwAccessedBy
 		}
 
 	}
-	return Graph
+
+	taskEntry := types.NewTask(-1, 0, nil)
+	taskEnd := types.NewTask(dag.MAXINT, 0, nil)
+
+	graph.AddVertex(taskEntry)
+	graph.AddVertex(taskEnd)
+
+	for id, v := range graph.Vertices {
+		if id == -1 || id == dag.MAXINT {
+			continue
+		}
+		if v.InDegree == 0 {
+			graph.AddEdge(-1, id)
+		}
+		if v.OutDegree == 0 {
+			graph.AddEdge(id, dag.MAXINT)
+		}
+	}
+	graph.GenerateProperties()
+
+	return graph
 }

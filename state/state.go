@@ -459,6 +459,8 @@ func (s *State) TotallyAbort() {
 			version.Status = multiversion.Ignore
 		}
 	}
+	s.localWrite = newLocalWrite()
+	s.snapshot = newLocalWrite()
 }
 
 // 将所有在localWrite中的writeVersion都设为committed
@@ -475,4 +477,6 @@ func (s *State) CommitLocalWrite() {
 			}
 		}
 	}
+	s.localWrite = newLocalWrite()
+	s.snapshot = newLocalWrite()
 }

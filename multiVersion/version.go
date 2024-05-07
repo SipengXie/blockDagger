@@ -67,6 +67,7 @@ func (v *Version) updatePrev(iv *Version) bool {
 
 func (v *Version) GetVisible() *Version {
 	if v.Status != Committed {
+		// fmt.Println(v)
 		return v.Prev.GetVisible()
 	}
 	return v

@@ -9,10 +9,10 @@ func transferTxToTask(txw types.TransactionWrapper, gVC *multiversion.GlobalVers
 	task := types.NewTask(txw.Tid, txw.Tx.GetGas(), txw.Tx)
 	for addr, readSet := range txw.RwSet.ReadSet {
 		for hash := range readSet {
-			// 先默认依赖snapshot，建图的时候再修改
-			task.AddReadVersion(addr, hash, gVC.GetHeadVersion(addr, hash))
+			// 先默认依赖上一个区块的版本（不一定是commit版本），建图的时候再修改
+			task.AddReadVersion(addr, hash, gVC.GetLastBlockTailVersion(addr, hash))
 			// 顺带预取了
-			gVC.SetHeadVersion(addr, hash)
+			gVC.DoPrefetch(addr, hash)
 		}
 	}
 	for addr, writeSet := range txw.RwSet.WriteSet {
@@ -24,7 +24,7 @@ func transferTxToTask(txw types.TransactionWrapper, gVC *multiversion.GlobalVers
 			// 写入task
 			task.AddWriteVersion(addr, hash, newVersion)
 			// 顺带预取了
-			gVC.SetHeadVersion(addr, hash)
+			gVC.DoPrefetch(addr, hash)
 		}
 	}
 	return task

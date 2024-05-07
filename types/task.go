@@ -2,6 +2,7 @@ package types
 
 import (
 	multiversion "blockDagger/multiVersion"
+	"blockDagger/rwset"
 
 	"github.com/ledgerwatch/erigon-lib/common"
 	erigonTypes "github.com/ledgerwatch/erigon/core/types"
@@ -48,4 +49,21 @@ func (t *Task) Wait() {
 			}
 		}
 	}
+}
+
+func (t *Task) OutputReadVersion() string {
+	tempStruct := TempSturct{
+		Map: make(map[common.Address]map[string]interface{}),
+	}
+
+	for addr, versions := range t.ReadVersions {
+		for hash, version := range versions {
+			if _, ok := tempStruct.Map[addr]; !ok {
+				tempStruct.Map[addr] = make(map[string]interface{})
+			}
+			tempStruct.Map[addr][rwset.DecodeHash(hash)] = version.GetVisible().Tid
+		}
+	}
+
+	return tempStruct.ToString()
 }
