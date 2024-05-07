@@ -16,17 +16,6 @@ func TestParallel(t *testing.T) {
 
 	processors, makespan := scheduler.Schedule()
 	fmt.Println("makespan: ", makespan)
-	// for _, processor := range processors {
-	// 	for num, task := range processor.Tasks {
-	// 		if task.Task.ID == 11 {
-	// 			//TODO:debug
-	// 			fmt.Println(num, task)
-	// 		} else if task.Task.ID == 124 {
-	// 			//TODO:debug
-	// 			fmt.Println(num, task)
-	// 		}
-	// 	}
-	// }
 	var wg sync.WaitGroup
 	wg.Add(len(processors))
 	errMaps := make([]map[int]error, len(processors))

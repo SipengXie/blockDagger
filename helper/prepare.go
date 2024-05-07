@@ -169,3 +169,21 @@ func SerialExecutionKBlocks(blockNum, k uint64) time.Duration {
 
 	return time.Since(st)
 }
+
+func TransactionCounting(blockNum, k uint64) {
+	ctx, dbTx, blkReader := PrepareEnv()
+	txs := make(originTypes.Transactions, 0)
+
+	// fetch transactions
+	for i := blockNum; i < blockNum+k; i++ {
+		block, _ := GetBlockAndHeader(blkReader, ctx, dbTx, i)
+		txs = append(txs, block.Transactions()...)
+	}
+
+	sum := 0
+	for _, tx := range txs {
+		sum += tx.EncodingSize()
+	}
+	fmt.Println("Transaction Size in total: ", sum)
+	fmt.Println("Transaction Size in average: ", sum/len(txs))
+}

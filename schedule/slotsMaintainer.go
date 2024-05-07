@@ -12,13 +12,13 @@ type SlotsMaintainer struct {
 // TODO:或者timespan<<1也可以
 func NewSlotsMaintainer(timespan uint64) *SlotsMaintainer {
 	bst := NewTree()
-	bst.Add(0, MAXUINT64)
-	segt := NewSegTree(0, MAXUINT64)
-	segt.Modify(0, MAXUINT64)
+	bst.Add(0, timespan<<1)
+	segt := NewSegTree(0, timespan<<1)
+	segt.Modify(0, timespan<<1)
 	return &SlotsMaintainer{
 		Slots:       bst,
 		TimeSpan:    segt,
-		largestTime: MAXUINT64,
+		largestTime: timespan << 1,
 	}
 }
 
