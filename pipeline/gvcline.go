@@ -27,12 +27,12 @@ func (g *GVCLine) Run() {
 	for input := range g.InputChan {
 		// 如果是END信号，那么就结束
 		if input.Flag == END {
-			g.Wg.Done()
 			outMessage := &TaskMapsAndAccessedBy{
 				Flag: END,
 			}
 			g.OutputChan <- outMessage
 			close(g.OutputChan) // 通知下一个Line结束循环
+			g.Wg.Done()
 			return
 		}
 

@@ -4,6 +4,7 @@ import (
 	multiversion "blockDagger/multiVersion"
 	"blockDagger/rwset"
 	"blockDagger/types"
+	"crypto/sha256"
 
 	"github.com/holiman/uint256"
 	"github.com/ledgerwatch/erigon-lib/chain"
@@ -11,6 +12,8 @@ import (
 	erigonTypes "github.com/ledgerwatch/erigon-lib/types"
 	coreTypes "github.com/ledgerwatch/erigon/core/types"
 )
+
+var EXIST = common.Hash(sha256.Sum256([]byte("exist")))
 
 type TaskContext struct {
 	ID            int
@@ -46,7 +49,7 @@ func (s *State) SetTaskContext(task *types.Task) {
 // --------------- 读写都不能超过Task的ReadVersions和WriteVersions ----------------
 
 func (s *State) isValidRead(addr common.Address, hash common.Hash) bool {
-	if (hash == common.Hash{}) {
+	if hash == EXIST {
 		// 一个用于判断这个addr在不在ReadVersions里的实现
 		_, ok := s.taskCtx.ReadVersions[addr]
 		return ok
@@ -61,7 +64,7 @@ func (s *State) isValidRead(addr common.Address, hash common.Hash) bool {
 }
 
 func (s *State) isValidWrite(addr common.Address, hash common.Hash) bool {
-	if (hash == common.Hash{}) {
+	if hash == EXIST {
 		// 一个用于判断这个addr在不在WriteVersions里的实现
 		_, ok := s.taskCtx.ReadVersions[addr]
 		return ok
@@ -175,8 +178,8 @@ func (s *State) GetState(addr common.Address, hash *common.Hash, ret *uint256.In
 		ret.Set(state)
 		return true
 	}
-
-	version := (s.taskCtx.ReadVersions[addr][*hash]).GetVisible()
+	rv := s.taskCtx.ReadVersions[addr][*hash]
+	version := rv.GetVisible()
 	state, ok := version.Data.(*uint256.Int)
 	if !ok {
 		// 这意味预取不出来且valid
@@ -210,7 +213,7 @@ func (s *State) HasSelfdestructed(addr common.Address) (bool, bool) {
 }
 
 func (s *State) Exist(addr common.Address) (bool, bool) {
-	isValid := s.isValidRead(addr, common.Hash{})
+	isValid := s.isValidRead(addr, EXIST)
 	if !isValid {
 		// 默认是不存在
 		return false, false
@@ -274,7 +277,7 @@ func (s *State) GetRefund() uint64 {
 
 // --------------- Setters ----------------
 func (s *State) CreateAccount(addr common.Address, _ bool) bool {
-	valid := s.isValidWrite(addr, common.Hash{})
+	valid := s.isValidWrite(addr, EXIST)
 	if !valid {
 		return false
 	}

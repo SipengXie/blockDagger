@@ -13,6 +13,7 @@ type GraphLine struct {
 
 func NewGraphLine(wg *sync.WaitGroup, in chan *TaskMapsAndAccessedBy, out chan *GraphMessage) *GraphLine {
 	return &GraphLine{
+		Wg:         wg,
 		InputChan:  in,
 		OutputChan: out,
 	}
@@ -21,12 +22,12 @@ func NewGraphLine(wg *sync.WaitGroup, in chan *TaskMapsAndAccessedBy, out chan *
 func (g *GraphLine) Run() {
 	for input := range g.InputChan {
 		if input.Flag == END {
-			g.Wg.Done()
 			outMessage := &GraphMessage{
 				Flag: END,
 			}
 			g.OutputChan <- outMessage
 			close(g.OutputChan)
+			g.Wg.Done()
 			return
 		}
 

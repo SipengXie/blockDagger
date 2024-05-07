@@ -36,7 +36,7 @@ func TestParallel(t *testing.T) {
 }
 
 func TestParallelMultipleBlocks(t *testing.T) {
-	_, graph, _, blkCtx := helper.PrepareForKBlocks(18999989, 11)
+	_, graph, _, blkCtx := helper.PrepareForKBlocks(18999979, 21)
 	scheduler := schedule.NewScheduler(graph, runtime.NumCPU())
 	processors, makespan := scheduler.Schedule()
 	fmt.Println("makespan: ", makespan)
@@ -60,7 +60,7 @@ func TestParallelMultipleBlocks(t *testing.T) {
 }
 
 func TestPipelineSim(t *testing.T) {
-	_, graphGroup, blkCtx := helper.PreparePipelineSim(18999989, 11, 2)
+	_, graphGroup, blkCtx := helper.PreparePipelineSim(18999979, 21, 5)
 	// 这里是Schduler流水线的例子
 	schedulers := make([]*schedule.Scheduler, len(graphGroup))
 	processorsGroup, makespanGroup := make([][]*schedule.Processor, len(graphGroup)), make([]uint64, len(graphGroup))
@@ -92,7 +92,7 @@ func TestPipelineSim(t *testing.T) {
 
 func TestPipeline(t *testing.T) {
 	//初始化执行环境与Channel
-	txwsGroup, blkCtx, gvc := helper.PreparePipeline(18999989, 11, 2)
+	txwsGroup, blkCtx, gvc := helper.PreparePipeline(18999979, 21, 5)
 	txwsMsgChan := make(chan *pipeline.TxwsMessage, len(txwsGroup)+2)
 	taskMapsAndAccessedByChan := make(chan *pipeline.TaskMapsAndAccessedBy, len(txwsGroup)+2)
 	graphMsgChan := make(chan *pipeline.GraphMessage, len(txwsGroup)+2)
@@ -118,12 +118,15 @@ func TestPipeline(t *testing.T) {
 	close(txwsMsgChan)
 
 	//启动四条流水线
+	st := time.Now()
 	wg.Add(4)
-	go gvcLine.Run()
-	go graphLine.Run()
-	go scheduleLine.Run()
 	go executeLine.Run()
+	go scheduleLine.Run()
+	go graphLine.Run()
+	go gvcLine.Run()
 	wg.Wait()
+	elapsed := time.Since(st)
+	fmt.Println("Pipeline Execution Time: ", elapsed)
 }
 
 func TestSerial(t *testing.T) {
@@ -132,6 +135,6 @@ func TestSerial(t *testing.T) {
 }
 
 func TestSerialMultipleBlocks(t *testing.T) {
-	SerialExecutionKBlocksTime := helper.SerialExecutionKBlocks(18999989, 11)
+	SerialExecutionKBlocksTime := helper.SerialExecutionKBlocks(18999979, 21)
 	fmt.Println("Serial Execution Time: ", SerialExecutionKBlocksTime)
 }

@@ -24,12 +24,12 @@ func NewScheduleLine(numWorker int, wg *sync.WaitGroup, in chan *GraphMessage, o
 func (s *ScheduleLine) Run() {
 	for input := range s.InputChan {
 		if input.Flag == END {
-			s.Wg.Done()
 			outMessage := &ScheduleMessage{
 				Flag: END,
 			}
 			s.OutputChan <- outMessage
 			close(s.OutputChan)
+			s.Wg.Done()
 			return
 		}
 

@@ -36,12 +36,12 @@ func (e *ExecuteLine) Run() {
 		errMaps := make([]map[int]error, len(processors))
 		for id, processor := range processors {
 			errMaps[id] = make(map[int]error)
-			processor.Execute(e.BlkCtx, &execwg, errMaps[id])
+			go processor.Execute(e.BlkCtx, &execwg, errMaps[id])
 		}
 		execwg.Wait()
 		for id, errMap := range errMaps {
 			if len(errMap) != 0 {
-				fmt.Println("Processor ", id, " has errors: ", errMap)
+				fmt.Println("Processor ", id, " has errors: ", len(errMap))
 			}
 		}
 	}
