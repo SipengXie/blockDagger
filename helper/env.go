@@ -54,7 +54,7 @@ func newBlockReader(cfg ethconfig.Config) *freezeblocks.BlockReader {
 	return freezeblocks.NewBlockReader(blockSnaps, borSnaps)
 }
 
-func PrepareEnv() (context.Context, kv.Tx, *freezeblocks.BlockReader) {
+func PrepareEnv() (context.Context, kv.Tx, *freezeblocks.BlockReader, kv.RoDB) {
 	consoleHandler := log.LvlFilterHandler(log.LvlInfo, log.StdoutHandler)
 	log.Root().SetHandler(consoleHandler)
 	log.Info("Starting")
@@ -66,14 +66,14 @@ func PrepareEnv() (context.Context, kv.Tx, *freezeblocks.BlockReader) {
 	dbTx, err := db.BeginRo(ctx)
 	if err != nil {
 		log.Error("Failed to begin transaction", "err", err)
-		return nil, nil, nil
+		return nil, nil, nil, nil
 	}
 	log.Info("DB Transaction started")
 
 	blockReader := newBlockReader(cfg)
 	log.Info("Block Reader created")
 
-	return ctx, dbTx, blockReader
+	return ctx, dbTx, blockReader, db
 }
 
 func GetBlockAndHeader(blockReader *freezeblocks.BlockReader, ctx context.Context, dbTx kv.Tx, blockNumber uint64) (*types.Block, *types.Header) {
@@ -96,6 +96,7 @@ func GetState(chainConfig *chain.Config, dbTx kv.Tx, blockNumber uint64) *state.
 	return ibs
 }
 
+// TODO:这里需要每一个execution goroutine有自己的dbTx！
 func GetBlockContext(blockReader *freezeblocks.BlockReader, blk *types.Block, dbTx kv.Tx, header *types.Header) evmtypes.BlockContext {
 	getHeader := func(hash common.Hash, number uint64) *types.Header {
 		h, _ := blockReader.Header(context.Background(), dbTx, hash, number)

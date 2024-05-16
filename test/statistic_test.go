@@ -6,5 +6,5 @@ import (
 )
 
 func TestTxStat(t *testing.T) {
-	helper.TransactionCounting(18999949, 51)
+	helper.TransactionCounting(18999940, 60)
 }

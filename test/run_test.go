@@ -12,7 +12,7 @@ import (
 )
 
 func TestParallel(t *testing.T) {
-	_, graph, _, blkCtx := helper.PrepareforSingleBlock(18999999)
+	ctx, _, graph, _, db, blkReader, blk, header := helper.PrepareforSingleBlock(18999999)
 	scheduler := schedule.NewScheduler(graph, runtime.NumCPU())
 
 	processors, makespan := scheduler.Schedule()
@@ -23,7 +23,7 @@ func TestParallel(t *testing.T) {
 	st := time.Now()
 	for id, processor := range processors {
 		errMaps[id] = make(map[int]error)
-		go processor.Execute(blkCtx, &wg, errMaps[id])
+		go processor.Execute(blkReader, ctx, blk, header, db, &wg, errMaps[id])
 	}
 	wg.Wait()
 	elapsed := time.Since(st)
@@ -36,7 +36,7 @@ func TestParallel(t *testing.T) {
 }
 
 func TestParallelMultipleBlocks(t *testing.T) {
-	_, graph, _, blkCtx := helper.PrepareForKBlocks(18999979, 21)
+	ctx, _, graph, _, db, blkReader, blk, header := helper.PrepareForKBlocks(18999940, 60)
 	scheduler := schedule.NewScheduler(graph, runtime.NumCPU())
 	processors, makespan := scheduler.Schedule()
 	fmt.Println("makespan: ", makespan)
@@ -46,7 +46,7 @@ func TestParallelMultipleBlocks(t *testing.T) {
 	st := time.Now()
 	for id, processor := range processors {
 		errMaps[id] = make(map[int]error)
-		go processor.Execute(blkCtx, &wg, errMaps[id])
+		go processor.Execute(blkReader, ctx, blk, header, db, &wg, errMaps[id])
 	}
 	wg.Wait()
 	elapsed := time.Since(st)
@@ -60,7 +60,7 @@ func TestParallelMultipleBlocks(t *testing.T) {
 }
 
 func TestPipelineSim(t *testing.T) {
-	_, graphGroup, blkCtx := helper.PreparePipelineSim(18999979, 21, 5)
+	ctx, _, graphGroup, db, blkReader, blk, header := helper.PreparePipelineSim(18999940, 60, 12)
 	// 这里是Schduler流水线的例子
 	schedulers := make([]*schedule.Scheduler, len(graphGroup))
 	processorsGroup, makespanGroup := make([][]*schedule.Processor, len(graphGroup)), make([]uint64, len(graphGroup))
@@ -79,7 +79,7 @@ func TestPipelineSim(t *testing.T) {
 		errMaps := make([]map[int]error, len(processors))
 		for id, processor := range processors {
 			errMaps[id] = make(map[int]error)
-			go processor.Execute(blkCtx, &wg, errMaps[id])
+			go processor.Execute(blkReader, ctx, blk, header, db, &wg, errMaps[id])
 		}
 		wg.Wait()
 		for id, errMap := range errMaps {
@@ -92,7 +92,7 @@ func TestPipelineSim(t *testing.T) {
 
 func TestPipeline(t *testing.T) {
 	//初始化执行环境与Channel
-	txwsGroup, blkCtx, gvc := helper.PreparePipeline(18999979, 21, 5)
+	ctx, txwsGroup, db, gvc, blkReader, blk, header := helper.PreparePipeline(18999940, 60, 12)
 	txwsMsgChan := make(chan *pipeline.TxwsMessage, len(txwsGroup)+2)
 	taskMapsAndAccessedByChan := make(chan *pipeline.TaskMapsAndAccessedBy, len(txwsGroup)+2)
 	graphMsgChan := make(chan *pipeline.GraphMessage, len(txwsGroup)+2)
@@ -103,7 +103,7 @@ func TestPipeline(t *testing.T) {
 	gvcLine := pipeline.NewGVCLine(gvc, &wg, txwsMsgChan, taskMapsAndAccessedByChan)
 	graphLine := pipeline.NewGraphLine(&wg, taskMapsAndAccessedByChan, graphMsgChan)
 	scheduleLine := pipeline.NewScheduleLine(runtime.NumCPU(), &wg, graphMsgChan, scheduleMsgChan)
-	executeLine := pipeline.NewExecuteLine(blkCtx, &wg, scheduleMsgChan)
+	executeLine := pipeline.NewExecuteLine(blkReader, ctx, blk, header, db, &wg, scheduleMsgChan)
 
 	//向第一条流水线填充交易
 	for _, txws := range txwsGroup {
@@ -135,6 +135,6 @@ func TestSerial(t *testing.T) {
 }
 
 func TestSerialMultipleBlocks(t *testing.T) {
-	SerialExecutionKBlocksTime := helper.SerialExecutionKBlocks(18999979, 21)
+	SerialExecutionKBlocksTime := helper.SerialExecutionKBlocks(18999940, 60)
 	fmt.Println("Serial Execution Time: ", SerialExecutionKBlocksTime)
 }

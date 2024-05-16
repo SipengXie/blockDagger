@@ -1,16 +1,18 @@
 package helper
 
 import (
-	"blockDagger/core/vm/evmtypes"
 	dag "blockDagger/graph"
 	multiversion "blockDagger/multiVersion"
 	"blockDagger/rwset"
 	"blockDagger/types"
+	"context"
 	"fmt"
 
+	"github.com/ledgerwatch/erigon-lib/kv"
 	originTypes "github.com/ledgerwatch/erigon/core/types"
 	originEvmTypes "github.com/ledgerwatch/erigon/core/vm/evmtypes"
 	"github.com/ledgerwatch/erigon/params"
+	"github.com/ledgerwatch/erigon/turbo/snapshotsync/freezeblocks"
 )
 
 // input: TransactionWarppers, rwAccessedBy
@@ -45,8 +47,8 @@ func prepareWithGVC(txws []*types.TransactionWrapper, gVC *multiversion.GlobalVe
 
 // 返回带有RwSet的TransactionWrapper，RwAccessedBy，执行用的blockNum的BlockContext，以及从blockNum开始的IntraBlockState
 // rwAccessedBy不一定都会用，比如Pipeline就不会用，而是使用generateAccessedBy
-func prepareTxws(blockNum, k uint64) (txws []*types.TransactionWrapper, rwAccessedBy *rwset.RwAccessedBy, blkCtx evmtypes.BlockContext, ibs originEvmTypes.IntraBlockState) {
-	ctx, dbTx, blkReader := PrepareEnv()
+func prepareTxws(blockNum, k uint64) (ctx context.Context, txws []*types.TransactionWrapper, rwAccessedBy *rwset.RwAccessedBy, db kv.RoDB, ibs originEvmTypes.IntraBlockState, blkReader *freezeblocks.BlockReader, block *originTypes.Block, header *originTypes.Header) {
+	ctx, dbTx, blkReader, db := PrepareEnv()
 	txs := make(originTypes.Transactions, 0)
 
 	// fetch transactions
@@ -56,7 +58,7 @@ func prepareTxws(blockNum, k uint64) (txws []*types.TransactionWrapper, rwAccess
 	}
 
 	// generating execution environment
-	block, header := GetBlockAndHeader(blkReader, ctx, dbTx, blockNum)
+	block, header = GetBlockAndHeader(blkReader, ctx, dbTx, blockNum)
 	originblkCtx := GetOriginBlockContext(blkReader, block, dbTx, header)
 
 	txws = make([]*types.TransactionWrapper, 0)
@@ -73,7 +75,6 @@ func prepareTxws(blockNum, k uint64) (txws []*types.TransactionWrapper, rwAccess
 		txws = append(txws, types.NewTransactionWrapper(tx, rwset, i))
 	}
 	ibs = GetState(params.MainnetChainConfig, dbTx, blockNum)
-	blkCtx = GetBlockContext(blkReader, block, dbTx, header)
 	fmt.Println("Transation count: ", len(txs), "Task count:", len(txws))
 	return
 }
@@ -88,19 +89,20 @@ func GenerateAccessedBy(txws []*types.TransactionWrapper) (rwAccessedBy *rwset.R
 }
 
 func TransactionCounting(blockNum, k uint64) {
-	ctx, dbTx, blkReader := PrepareEnv()
-	txs := make(originTypes.Transactions, 0)
-
-	// fetch transactions
-	for i := blockNum; i < blockNum+k; i++ {
-		block, _ := GetBlockAndHeader(blkReader, ctx, dbTx, i)
-		txs = append(txs, block.Transactions()...)
-	}
+	_, txws, _, _, _, _, _, _ := prepareTxws(blockNum, k)
 
 	sum := 0
-	for _, tx := range txs {
-		sum += tx.EncodingSize()
+	sumRw := 0
+	for _, txw := range txws {
+		sum += txw.Tx.EncodingSize()
+		for _, s := range txw.RwSet.ReadSet {
+			sumRw += 20
+			sumRw += 32 * len(s)
+		}
 	}
+	fmt.Println("Transaction count: ", len(txws))
 	fmt.Println("Transaction Size in total: ", sum)
-	fmt.Println("Transaction Size in average: ", sum/len(txs))
+	fmt.Println("RwSet Size in total: ", sumRw)
+	fmt.Println("Transaction Size in average: ", sum/len(txws))
+	fmt.Println("RwSet Size in average: ", sumRw/len(txws))
 }

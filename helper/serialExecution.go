@@ -11,7 +11,7 @@ import (
 )
 
 func SerialExecutionTime(blockNum uint64) time.Duration {
-	ctx, dbTx, blkReader := PrepareEnv()
+	ctx, dbTx, blkReader, _ := PrepareEnv()
 
 	block, header := GetBlockAndHeader(blkReader, ctx, dbTx, blockNum)
 	originblkCtx := GetOriginBlockContext(blkReader, block, dbTx, header)
@@ -36,7 +36,7 @@ func SerialExecutionTime(blockNum uint64) time.Duration {
 }
 
 func SerialExecutionKBlocks(blockNum, k uint64) time.Duration {
-	ctx, dbTx, blkReader := PrepareEnv()
+	ctx, dbTx, blkReader, _ := PrepareEnv()
 
 	txs := make(originTypes.Transactions, 0)
 

@@ -35,8 +35,6 @@ func (s *Scheduler) taskPrioritize(m Method) (timespan uint64, pq PriorityTaskQu
 		switch m {
 		case EFT:
 			priority = v.Rank_u
-		case CPTL:
-			priority = s.Graph.CriticalPathLen - v.Rank_d
 		case CT:
 			priority = v.CT
 		}
@@ -118,7 +116,7 @@ func (s *Scheduler) listSchedule(m Method, retProcessors *[]*Processor, retMakes
 	*retMakespan = makespan
 }
 
-func (s *Scheduler) cpopSchedule(retProcessors *[]*Processor, retMakespan *uint64, wg *sync.WaitGroup) {
+func (s *Scheduler) pqSchedule(m Method, retProcessors *[]*Processor, retMakespan *uint64, wg *sync.WaitGroup) {
 	defer wg.Done()
 	tWrapMap := make(map[int]*TaskWrapper)
 	var timespan uint64 = 0
@@ -127,7 +125,14 @@ func (s *Scheduler) cpopSchedule(retProcessors *[]*Processor, retMakespan *uint6
 	mapIndegree := make(map[int]uint)
 
 	for _, v := range s.Graph.Vertices {
-		priority := v.Rank_d + v.Rank_u
+		var priority uint64
+		switch m {
+		case CPTL:
+			priority = s.Graph.CriticalPathLen - v.Rank_d
+		case CPOP:
+			priority = v.Rank_d + v.Rank_u
+		}
+
 		if priority == s.Graph.CriticalPathLen {
 			isCP[v.Task.ID] = struct{}{}
 		}
@@ -190,9 +195,9 @@ func (s *Scheduler) Schedule() ([]*Processor, uint64) {
 	var wg sync.WaitGroup
 	wg.Add(4)
 	go s.listSchedule(EFT, &retProcessors[0], &retMakespans[0], &wg)
-	go s.listSchedule(CPTL, &retProcessors[1], &retMakespans[1], &wg)
+	go s.pqSchedule(CPTL, &retProcessors[1], &retMakespans[1], &wg)
 	go s.listSchedule(CT, &retProcessors[2], &retMakespans[2], &wg)
-	go s.cpopSchedule(&retProcessors[3], &retMakespans[3], &wg)
+	go s.pqSchedule(CPOP, &retProcessors[3], &retMakespans[3], &wg)
 	wg.Wait()
 
 	makespan := retMakespans[0]

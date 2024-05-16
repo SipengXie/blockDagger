@@ -1,28 +1,32 @@
 package helper
 
 import (
-	"blockDagger/core/vm/evmtypes"
 	dag "blockDagger/graph"
 	multiversion "blockDagger/multiVersion"
 	"blockDagger/types"
+	"context"
+
+	"github.com/ledgerwatch/erigon-lib/kv"
+	originTypes "github.com/ledgerwatch/erigon/core/types"
+	"github.com/ledgerwatch/erigon/turbo/snapshotsync/freezeblocks"
 )
 
-func PrepareforSingleBlock(blockNum uint64) (map[int]*types.Task, *dag.Graph, *multiversion.GlobalVersionChain, evmtypes.BlockContext) {
-	txws, rwAccessedBy, blkCtx, ibs := prepareTxws(blockNum, 1)
+func PrepareforSingleBlock(blockNum uint64) (context.Context, map[int]*types.Task, *dag.Graph, *multiversion.GlobalVersionChain, kv.RoDB, *freezeblocks.BlockReader, *originTypes.Block, *originTypes.Header) {
+	ctx, txws, rwAccessedBy, db, ibs, blkReader, blk, header := prepareTxws(blockNum, 1)
 	tasks, graph, gvc := prepare(txws, rwAccessedBy, ibs)
 
-	return tasks, graph, gvc, blkCtx
+	return ctx, tasks, graph, gvc, db, blkReader, blk, header
 }
 
-func PrepareForKBlocks(blockNum, k uint64) (map[int]*types.Task, *dag.Graph, *multiversion.GlobalVersionChain, evmtypes.BlockContext) {
-	txws, rwAccessedBy, blkCtx, ibs := prepareTxws(blockNum, k)
+func PrepareForKBlocks(blockNum, k uint64) (context.Context, map[int]*types.Task, *dag.Graph, *multiversion.GlobalVersionChain, kv.RoDB, *freezeblocks.BlockReader, *originTypes.Block, *originTypes.Header) {
+	ctx, txws, rwAccessedBy, db, ibs, blkReader, blk, header := prepareTxws(blockNum, k)
 	tasks, graph, gvc := prepare(txws, rwAccessedBy, ibs)
-	return tasks, graph, gvc, blkCtx
+	return ctx, tasks, graph, gvc, db, blkReader, blk, header
 }
 
 // 从blockNum开始k个block的Tx，分为groupNum个组
-func PreparePipelineSim(blockNum, k, groupNum uint64) (taskMapGroup []map[int]*types.Task, graphGroup []*dag.Graph, blkCtx evmtypes.BlockContext) {
-	txws, _, blkCtx, ibs := prepareTxws(blockNum, k)
+func PreparePipelineSim(blockNum, k, groupNum uint64) (ctx context.Context, taskMapGroup []map[int]*types.Task, graphGroup []*dag.Graph, db kv.RoDB, blkReader *freezeblocks.BlockReader, blk *originTypes.Block, header *originTypes.Header) {
+	ctx, txws, _, db, ibs, blkReader, blk, header := prepareTxws(blockNum, k)
 	gvc := multiversion.NewGlobalVersionChain(ibs)
 	// 将txws按顺序分成groupnum个组
 	txwsGroup := make([][]*types.TransactionWrapper, groupNum)
@@ -43,8 +47,8 @@ func PreparePipelineSim(blockNum, k, groupNum uint64) (taskMapGroup []map[int]*t
 }
 
 // 从blockNum开始k个block的Tx，分为groupNum个组
-func PreparePipeline(blockNum, k, groupNum uint64) (txwsGroup [][]*types.TransactionWrapper, blkCtx evmtypes.BlockContext, gvc *multiversion.GlobalVersionChain) {
-	txws, _, blkCtx, ibs := prepareTxws(blockNum, k)
+func PreparePipeline(blockNum, k, groupNum uint64) (ctx context.Context, txwsGroup [][]*types.TransactionWrapper, db kv.RoDB, gvc *multiversion.GlobalVersionChain, blkReader *freezeblocks.BlockReader, blk *originTypes.Block, header *originTypes.Header) {
+	ctx, txws, _, db, ibs, blkReader, blk, header := prepareTxws(blockNum, k)
 	gvc = multiversion.NewGlobalVersionChain(ibs)
 	// 将txws按顺序分成groupnum个组
 	txwsGroup = make([][]*types.TransactionWrapper, groupNum)

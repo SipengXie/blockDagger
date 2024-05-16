@@ -4,12 +4,16 @@ import (
 	"blockDagger/core"
 	"blockDagger/core/vm"
 	"blockDagger/core/vm/evmtypes"
+	"blockDagger/helper"
 	"blockDagger/state"
 	"container/heap"
+	"context"
 	"sync"
 
+	"github.com/ledgerwatch/erigon-lib/kv"
 	"github.com/ledgerwatch/erigon/core/types"
 	"github.com/ledgerwatch/erigon/params"
+	"github.com/ledgerwatch/erigon/turbo/snapshotsync/freezeblocks"
 )
 
 type Processor struct {
@@ -58,10 +62,17 @@ func (p *Processor) AddTask(tWrap *TaskWrapper, slotSt uint64, slotLength uint64
 	p.SlotsMaintainer.addSlot(tWrap.EFT, slotLength-tWrap.Task.Cost)
 }
 
-func (p *Processor) Execute(blkCtx evmtypes.BlockContext, wg *sync.WaitGroup, errs map[int]error) {
+func (p *Processor) Execute(blockReader *freezeblocks.BlockReader, ctx context.Context, blk *types.Block, header *types.Header, db kv.RoDB, wg *sync.WaitGroup, errs map[int]error) {
 	defer wg.Done()
 	// 执行环境准备
 	s := state.NewState()
+
+	dbTx, err := db.BeginRo(ctx)
+	if err != nil {
+		panic(err)
+	}
+	blkCtx := helper.GetBlockContext(blockReader, blk, dbTx, header)
+
 	evm := vm.NewEVM(blkCtx, evmtypes.TxContext{}, s, params.MainnetChainConfig, vm.Config{})
 	// TODO: 可用一个map返回ret
 	for p.Tasks.Len() > 0 {
