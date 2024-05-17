@@ -5,6 +5,7 @@ import (
 	multiversion "blockDagger/multiVersion"
 	"blockDagger/types"
 	"context"
+	"fmt"
 
 	"github.com/ledgerwatch/erigon-lib/kv"
 	originTypes "github.com/ledgerwatch/erigon/core/types"
@@ -31,6 +32,7 @@ func PreparePipelineSim(blockNum, k, groupNum uint64) (ctx context.Context, task
 	// 将txws按顺序分成groupnum个组
 	txwsGroup := make([][]*types.TransactionWrapper, groupNum)
 	eachGroupNum := len(txws) / int(groupNum)
+	fmt.Println("eachGroupNum: ", eachGroupNum)
 	for i := 0; i < int(groupNum); i++ {
 		txwsGroup[i] = txws[i*eachGroupNum : (i+1)*eachGroupNum]
 	}
@@ -53,6 +55,7 @@ func PreparePipeline(blockNum, k, groupNum uint64) (ctx context.Context, txwsGro
 	// 将txws按顺序分成groupnum个组
 	txwsGroup = make([][]*types.TransactionWrapper, groupNum)
 	eachGroupNum := len(txws) / int(groupNum)
+	fmt.Println("eachGroupNum: ", eachGroupNum)
 	for i := 0; i < int(groupNum); i++ {
 		txwsGroup[i] = txws[i*eachGroupNum : (i+1)*eachGroupNum]
 	}

@@ -1,6 +1,7 @@
 package test
 
 import (
+	"blockDagger/core/vm"
 	"blockDagger/helper"
 	"blockDagger/pipeline"
 	"blockDagger/schedule"
@@ -11,54 +12,81 @@ import (
 	"time"
 )
 
+// 就用这个测 测够50个区块就好
 func TestParallel(t *testing.T) {
 	ctx, _, graph, _, db, blkReader, blk, header := helper.PrepareforSingleBlock(18999999)
+
 	scheduler := schedule.NewScheduler(graph, runtime.NumCPU())
 
+	st := time.Now()
 	processors, makespan := scheduler.Schedule()
 	fmt.Println("makespan: ", makespan)
+	fmt.Println("Schedule Cost: ", time.Since(st))
 	var wg sync.WaitGroup
 	wg.Add(len(processors))
 	errMaps := make([]map[int]error, len(processors))
-	st := time.Now()
+	st = time.Now()
 	for id, processor := range processors {
 		errMaps[id] = make(map[int]error)
 		go processor.Execute(blkReader, ctx, blk, header, db, &wg, errMaps[id])
 	}
 	wg.Wait()
-	elapsed := time.Since(st)
-	for id, errMap := range errMaps {
-		if len(errMap) != 0 {
-			fmt.Println("Processor ", id, " has errors: ", errMap)
+	fmt.Println("Parallel Execution Time: ", time.Since(st))
+	systemAbortCnt := 0
+	vmAbort := 0
+	for _, errMap := range errMaps {
+		for _, err := range errMap {
+			if err == vm.ErrSystemAbort {
+				systemAbortCnt++
+			} else if err != nil {
+				vmAbort++
+			}
+
 		}
 	}
-	fmt.Println("Parallel Execution Time: ", elapsed)
+	fmt.Println("System Abort Count: ", systemAbortCnt)
+	fmt.Println("VM Abort Count: ", vmAbort)
 }
 
+// 就用这个测 2、3、4、5、6、7、8、9、10区块聚合（5区块约1k）
 func TestParallelMultipleBlocks(t *testing.T) {
-	ctx, _, graph, _, db, blkReader, blk, header := helper.PrepareForKBlocks(18999940, 60)
+	ctx, _, graph, _, db, blkReader, blk, header := helper.PrepareForKBlocks(18999990, 5)
 	scheduler := schedule.NewScheduler(graph, runtime.NumCPU())
+	st := time.Now()
 	processors, makespan := scheduler.Schedule()
 	fmt.Println("makespan: ", makespan)
+	fmt.Println("Schedule Cost: ", time.Since(st))
+
 	var wg sync.WaitGroup
 	wg.Add(len(processors))
 	errMaps := make([]map[int]error, len(processors))
-	st := time.Now()
+
+	st = time.Now()
 	for id, processor := range processors {
 		errMaps[id] = make(map[int]error)
 		go processor.Execute(blkReader, ctx, blk, header, db, &wg, errMaps[id])
 	}
 	wg.Wait()
-	elapsed := time.Since(st)
+	fmt.Println("Parallel Execution Time: ", time.Since(st))
 
-	for id, errMap := range errMaps {
-		if len(errMap) != 0 {
-			fmt.Println("Processor ", id, " has errors: ", len(errMap))
+	systemAbortCnt := 0
+	vmAbort := 0
+	for _, errMap := range errMaps {
+		for _, err := range errMap {
+			if err == vm.ErrSystemAbort {
+				systemAbortCnt++
+			} else if err != nil {
+				vmAbort++
+			}
+
 		}
 	}
-	fmt.Println("Parallel Execution Time: ", elapsed)
+	fmt.Println("System Abort Count: ", systemAbortCnt)
+	fmt.Println("VM Abort Count: ", vmAbort)
+
 }
 
+// 就用这个测 2、3、4、5、6、7、8、9、10区块聚合（5区块约1k）
 func TestPipelineSim(t *testing.T) {
 	ctx, _, graphGroup, db, blkReader, blk, header := helper.PreparePipelineSim(18999940, 60, 12)
 	// 这里是Schduler流水线的例子

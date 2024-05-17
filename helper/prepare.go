@@ -7,6 +7,7 @@ import (
 	"blockDagger/types"
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/ledgerwatch/erigon-lib/kv"
 	originTypes "github.com/ledgerwatch/erigon/core/types"
@@ -20,12 +21,18 @@ import (
 func prepare(txws []*types.TransactionWrapper, rwAccessedBy *rwset.RwAccessedBy, ibs originEvmTypes.IntraBlockState) (map[int]*types.Task, *dag.Graph, *multiversion.GlobalVersionChain) {
 	gVC := multiversion.NewGlobalVersionChain(ibs)
 	taskMap := make(map[int]*types.Task)
+	st := time.Now()
 	for _, txw := range txws {
 		task := TransferTxToTask(*txw, gVC)
 		taskMap[task.ID] = task
 	}
+	gVC.UpdateLastBlockTail()
+	fmt.Println("Pre-Processing time: ", time.Since(st))
 	// 在For循环结束后已经完成了GVC的生成
+	st = time.Now()
 	graph := GenerateGraph(taskMap, rwAccessedBy)
+	fmt.Println("Graph generation time: ", time.Since(st))
+	fmt.Println("Critical Path Length: ", graph.CriticalPathLen)
 	return taskMap, graph, gVC
 }
 
@@ -34,18 +41,23 @@ func prepareWithGVC(txws []*types.TransactionWrapper, gVC *multiversion.GlobalVe
 	// 这里是GVC更新流水线的例子
 	rwAccessedBy := GenerateAccessedBy(txws)
 	taskMap := make(map[int]*types.Task)
+	st := time.Now()
 	for _, txw := range txws {
 		task := TransferTxToTask(*txw, gVC)
 		taskMap[task.ID] = task
 	}
 	gVC.UpdateLastBlockTail()
+	fmt.Println("Pre-Processing time: ", time.Since(st))
 
 	// 这里是建图流水线的例子
+	st = time.Now()
 	graph := GenerateGraph(taskMap, rwAccessedBy)
+	fmt.Println("Graph generation time: ", time.Since(st))
+	fmt.Println("Critical Path Length: ", graph.CriticalPathLen)
 	return taskMap, graph
 }
 
-// 返回带有RwSet的TransactionWrapper，RwAccessedBy，执行用的blockNum的BlockContext，以及从blockNum开始的IntraBlockState
+// 返回带有RwSet的把k个区块攒在一起的TransactionWrapper
 // rwAccessedBy不一定都会用，比如Pipeline就不会用，而是使用generateAccessedBy
 func prepareTxws(blockNum, k uint64) (ctx context.Context, txws []*types.TransactionWrapper, rwAccessedBy *rwset.RwAccessedBy, db kv.RoDB, ibs originEvmTypes.IntraBlockState, blkReader *freezeblocks.BlockReader, block *originTypes.Block, header *originTypes.Header) {
 	ctx, dbTx, blkReader, db := PrepareEnv()
