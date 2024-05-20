@@ -2,7 +2,6 @@ package pipeline
 
 import (
 	"context"
-	"fmt"
 	"sync"
 
 	"github.com/ledgerwatch/erigon-lib/kv"
@@ -41,8 +40,8 @@ func (e *ExecuteLine) Run() {
 		}
 
 		processors := input.Processors
-		makespan := input.Makespan
-		fmt.Println("makespan: ", makespan)
+		// makespan := input.Makespan
+		// fmt.Println("makespan: ", makespan)
 
 		var execwg sync.WaitGroup
 		execwg.Add(len(processors))
@@ -52,10 +51,10 @@ func (e *ExecuteLine) Run() {
 			go processor.Execute(e.BlkReader, e.Ctx, e.Blk, e.Header, e.Db, &execwg, errMaps[id])
 		}
 		execwg.Wait()
-		for id, errMap := range errMaps {
-			if len(errMap) != 0 {
-				fmt.Println("Processor ", id, " has errors: ", len(errMap))
-			}
-		}
+		// for id, errMap := range errMaps {
+		// 	if len(errMap) != 0 {
+		// 		fmt.Println("Processor ", id, " has errors: ", len(errMap))
+		// 	}
+		// }
 	}
 }
