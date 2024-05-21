@@ -1,0 +1,479 @@
+=== RUN   TestSerialExp
+[INFO] [05-21|16:56:28.598] Starting 
+[INFO] [05-21|16:56:28.600] [db] open                                lable=chaindata sizeLimit=12TB pageSize=8192
+[INFO] [05-21|16:56:28.600] DB opened 
+[INFO] [05-21|16:56:28.600] DB Transaction started 
+[INFO] [05-21|16:56:31.866] Block Reader created 
+Collect Size:  1
+=============================================
+MegaBlock Start From: 18999950
+Serial Execution Cost: 60.011878ms
+=============================================
+MegaBlock Start From: 18999951
+Serial Execution Cost: 67.561597ms
+=============================================
+MegaBlock Start From: 18999952
+Serial Execution Cost: 48.688232ms
+=============================================
+MegaBlock Start From: 18999953
+Serial Execution Cost: 7.446709ms
+=============================================
+MegaBlock Start From: 18999954
+Serial Execution Cost: 86.472745ms
+=============================================
+MegaBlock Start From: 18999955
+Serial Execution Cost: 140.115947ms
+=============================================
+MegaBlock Start From: 18999956
+Serial Execution Cost: 35.658926ms
+=============================================
+MegaBlock Start From: 18999957
+Serial Execution Cost: 94.919385ms
+=============================================
+MegaBlock Start From: 18999958
+Serial Execution Cost: 54.624766ms
+=============================================
+MegaBlock Start From: 18999959
+Serial Execution Cost: 42.173642ms
+=============================================
+MegaBlock Start From: 18999960
+Serial Execution Cost: 84.891943ms
+=============================================
+MegaBlock Start From: 18999961
+Serial Execution Cost: 61.25757ms
+=============================================
+MegaBlock Start From: 18999962
+Serial Execution Cost: 49.608727ms
+=============================================
+MegaBlock Start From: 18999963
+Serial Execution Cost: 55.865013ms
+=============================================
+MegaBlock Start From: 18999964
+Serial Execution Cost: 52.981713ms
+=============================================
+MegaBlock Start From: 18999965
+Serial Execution Cost: 73.617323ms
+=============================================
+MegaBlock Start From: 18999966
+Serial Execution Cost: 94.781003ms
+=============================================
+MegaBlock Start From: 18999967
+Serial Execution Cost: 67.617873ms
+=============================================
+MegaBlock Start From: 18999968
+Serial Execution Cost: 46.095469ms
+=============================================
+MegaBlock Start From: 18999969
+Serial Execution Cost: 51.19859ms
+=============================================
+MegaBlock Start From: 18999970
+Serial Execution Cost: 51.863829ms
+=============================================
+MegaBlock Start From: 18999971
+Serial Execution Cost: 39.556907ms
+=============================================
+MegaBlock Start From: 18999972
+Serial Execution Cost: 47.764402ms
+=============================================
+MegaBlock Start From: 18999973
+Serial Execution Cost: 43.211319ms
+=============================================
+MegaBlock Start From: 18999974
+Serial Execution Cost: 69.889099ms
+=============================================
+MegaBlock Start From: 18999975
+Serial Execution Cost: 113.119895ms
+=============================================
+MegaBlock Start From: 18999976
+Serial Execution Cost: 51.722062ms
+=============================================
+MegaBlock Start From: 18999977
+Serial Execution Cost: 46.113579ms
+=============================================
+MegaBlock Start From: 18999978
+Serial Execution Cost: 67.132937ms
+=============================================
+MegaBlock Start From: 18999979
+Serial Execution Cost: 101.587443ms
+=============================================
+MegaBlock Start From: 18999980
+Serial Execution Cost: 113.168933ms
+=============================================
+MegaBlock Start From: 18999981
+Serial Execution Cost: 43.75548ms
+=============================================
+MegaBlock Start From: 18999982
+Serial Execution Cost: 41.005909ms
+=============================================
+MegaBlock Start From: 18999983
+Serial Execution Cost: 32.665678ms
+=============================================
+MegaBlock Start From: 18999984
+Serial Execution Cost: 35.483988ms
+=============================================
+MegaBlock Start From: 18999985
+Serial Execution Cost: 56.06708ms
+=============================================
+MegaBlock Start From: 18999986
+Serial Execution Cost: 41.415127ms
+=============================================
+MegaBlock Start From: 18999987
+Serial Execution Cost: 26.061257ms
+=============================================
+MegaBlock Start From: 18999988
+Serial Execution Cost: 80.604791ms
+=============================================
+MegaBlock Start From: 18999989
+Serial Execution Cost: 72.0209ms
+=============================================
+MegaBlock Start From: 18999990
+Serial Execution Cost: 63.691215ms
+=============================================
+MegaBlock Start From: 18999991
+Serial Execution Cost: 29.639919ms
+=============================================
+MegaBlock Start From: 18999992
+Serial Execution Cost: 32.212159ms
+=============================================
+MegaBlock Start From: 18999993
+Serial Execution Cost: 69.704534ms
+=============================================
+MegaBlock Start From: 18999994
+Serial Execution Cost: 57.599576ms
+=============================================
+MegaBlock Start From: 18999995
+Serial Execution Cost: 27.431423ms
+=============================================
+MegaBlock Start From: 18999996
+Serial Execution Cost: 63.616902ms
+=============================================
+MegaBlock Start From: 18999997
+Serial Execution Cost: 39.604901ms
+=============================================
+MegaBlock Start From: 18999998
+Serial Execution Cost: 48.858462ms
+=============================================
+MegaBlock Start From: 18999999
+Serial Execution Cost: 41.008963ms
+=============================================
+Collect Size:  2
+=============================================
+MegaBlock Start From: 18999950
+Serial Execution Cost: 92.85766ms
+=============================================
+MegaBlock Start From: 18999952
+Serial Execution Cost: 32.199195ms
+=============================================
+MegaBlock Start From: 18999954
+Serial Execution Cost: 98.798117ms
+=============================================
+MegaBlock Start From: 18999956
+Serial Execution Cost: 72.300958ms
+=============================================
+MegaBlock Start From: 18999958
+Serial Execution Cost: 63.727982ms
+=============================================
+MegaBlock Start From: 18999960
+Serial Execution Cost: 84.619589ms
+=============================================
+MegaBlock Start From: 18999962
+Serial Execution Cost: 73.554434ms
+=============================================
+MegaBlock Start From: 18999964
+Serial Execution Cost: 79.314091ms
+=============================================
+MegaBlock Start From: 18999966
+Serial Execution Cost: 90.103451ms
+=============================================
+MegaBlock Start From: 18999968
+Serial Execution Cost: 62.263667ms
+=============================================
+MegaBlock Start From: 18999970
+Serial Execution Cost: 67.66517ms
+=============================================
+MegaBlock Start From: 18999972
+Serial Execution Cost: 53.093327ms
+=============================================
+MegaBlock Start From: 18999974
+Serial Execution Cost: 77.287734ms
+=============================================
+MegaBlock Start From: 18999976
+Serial Execution Cost: 55.396541ms
+=============================================
+MegaBlock Start From: 18999978
+Serial Execution Cost: 79.396534ms
+=============================================
+MegaBlock Start From: 18999980
+Serial Execution Cost: 82.906151ms
+=============================================
+MegaBlock Start From: 18999982
+Serial Execution Cost: 60.923704ms
+=============================================
+MegaBlock Start From: 18999984
+Serial Execution Cost: 70.374092ms
+=============================================
+MegaBlock Start From: 18999986
+Serial Execution Cost: 52.50003ms
+=============================================
+MegaBlock Start From: 18999988
+Serial Execution Cost: 95.352378ms
+=============================================
+MegaBlock Start From: 18999990
+Serial Execution Cost: 50.233163ms
+=============================================
+MegaBlock Start From: 18999992
+Serial Execution Cost: 75.134072ms
+=============================================
+MegaBlock Start From: 18999994
+Serial Execution Cost: 77.906496ms
+=============================================
+MegaBlock Start From: 18999996
+Serial Execution Cost: 68.744774ms
+=============================================
+MegaBlock Start From: 18999998
+Serial Execution Cost: 62.449599ms
+=============================================
+Collect Size:  3
+=============================================
+MegaBlock Start From: 18999950
+Serial Execution Cost: 116.60432ms
+=============================================
+MegaBlock Start From: 18999953
+Serial Execution Cost: 87.14332ms
+=============================================
+MegaBlock Start From: 18999956
+Serial Execution Cost: 100.65131ms
+=============================================
+MegaBlock Start From: 18999959
+Serial Execution Cost: 111.212969ms
+=============================================
+MegaBlock Start From: 18999962
+Serial Execution Cost: 111.087361ms
+=============================================
+MegaBlock Start From: 18999965
+Serial Execution Cost: 120.787992ms
+=============================================
+MegaBlock Start From: 18999968
+Serial Execution Cost: 95.620913ms
+=============================================
+MegaBlock Start From: 18999971
+Serial Execution Cost: 92.602819ms
+=============================================
+MegaBlock Start From: 18999974
+Serial Execution Cost: 101.524832ms
+=============================================
+MegaBlock Start From: 18999977
+Serial Execution Cost: 114.981066ms
+=============================================
+MegaBlock Start From: 18999980
+Serial Execution Cost: 118.669873ms
+=============================================
+MegaBlock Start From: 18999983
+Serial Execution Cost: 95.906949ms
+=============================================
+MegaBlock Start From: 18999986
+Serial Execution Cost: 73.513675ms
+=============================================
+MegaBlock Start From: 18999989
+Serial Execution Cost: 113.145175ms
+=============================================
+MegaBlock Start From: 18999992
+Serial Execution Cost: 125.862217ms
+=============================================
+MegaBlock Start From: 18999995
+Serial Execution Cost: 80.831211ms
+=============================================
+MegaBlock Start From: 18999998
+Serial Execution Cost: 62.079914ms
+=============================================
+Collect Size:  4
+=============================================
+MegaBlock Start From: 18999950
+Serial Execution Cost: 118.955333ms
+=============================================
+MegaBlock Start From: 18999954
+Serial Execution Cost: 161.701558ms
+=============================================
+MegaBlock Start From: 18999958
+Serial Execution Cost: 140.248249ms
+=============================================
+MegaBlock Start From: 18999962
+Serial Execution Cost: 137.295064ms
+=============================================
+MegaBlock Start From: 18999966
+Serial Execution Cost: 148.207746ms
+=============================================
+MegaBlock Start From: 18999970
+Serial Execution Cost: 118.530998ms
+=============================================
+MegaBlock Start From: 18999974
+Serial Execution Cost: 124.468904ms
+=============================================
+MegaBlock Start From: 18999978
+Serial Execution Cost: 158.316487ms
+=============================================
+MegaBlock Start From: 18999982
+Serial Execution Cost: 128.216854ms
+=============================================
+MegaBlock Start From: 18999986
+Serial Execution Cost: 129.463503ms
+=============================================
+MegaBlock Start From: 18999990
+Serial Execution Cost: 119.367209ms
+=============================================
+MegaBlock Start From: 18999994
+Serial Execution Cost: 133.243739ms
+=============================================
+MegaBlock Start From: 18999998
+Serial Execution Cost: 62.571011ms
+=============================================
+Collect Size:  5
+=============================================
+MegaBlock Start From: 18999950
+Serial Execution Cost: 174.633364ms
+=============================================
+MegaBlock Start From: 18999955
+Serial Execution Cost: 156.400324ms
+=============================================
+MegaBlock Start From: 18999960
+Serial Execution Cost: 178.85439ms
+=============================================
+MegaBlock Start From: 18999965
+Serial Execution Cost: 171.943751ms
+=============================================
+MegaBlock Start From: 18999970
+Serial Execution Cost: 149.15042ms
+=============================================
+MegaBlock Start From: 18999975
+Serial Execution Cost: 197.24979ms
+=============================================
+MegaBlock Start From: 18999980
+Serial Execution Cost: 172.257204ms
+=============================================
+MegaBlock Start From: 18999985
+Serial Execution Cost: 183.073546ms
+=============================================
+MegaBlock Start From: 18999990
+Serial Execution Cost: 172.568313ms
+=============================================
+MegaBlock Start From: 18999995
+Serial Execution Cost: 145.711192ms
+=============================================
+Collect Size:  6
+=============================================
+MegaBlock Start From: 18999950
+Serial Execution Cost: 357.03376ms
+=============================================
+MegaBlock Start From: 18999956
+Serial Execution Cost: 210.063499ms
+=============================================
+MegaBlock Start From: 18999962
+Serial Execution Cost: 226.14591ms
+=============================================
+MegaBlock Start From: 18999968
+Serial Execution Cost: 179.654993ms
+=============================================
+MegaBlock Start From: 18999974
+Serial Execution Cost: 195.021936ms
+=============================================
+MegaBlock Start From: 18999980
+Serial Execution Cost: 202.084403ms
+=============================================
+MegaBlock Start From: 18999986
+Serial Execution Cost: 170.011863ms
+=============================================
+MegaBlock Start From: 18999992
+Serial Execution Cost: 204.948257ms
+=============================================
+MegaBlock Start From: 18999998
+Serial Execution Cost: 61.471909ms
+=============================================
+Collect Size:  7
+=============================================
+MegaBlock Start From: 18999950
+Serial Execution Cost: 224.216897ms
+=============================================
+MegaBlock Start From: 18999957
+Serial Execution Cost: 226.359634ms
+=============================================
+MegaBlock Start From: 18999964
+Serial Execution Cost: 239.495997ms
+=============================================
+MegaBlock Start From: 18999971
+Serial Execution Cost: 205.57076ms
+=============================================
+MegaBlock Start From: 18999978
+Serial Execution Cost: 239.490899ms
+=============================================
+MegaBlock Start From: 18999985
+Serial Execution Cost: 222.383434ms
+=============================================
+MegaBlock Start From: 18999992
+Serial Execution Cost: 226.667534ms
+=============================================
+MegaBlock Start From: 18999999
+Serial Execution Cost: 36.164307ms
+=============================================
+Collect Size:  8
+=============================================
+MegaBlock Start From: 18999950
+Serial Execution Cost: 262.806874ms
+=============================================
+MegaBlock Start From: 18999958
+Serial Execution Cost: 236.286271ms
+=============================================
+MegaBlock Start From: 18999966
+Serial Execution Cost: 258.629875ms
+=============================================
+MegaBlock Start From: 18999974
+Serial Execution Cost: 263.623619ms
+=============================================
+MegaBlock Start From: 18999982
+Serial Execution Cost: 255.713052ms
+=============================================
+MegaBlock Start From: 18999990
+Serial Execution Cost: 239.940644ms
+=============================================
+MegaBlock Start From: 18999998
+Serial Execution Cost: 60.731394ms
+=============================================
+Collect Size:  9
+=============================================
+MegaBlock Start From: 18999950
+Serial Execution Cost: 289.781105ms
+=============================================
+MegaBlock Start From: 18999959
+Serial Execution Cost: 278.334477ms
+=============================================
+MegaBlock Start From: 18999968
+Serial Execution Cost: 260.032571ms
+=============================================
+MegaBlock Start From: 18999977
+Serial Execution Cost: 297.421523ms
+=============================================
+MegaBlock Start From: 18999986
+Serial Execution Cost: 272.054346ms
+=============================================
+MegaBlock Start From: 18999995
+Serial Execution Cost: 136.744038ms
+=============================================
+Collect Size:  10
+=============================================
+MegaBlock Start From: 18999950
+Serial Execution Cost: 310.269493ms
+=============================================
+MegaBlock Start From: 18999960
+Serial Execution Cost: 309.846513ms
+=============================================
+MegaBlock Start From: 18999970
+Serial Execution Cost: 288.565558ms
+=============================================
+MegaBlock Start From: 18999980
+Serial Execution Cost: 318.101221ms
+=============================================
+MegaBlock Start From: 18999990
+Serial Execution Cost: 293.892437ms
+=============================================
+--- PASS: TestSerialExp (21.88s)
+PASS
+ok  	blockDagger/test	23.065s

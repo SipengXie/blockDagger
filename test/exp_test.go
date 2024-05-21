@@ -6,14 +6,62 @@ import (
 	"blockDagger/pipeline"
 	"blockDagger/schedule"
 	"fmt"
+	"runtime"
 	"sync"
 	"testing"
 	"time"
+
+	originCore "github.com/ledgerwatch/erigon/core"
+	originTypes "github.com/ledgerwatch/erigon/core/types"
+	originVm "github.com/ledgerwatch/erigon/core/vm"
+	originEvmTypes "github.com/ledgerwatch/erigon/core/vm/evmtypes"
+	"github.com/ledgerwatch/erigon/params"
 )
+
+func TestSerialExp(t *testing.T) {
+	ctx, dbTx, blkReader, _ := helper.PrepareEnv()
+	blockNum := uint64(18999950) // 走50个区块
+
+	for collectSize := uint64(1); collectSize <= 10; collectSize++ {
+		fmt.Println("Collect Size: ", collectSize)
+		fmt.Println("=============================================")
+		// 我们的i是每一个megaBlock的起始位置
+		for i := blockNum; i < 19000000; i += collectSize {
+			fmt.Println("MegaBlock Start From:", i)
+
+			// 收集collecteSize个区块
+			txs := make(originTypes.Transactions, 0)
+			for j := i; j < min(i+collectSize, 19000000); j++ {
+				block, _ := helper.GetBlockAndHeader(blkReader, ctx, dbTx, j)
+				txs = append(txs, block.Transactions()...)
+			}
+
+			block, header := helper.GetBlockAndHeader(blkReader, ctx, dbTx, i)
+			originblkCtx := helper.GetOriginBlockContext(blkReader, block, dbTx, header)
+			ibs := helper.GetState(params.MainnetChainConfig, dbTx, i)
+
+			evm := originVm.NewEVM(originblkCtx, originEvmTypes.TxContext{}, ibs, params.MainnetChainConfig, originVm.Config{})
+
+			st := time.Now()
+			for _, tx := range txs {
+				msg, _ := tx.AsMessage(*originTypes.LatestSigner(params.MainnetChainConfig), header.BaseFee, evm.ChainRules())
+
+				// Skip the nonce check!
+				msg.SetCheckNonce(false)
+				txCtx := originCore.NewEVMTxContext(msg)
+				evm.TxContext = txCtx
+
+				originCore.ApplyMessage(evm, msg, new(originCore.GasPool).AddGas(header.GasLimit), true /* refunds */, false /* gasBailout */)
+			}
+			fmt.Println("Serial Execution Cost:", time.Since(st))
+			fmt.Println("=============================================")
+		}
+	}
+}
 
 func TestExp(t *testing.T) {
 	ctx, dbTx, blkReader, db := helper.PrepareEnv()
-	workerNum := 2
+	workerNum := min(64, runtime.NumCPU())
 	blockNum := uint64(18999950) // 走50个区块
 
 	for collectSize := uint64(1); collectSize <= 10; collectSize++ {
@@ -63,7 +111,7 @@ func TestExp(t *testing.T) {
 
 func TestPipelineExp(t *testing.T) {
 	ctx, dbTx, blkReader, db := helper.PrepareEnv()
-	workerNum := 2
+	workerNum := 64
 	blockNum := uint64(18999950) // 走50个区块
 	groupNums := []uint64{25, 17, 13, 10, 9, 8, 6, 5}
 	fmt.Println("=============================================")

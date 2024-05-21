@@ -1,0 +1,1676 @@
+=== RUN   TestExp
+[INFO] [05-21|16:51:06.014] Starting 
+[INFO] [05-21|16:51:06.015] [db] open                                lable=chaindata sizeLimit=12TB pageSize=8192
+[INFO] [05-21|16:51:06.016] DB opened 
+[INFO] [05-21|16:51:06.016] DB Transaction started 
+[INFO] [05-21|16:51:09.367] Block Reader created 
+Collect Size:  1
+=============================================
+MegaBlock Start From: 18999950
+Transation count:  246 Task count: 246
+Pre-Processing time:  18.636787ms
+Graph generation time:  8.35779ms
+Critical Path Length:  22000000
+Schedule Cost: 2.47376ms
+makespan:  22000000
+Parallel Execution Time:  19.943135ms
+System Abort Count:  5
+VM Abort Count:  8
+=============================================
+MegaBlock Start From: 18999951
+Transation count:  189 Task count: 189
+Pre-Processing time:  21.46618ms
+Graph generation time:  3.318891ms
+Critical Path Length:  22000000
+Schedule Cost: 2.005877ms
+makespan:  22000000
+Parallel Execution Time:  21.572461ms
+System Abort Count:  4
+VM Abort Count:  4
+=============================================
+MegaBlock Start From: 18999952
+Transation count:  271 Task count: 271
+Pre-Processing time:  13.758974ms
+Graph generation time:  9.234325ms
+Critical Path Length:  22000000
+Schedule Cost: 2.668802ms
+makespan:  22000000
+Parallel Execution Time:  11.158379ms
+System Abort Count:  4
+VM Abort Count:  3
+=============================================
+MegaBlock Start From: 18999953
+Transation count:  11 Task count: 11
+Pre-Processing time:  2.51325ms
+Graph generation time:  264.652µs
+Critical Path Length:  2263706
+Schedule Cost: 290.188µs
+makespan:  2263706
+Parallel Execution Time:  4.355155ms
+System Abort Count:  0
+VM Abort Count:  0
+=============================================
+MegaBlock Start From: 18999954
+Transation count:  328 Task count: 328
+Pre-Processing time:  33.249423ms
+Graph generation time:  5.351474ms
+Critical Path Length:  22000000
+Schedule Cost: 5.066419ms
+makespan:  22000000
+Parallel Execution Time:  25.66724ms
+System Abort Count:  11
+VM Abort Count:  10
+=============================================
+MegaBlock Start From: 18999955
+Transation count:  173 Task count: 173
+Pre-Processing time:  13.796829ms
+Graph generation time:  2.840685ms
+Critical Path Length:  22000000
+Schedule Cost: 1.938588ms
+makespan:  22000000
+Parallel Execution Time:  12.896462ms
+System Abort Count:  5
+VM Abort Count:  7
+=============================================
+MegaBlock Start From: 18999956
+Transation count:  128 Task count: 128
+Pre-Processing time:  12.002787ms
+Graph generation time:  1.601489ms
+Critical Path Length:  22000000
+Schedule Cost: 1.456893ms
+makespan:  22000000
+Parallel Execution Time:  9.307398ms
+System Abort Count:  3
+VM Abort Count:  2
+=============================================
+MegaBlock Start From: 18999957
+Transation count:  124 Task count: 124
+Pre-Processing time:  12.958523ms
+Graph generation time:  1.607174ms
+Critical Path Length:  6382896
+Schedule Cost: 1.536493ms
+makespan:  6382896
+Parallel Execution Time:  12.555804ms
+System Abort Count:  5
+VM Abort Count:  3
+=============================================
+MegaBlock Start From: 18999958
+Transation count:  137 Task count: 137
+Pre-Processing time:  14.861518ms
+Graph generation time:  1.981721ms
+Critical Path Length:  22000000
+Schedule Cost: 1.458482ms
+makespan:  22000000
+Parallel Execution Time:  15.105295ms
+System Abort Count:  3
+VM Abort Count:  3
+=============================================
+MegaBlock Start From: 18999959
+Transation count:  143 Task count: 143
+Pre-Processing time:  15.380673ms
+Graph generation time:  2.217907ms
+Critical Path Length:  22000000
+Schedule Cost: 1.710829ms
+makespan:  22000000
+Parallel Execution Time:  14.802906ms
+System Abort Count:  2
+VM Abort Count:  3
+=============================================
+MegaBlock Start From: 18999960
+Transation count:  201 Task count: 201
+Pre-Processing time:  20.231084ms
+Graph generation time:  2.995582ms
+Critical Path Length:  26000000
+Schedule Cost: 2.244585ms
+makespan:  26000000
+Parallel Execution Time:  15.159418ms
+System Abort Count:  5
+VM Abort Count:  7
+=============================================
+MegaBlock Start From: 18999961
+Transation count:  124 Task count: 124
+Pre-Processing time:  14.051058ms
+Graph generation time:  1.726245ms
+Critical Path Length:  22000000
+Schedule Cost: 1.498907ms
+makespan:  22000000
+Parallel Execution Time:  20.838083ms
+System Abort Count:  2
+VM Abort Count:  4
+=============================================
+MegaBlock Start From: 18999962
+Transation count:  129 Task count: 129
+Pre-Processing time:  11.182109ms
+Graph generation time:  1.468408ms
+Critical Path Length:  6606860
+Schedule Cost: 1.537818ms
+makespan:  6606860
+Parallel Execution Time:  11.929946ms
+System Abort Count:  4
+VM Abort Count:  4
+=============================================
+MegaBlock Start From: 18999963
+Transation count:  150 Task count: 150
+Pre-Processing time:  18.706428ms
+Graph generation time:  1.7176ms
+Critical Path Length:  16500000
+Schedule Cost: 2.022508ms
+makespan:  16500000
+Parallel Execution Time:  9.322841ms
+System Abort Count:  7
+VM Abort Count:  4
+=============================================
+MegaBlock Start From: 18999964
+Transation count:  223 Task count: 223
+Pre-Processing time:  22.66379ms
+Graph generation time:  3.254623ms
+Critical Path Length:  14610662
+Schedule Cost: 2.735722ms
+makespan:  14610662
+Parallel Execution Time:  16.539732ms
+System Abort Count:  0
+VM Abort Count:  2
+=============================================
+MegaBlock Start From: 18999965
+Transation count:  155 Task count: 155
+Pre-Processing time:  13.760951ms
+Graph generation time:  2.137617ms
+Critical Path Length:  9203426
+Schedule Cost: 1.662066ms
+makespan:  9203426
+Parallel Execution Time:  14.640889ms
+System Abort Count:  4
+VM Abort Count:  4
+=============================================
+MegaBlock Start From: 18999966
+Transation count:  212 Task count: 212
+Pre-Processing time:  20.571509ms
+Graph generation time:  3.24895ms
+Critical Path Length:  11398784
+Schedule Cost: 2.586589ms
+makespan:  11398784
+Parallel Execution Time:  19.401053ms
+System Abort Count:  4
+VM Abort Count:  1
+=============================================
+MegaBlock Start From: 18999967
+Transation count:  204 Task count: 204
+Pre-Processing time:  17.739229ms
+Graph generation time:  3.260567ms
+Critical Path Length:  27105000
+Schedule Cost: 1.747081ms
+makespan:  27105000
+Parallel Execution Time:  15.986869ms
+System Abort Count:  3
+VM Abort Count:  1
+=============================================
+MegaBlock Start From: 18999968
+Transation count:  141 Task count: 141
+Pre-Processing time:  13.010087ms
+Graph generation time:  1.634125ms
+Critical Path Length:  11658604
+Schedule Cost: 1.59307ms
+makespan:  11658604
+Parallel Execution Time:  11.096565ms
+System Abort Count:  4
+VM Abort Count:  3
+=============================================
+MegaBlock Start From: 18999969
+Transation count:  410 Task count: 410
+Pre-Processing time:  20.012437ms
+Graph generation time:  36.348687ms
+Critical Path Length:  7929272
+Schedule Cost: 5.396018ms
+makespan:  7929272
+Parallel Execution Time:  18.669707ms
+System Abort Count:  4
+VM Abort Count:  0
+=============================================
+MegaBlock Start From: 18999970
+Transation count:  165 Task count: 165
+Pre-Processing time:  14.920499ms
+Graph generation time:  1.993904ms
+Critical Path Length:  11105000
+Schedule Cost: 2.158398ms
+makespan:  11105000
+Parallel Execution Time:  12.109944ms
+System Abort Count:  2
+VM Abort Count:  2
+=============================================
+MegaBlock Start From: 18999971
+Transation count:  405 Task count: 405
+Pre-Processing time:  17.471025ms
+Graph generation time:  35.592447ms
+Critical Path Length:  7838496
+Schedule Cost: 5.208601ms
+makespan:  7838496
+Parallel Execution Time:  10.329908ms
+System Abort Count:  1
+VM Abort Count:  2
+=============================================
+MegaBlock Start From: 18999972
+Transation count:  166 Task count: 166
+Pre-Processing time:  13.004409ms
+Graph generation time:  2.786004ms
+Critical Path Length:  9034221
+Schedule Cost: 1.681136ms
+makespan:  9034221
+Parallel Execution Time:  15.080344ms
+System Abort Count:  2
+VM Abort Count:  3
+=============================================
+MegaBlock Start From: 18999973
+Transation count:  257 Task count: 257
+Pre-Processing time:  18.250102ms
+Graph generation time:  6.45665ms
+Critical Path Length:  7096813
+Schedule Cost: 2.641717ms
+makespan:  7096813
+Parallel Execution Time:  13.255683ms
+System Abort Count:  2
+VM Abort Count:  2
+=============================================
+MegaBlock Start From: 18999974
+Transation count:  157 Task count: 157
+Pre-Processing time:  16.053476ms
+Graph generation time:  2.073506ms
+Critical Path Length:  6538023
+Schedule Cost: 2.020838ms
+makespan:  6538023
+Parallel Execution Time:  11.285162ms
+System Abort Count:  5
+VM Abort Count:  3
+=============================================
+MegaBlock Start From: 18999975
+Transation count:  168 Task count: 168
+Pre-Processing time:  26.189871ms
+Graph generation time:  2.468031ms
+Critical Path Length:  11509189
+Schedule Cost: 3.274478ms
+makespan:  11509189
+Parallel Execution Time:  24.039986ms
+System Abort Count:  6
+VM Abort Count:  2
+=============================================
+MegaBlock Start From: 18999976
+Transation count:  109 Task count: 109
+Pre-Processing time:  12.359493ms
+Graph generation time:  1.571141ms
+Critical Path Length:  8701263
+Schedule Cost: 1.332524ms
+makespan:  8701263
+Parallel Execution Time:  14.459726ms
+System Abort Count:  3
+VM Abort Count:  2
+=============================================
+MegaBlock Start From: 18999977
+Transation count:  151 Task count: 151
+Pre-Processing time:  17.467564ms
+Graph generation time:  1.950755ms
+Critical Path Length:  9902790
+Schedule Cost: 2.041308ms
+makespan:  9902790
+Parallel Execution Time:  13.655198ms
+System Abort Count:  7
+VM Abort Count:  5
+=============================================
+MegaBlock Start From: 18999978
+Transation count:  198 Task count: 198
+Pre-Processing time:  18.878862ms
+Graph generation time:  2.517776ms
+Critical Path Length:  7835588
+Schedule Cost: 2.480281ms
+makespan:  7835588
+Parallel Execution Time:  15.267641ms
+System Abort Count:  7
+VM Abort Count:  4
+=============================================
+MegaBlock Start From: 18999979
+Transation count:  323 Task count: 323
+Pre-Processing time:  19.262648ms
+Graph generation time:  13.957914ms
+Critical Path Length:  14867967
+Schedule Cost: 3.908757ms
+makespan:  14867967
+Parallel Execution Time:  14.985665ms
+System Abort Count:  6
+VM Abort Count:  1
+=============================================
+MegaBlock Start From: 18999980
+Transation count:  234 Task count: 234
+Pre-Processing time:  21.521883ms
+Graph generation time:  3.516781ms
+Critical Path Length:  22105000
+Schedule Cost: 2.760665ms
+makespan:  22105000
+Parallel Execution Time:  28.759456ms
+System Abort Count:  3
+VM Abort Count:  2
+=============================================
+MegaBlock Start From: 18999981
+Transation count:  125 Task count: 125
+Pre-Processing time:  9.131651ms
+Graph generation time:  1.25372ms
+Critical Path Length:  3279835
+Schedule Cost: 1.88023ms
+makespan:  3279835
+Parallel Execution Time:  7.874531ms
+System Abort Count:  1
+VM Abort Count:  2
+=============================================
+MegaBlock Start From: 18999982
+Transation count:  181 Task count: 181
+Pre-Processing time:  16.561254ms
+Graph generation time:  2.640249ms
+Critical Path Length:  9156131
+Schedule Cost: 1.957235ms
+makespan:  9156131
+Parallel Execution Time:  16.190961ms
+System Abort Count:  1
+VM Abort Count:  3
+=============================================
+MegaBlock Start From: 18999983
+Transation count:  117 Task count: 117
+Pre-Processing time:  10.514869ms
+Graph generation time:  1.219833ms
+Critical Path Length:  7601360
+Schedule Cost: 1.4283ms
+makespan:  7601360
+Parallel Execution Time:  10.722423ms
+System Abort Count:  2
+VM Abort Count:  3
+=============================================
+MegaBlock Start From: 18999984
+Transation count:  154 Task count: 154
+Pre-Processing time:  11.897974ms
+Graph generation time:  1.527962ms
+Critical Path Length:  4000000
+Schedule Cost: 1.92319ms
+makespan:  4000000
+Parallel Execution Time:  8.820052ms
+System Abort Count:  1
+VM Abort Count:  1
+=============================================
+MegaBlock Start From: 18999985
+Transation count:  576 Task count: 576
+Pre-Processing time:  28.96702ms
+Graph generation time:  89.305374ms
+Critical Path Length:  12236640
+Schedule Cost: 9.872079ms
+makespan:  12236640
+Parallel Execution Time:  18.426657ms
+System Abort Count:  2
+VM Abort Count:  2
+=============================================
+MegaBlock Start From: 18999986
+Transation count:  134 Task count: 134
+Pre-Processing time:  13.660468ms
+Graph generation time:  1.688594ms
+Critical Path Length:  16000000
+Schedule Cost: 1.597853ms
+makespan:  16000000
+Parallel Execution Time:  12.699842ms
+System Abort Count:  2
+VM Abort Count:  3
+=============================================
+MegaBlock Start From: 18999987
+Transation count:  121 Task count: 121
+Pre-Processing time:  10.941021ms
+Graph generation time:  1.162371ms
+Critical Path Length:  4000000
+Schedule Cost: 1.887136ms
+makespan:  4000000
+Parallel Execution Time:  8.298614ms
+System Abort Count:  5
+VM Abort Count:  0
+=============================================
+MegaBlock Start From: 18999988
+Transation count:  173 Task count: 171
+Pre-Processing time:  15.635956ms
+Graph generation time:  1.681053ms
+Critical Path Length:  15836953
+Schedule Cost: 2.467482ms
+makespan:  15836953
+Parallel Execution Time:  11.252664ms
+System Abort Count:  3
+VM Abort Count:  1
+=============================================
+MegaBlock Start From: 18999989
+Transation count:  172 Task count: 172
+Pre-Processing time:  18.351063ms
+Graph generation time:  2.26842ms
+Critical Path Length:  14440795
+Schedule Cost: 2.166289ms
+makespan:  14440795
+Parallel Execution Time:  38.397589ms
+System Abort Count:  2
+VM Abort Count:  6
+=============================================
+MegaBlock Start From: 18999990
+Transation count:  119 Task count: 119
+Pre-Processing time:  11.265945ms
+Graph generation time:  1.349842ms
+Critical Path Length:  6148925
+Schedule Cost: 2.121131ms
+makespan:  6148925
+Parallel Execution Time:  12.181293ms
+System Abort Count:  5
+VM Abort Count:  1
+=============================================
+MegaBlock Start From: 18999991
+Transation count:  156 Task count: 156
+Pre-Processing time:  13.217124ms
+Graph generation time:  1.85635ms
+Critical Path Length:  24105000
+Schedule Cost: 1.914314ms
+makespan:  24105000
+Parallel Execution Time:  13.542107ms
+System Abort Count:  1
+VM Abort Count:  1
+=============================================
+MegaBlock Start From: 18999992
+Transation count:  118 Task count: 118
+Pre-Processing time:  12.359488ms
+Graph generation time:  1.305353ms
+Critical Path Length:  5910733
+Schedule Cost: 1.460058ms
+makespan:  5910733
+Parallel Execution Time:  11.467051ms
+System Abort Count:  3
+VM Abort Count:  3
+=============================================
+MegaBlock Start From: 18999993
+Transation count:  366 Task count: 366
+Pre-Processing time:  21.608007ms
+Graph generation time:  14.9343ms
+Critical Path Length:  7743618
+Schedule Cost: 5.019485ms
+makespan:  7743618
+Parallel Execution Time:  21.30758ms
+System Abort Count:  3
+VM Abort Count:  7
+=============================================
+MegaBlock Start From: 18999994
+Transation count:  323 Task count: 323
+Pre-Processing time:  16.886071ms
+Graph generation time:  16.159183ms
+Critical Path Length:  16956794
+Schedule Cost: 5.128503ms
+makespan:  16956794
+Parallel Execution Time:  34.085127ms
+System Abort Count:  2
+VM Abort Count:  2
+=============================================
+MegaBlock Start From: 18999995
+Transation count:  302 Task count: 302
+Pre-Processing time:  13.296767ms
+Graph generation time:  18.186666ms
+Critical Path Length:  16000000
+Schedule Cost: 3.341943ms
+makespan:  16000000
+Parallel Execution Time:  11.546574ms
+System Abort Count:  1
+VM Abort Count:  0
+=============================================
+MegaBlock Start From: 18999996
+Transation count:  410 Task count: 410
+Pre-Processing time:  16.99631ms
+Graph generation time:  25.586311ms
+Critical Path Length:  24656243
+Schedule Cost: 4.771117ms
+makespan:  24656243
+Parallel Execution Time:  15.852416ms
+System Abort Count:  7
+VM Abort Count:  35
+=============================================
+MegaBlock Start From: 18999997
+Transation count:  312 Task count: 312
+Pre-Processing time:  13.15119ms
+Graph generation time:  14.022019ms
+Critical Path Length:  5773449
+Schedule Cost: 3.795417ms
+makespan:  5773449
+Parallel Execution Time:  10.629192ms
+System Abort Count:  1
+VM Abort Count:  2
+=============================================
+MegaBlock Start From: 18999998
+Transation count:  148 Task count: 148
+Pre-Processing time:  14.458008ms
+Graph generation time:  2.214159ms
+Critical Path Length:  10577718
+Schedule Cost: 1.52459ms
+makespan:  10577718
+Parallel Execution Time:  16.474185ms
+System Abort Count:  5
+VM Abort Count:  3
+=============================================
+MegaBlock Start From: 18999999
+Transation count:  196 Task count: 196
+Pre-Processing time:  16.764544ms
+Graph generation time:  2.566788ms
+Critical Path Length:  10123041
+Schedule Cost: 2.376901ms
+makespan:  10123041
+Parallel Execution Time:  18.566209ms
+System Abort Count:  5
+VM Abort Count:  1
+=============================================
+Collect Size:  2
+=============================================
+MegaBlock Start From: 18999950
+Transation count:  435 Task count: 435
+Pre-Processing time:  34.940426ms
+Graph generation time:  15.181389ms
+Critical Path Length:  44000000
+Schedule Cost: 5.62907ms
+makespan:  44000000
+Parallel Execution Time:  38.874691ms
+System Abort Count:  11
+VM Abort Count:  22
+=============================================
+MegaBlock Start From: 18999952
+Transation count:  282 Task count: 280
+Pre-Processing time:  15.355248ms
+Graph generation time:  10.139021ms
+Critical Path Length:  22000000
+Schedule Cost: 3.089755ms
+makespan:  22000000
+Parallel Execution Time:  12.755727ms
+System Abort Count:  4
+VM Abort Count:  7
+=============================================
+MegaBlock Start From: 18999954
+Transation count:  501 Task count: 501
+Pre-Processing time:  44.075068ms
+Graph generation time:  9.862553ms
+Critical Path Length:  44000000
+Schedule Cost: 7.427669ms
+makespan:  44000000
+Parallel Execution Time:  36.918321ms
+System Abort Count:  18
+VM Abort Count:  18
+=============================================
+MegaBlock Start From: 18999956
+Transation count:  252 Task count: 243
+Pre-Processing time:  23.158239ms
+Graph generation time:  3.15775ms
+Critical Path Length:  22000000
+Schedule Cost: 3.433668ms
+makespan:  22000000
+Parallel Execution Time:  18.742274ms
+System Abort Count:  9
+VM Abort Count:  7
+=============================================
+MegaBlock Start From: 18999958
+Transation count:  280 Task count: 277
+Pre-Processing time:  28.735809ms
+Graph generation time:  4.32259ms
+Critical Path Length:  44000000
+Schedule Cost: 3.850361ms
+makespan:  44000000
+Parallel Execution Time:  29.593327ms
+System Abort Count:  5
+VM Abort Count:  9
+=============================================
+MegaBlock Start From: 18999960
+Transation count:  325 Task count: 322
+Pre-Processing time:  32.151748ms
+Graph generation time:  5.084216ms
+Critical Path Length:  44000000
+Schedule Cost: 4.494104ms
+makespan:  44000000
+Parallel Execution Time:  28.23247ms
+System Abort Count:  8
+VM Abort Count:  15
+=============================================
+MegaBlock Start From: 18999962
+Transation count:  279 Task count: 249
+Pre-Processing time:  25.944079ms
+Graph generation time:  2.823367ms
+Critical Path Length:  22000000
+Schedule Cost: 3.747111ms
+makespan:  22000000
+Parallel Execution Time:  19.094778ms
+System Abort Count:  9
+VM Abort Count:  13
+=============================================
+MegaBlock Start From: 18999964
+Transation count:  378 Task count: 378
+Pre-Processing time:  32.595371ms
+Graph generation time:  5.667416ms
+Critical Path Length:  21068335
+Schedule Cost: 5.541512ms
+makespan:  21068335
+Parallel Execution Time:  29.266025ms
+System Abort Count:  3
+VM Abort Count:  12
+=============================================
+MegaBlock Start From: 18999966
+Transation count:  416 Task count: 415
+Pre-Processing time:  35.702511ms
+Graph generation time:  8.064079ms
+Critical Path Length:  31105000
+Schedule Cost: 5.458619ms
+makespan:  31105000
+Parallel Execution Time:  34.834443ms
+System Abort Count:  7
+VM Abort Count:  5
+=============================================
+MegaBlock Start From: 18999968
+Transation count:  551 Task count: 544
+Pre-Processing time:  30.438377ms
+Graph generation time:  43.688786ms
+Critical Path Length:  17762067
+Schedule Cost: 8.267144ms
+makespan:  17762067
+Parallel Execution Time:  22.094404ms
+System Abort Count:  9
+VM Abort Count:  6
+=============================================
+MegaBlock Start From: 18999970
+Transation count:  570 Task count: 568
+Pre-Processing time:  32.635436ms
+Graph generation time:  44.710148ms
+Critical Path Length:  15105000
+Schedule Cost: 8.715638ms
+makespan:  15105000
+Parallel Execution Time:  27.368538ms
+System Abort Count:  6
+VM Abort Count:  5
+=============================================
+MegaBlock Start From: 18999972
+Transation count:  423 Task count: 395
+Pre-Processing time:  23.915441ms
+Graph generation time:  12.104741ms
+Critical Path Length:  13619392
+Schedule Cost: 5.114807ms
+makespan:  13619392
+Parallel Execution Time:  24.701802ms
+System Abort Count:  5
+VM Abort Count:  7
+=============================================
+MegaBlock Start From: 18999974
+Transation count:  325 Task count: 298
+Pre-Processing time:  30.605152ms
+Graph generation time:  4.298706ms
+Critical Path Length:  15138050
+Schedule Cost: 4.599964ms
+makespan:  15138050
+Parallel Execution Time:  29.277271ms
+System Abort Count:  10
+VM Abort Count:  10
+=============================================
+MegaBlock Start From: 18999976
+Transation count:  260 Task count: 229
+Pre-Processing time:  25.763117ms
+Graph generation time:  3.669432ms
+Critical Path Length:  15292659
+Schedule Cost: 3.202248ms
+makespan:  15292659
+Parallel Execution Time:  23.957554ms
+System Abort Count:  12
+VM Abort Count:  6
+=============================================
+MegaBlock Start From: 18999978
+Transation count:  521 Task count: 518
+Pre-Processing time:  37.135329ms
+Graph generation time:  19.787704ms
+Critical Path Length:  20292514
+Schedule Cost: 7.20109ms
+makespan:  20292514
+Parallel Execution Time:  28.242244ms
+System Abort Count:  15
+VM Abort Count:  7
+=============================================
+MegaBlock Start From: 18999980
+Transation count:  359 Task count: 359
+Pre-Processing time:  31.068541ms
+Graph generation time:  6.383163ms
+Critical Path Length:  22105000
+Schedule Cost: 4.417459ms
+makespan:  22105000
+Parallel Execution Time:  45.21963ms
+System Abort Count:  5
+VM Abort Count:  4
+=============================================
+MegaBlock Start From: 18999982
+Transation count:  298 Task count: 298
+Pre-Processing time:  26.643223ms
+Graph generation time:  4.903696ms
+Critical Path Length:  13877064
+Schedule Cost: 5.322812ms
+makespan:  13877064
+Parallel Execution Time:  26.706944ms
+System Abort Count:  4
+VM Abort Count:  7
+=============================================
+MegaBlock Start From: 18999984
+Transation count:  730 Task count: 722
+Pre-Processing time:  38.788596ms
+Graph generation time:  100.14075ms
+Critical Path Length:  13449098
+Schedule Cost: 14.229141ms
+makespan:  13449098
+Parallel Execution Time:  20.653074ms
+System Abort Count:  3
+VM Abort Count:  4
+=============================================
+MegaBlock Start From: 18999986
+Transation count:  255 Task count: 240
+Pre-Processing time:  23.077432ms
+Graph generation time:  3.090653ms
+Critical Path Length:  20000000
+Schedule Cost: 3.485339ms
+makespan:  20000000
+Parallel Execution Time:  16.577587ms
+System Abort Count:  6
+VM Abort Count:  4
+=============================================
+MegaBlock Start From: 18999988
+Transation count:  345 Task count: 328
+Pre-Processing time:  30.412804ms
+Graph generation time:  4.266262ms
+Critical Path Length:  27316585
+Schedule Cost: 5.005141ms
+makespan:  27316585
+Parallel Execution Time:  44.586754ms
+System Abort Count:  7
+VM Abort Count:  6
+=============================================
+MegaBlock Start From: 18999990
+Transation count:  275 Task count: 272
+Pre-Processing time:  24.416397ms
+Graph generation time:  3.915795ms
+Critical Path Length:  24105000
+Schedule Cost: 3.949266ms
+makespan:  24105000
+Parallel Execution Time:  23.568801ms
+System Abort Count:  7
+VM Abort Count:  4
+=============================================
+MegaBlock Start From: 18999992
+Transation count:  484 Task count: 420
+Pre-Processing time:  28.835973ms
+Graph generation time:  16.410921ms
+Critical Path Length:  10692838
+Schedule Cost: 5.614861ms
+makespan:  10692838
+Parallel Execution Time:  21.225821ms
+System Abort Count:  8
+VM Abort Count:  6
+=============================================
+MegaBlock Start From: 18999994
+Transation count:  625 Task count: 625
+Pre-Processing time:  32.220723ms
+Graph generation time:  66.953784ms
+Critical Path Length:  20272391
+Schedule Cost: 10.536441ms
+makespan:  20272391
+Parallel Execution Time:  42.226942ms
+System Abort Count:  6
+VM Abort Count:  4
+=============================================
+MegaBlock Start From: 18999996
+Transation count:  722 Task count: 721
+Pre-Processing time:  32.263721ms
+Graph generation time:  74.185561ms
+Critical Path Length:  29320209
+Schedule Cost: 11.60096ms
+makespan:  29320209
+Parallel Execution Time:  24.400142ms
+System Abort Count:  8
+VM Abort Count:  36
+=============================================
+MegaBlock Start From: 18999998
+Transation count:  344 Task count: 336
+Pre-Processing time:  28.364604ms
+Graph generation time:  5.986807ms
+Critical Path Length:  17780408
+Schedule Cost: 4.415051ms
+makespan:  17780408
+Parallel Execution Time:  29.222954ms
+System Abort Count:  11
+VM Abort Count:  7
+=============================================
+Collect Size:  3
+=============================================
+MegaBlock Start From: 18999950
+Transation count:  706 Task count: 705
+Pre-Processing time:  47.884051ms
+Graph generation time:  42.6981ms
+Critical Path Length:  66000000
+Schedule Cost: 10.500465ms
+makespan:  66000000
+Parallel Execution Time:  52.604042ms
+System Abort Count:  17
+VM Abort Count:  34
+=============================================
+MegaBlock Start From: 18999953
+Transation count:  512 Task count: 408
+Pre-Processing time:  38.28471ms
+Graph generation time:  6.76878ms
+Critical Path Length:  44000000
+Schedule Cost: 8.736293ms
+makespan:  44000000
+Parallel Execution Time:  35.965215ms
+System Abort Count:  15
+VM Abort Count:  21
+=============================================
+MegaBlock Start From: 18999956
+Transation count:  389 Task count: 372
+Pre-Processing time:  35.070411ms
+Graph generation time:  5.971964ms
+Critical Path Length:  44000000
+Schedule Cost: 5.715725ms
+makespan:  44000000
+Parallel Execution Time:  32.372795ms
+System Abort Count:  13
+VM Abort Count:  15
+=============================================
+MegaBlock Start From: 18999959
+Transation count:  468 Task count: 430
+Pre-Processing time:  42.36962ms
+Graph generation time:  7.870114ms
+Critical Path Length:  66000000
+Schedule Cost: 6.570406ms
+makespan:  66000000
+Parallel Execution Time:  37.502877ms
+System Abort Count:  10
+VM Abort Count:  25
+=============================================
+MegaBlock Start From: 18999962
+Transation count:  502 Task count: 463
+Pre-Processing time:  48.074665ms
+Graph generation time:  7.229957ms
+Critical Path Length:  23261588
+Schedule Cost: 7.251157ms
+makespan:  23261588
+Parallel Execution Time:  35.275093ms
+System Abort Count:  11
+VM Abort Count:  20
+=============================================
+MegaBlock Start From: 18999965
+Transation count:  571 Task count: 512
+Pre-Processing time:  46.098732ms
+Graph generation time:  11.845371ms
+Critical Path Length:  31105000
+Schedule Cost: 9.881477ms
+makespan:  31105000
+Parallel Execution Time:  48.621085ms
+System Abort Count:  14
+VM Abort Count:  14
+=============================================
+MegaBlock Start From: 18999968
+Transation count:  716 Task count: 708
+Pre-Processing time:  46.690041ms
+Graph generation time:  51.940785ms
+Critical Path Length:  24416334
+Schedule Cost: 10.94609ms
+makespan:  24416334
+Parallel Execution Time:  32.600809ms
+System Abort Count:  14
+VM Abort Count:  9
+=============================================
+MegaBlock Start From: 18999971
+Transation count:  828 Task count: 804
+Pre-Processing time:  44.912285ms
+Graph generation time:  83.865944ms
+Critical Path Length:  19804612
+Schedule Cost: 14.694776ms
+makespan:  19804612
+Parallel Execution Time:  34.166618ms
+System Abort Count:  8
+VM Abort Count:  8
+=============================================
+MegaBlock Start From: 18999974
+Transation count:  434 Task count: 406
+Pre-Processing time:  40.013025ms
+Graph generation time:  6.593744ms
+Critical Path Length:  20441282
+Schedule Cost: 6.447939ms
+makespan:  20441282
+Parallel Execution Time:  37.285695ms
+System Abort Count:  15
+VM Abort Count:  20
+=============================================
+MegaBlock Start From: 18999977
+Transation count:  672 Task count: 652
+Pre-Processing time:  49.30312ms
+Graph generation time:  22.605279ms
+Critical Path Length:  29592265
+Schedule Cost: 10.039592ms
+makespan:  29592265
+Parallel Execution Time:  37.318886ms
+System Abort Count:  22
+VM Abort Count:  14
+=============================================
+MegaBlock Start From: 18999980
+Transation count:  540 Task count: 536
+Pre-Processing time:  45.275433ms
+Graph generation time:  12.711284ms
+Critical Path Length:  27386177
+Schedule Cost: 7.147669ms
+makespan:  27386177
+Parallel Execution Time:  47.6723ms
+System Abort Count:  10
+VM Abort Count:  10
+=============================================
+MegaBlock Start From: 18999983
+Transation count:  847 Task count: 841
+Pre-Processing time:  47.730885ms
+Graph generation time:  113.066817ms
+Critical Path Length:  17222576
+Schedule Cost: 16.296975ms
+makespan:  17222576
+Parallel Execution Time:  31.849357ms
+System Abort Count:  10
+VM Abort Count:  9
+=============================================
+MegaBlock Start From: 18999986
+Transation count:  428 Task count: 372
+Pre-Processing time:  34.146306ms
+Graph generation time:  4.916221ms
+Critical Path Length:  20000000
+Schedule Cost: 5.939269ms
+makespan:  20000000
+Parallel Execution Time:  25.519699ms
+System Abort Count:  8
+VM Abort Count:  9
+=============================================
+MegaBlock Start From: 18999989
+Transation count:  447 Task count: 445
+Pre-Processing time:  38.761033ms
+Graph generation time:  7.623025ms
+Critical Path Length:  25615448
+Schedule Cost: 7.65271ms
+makespan:  25615448
+Parallel Execution Time:  55.71553ms
+System Abort Count:  7
+VM Abort Count:  12
+=============================================
+MegaBlock Start From: 18999992
+Transation count:  807 Task count: 743
+Pre-Processing time:  45.457566ms
+Graph generation time:  60.805501ms
+Critical Path Length:  26567868
+Schedule Cost: 12.281804ms
+makespan:  26567868
+Parallel Execution Time:  49.752665ms
+System Abort Count:  14
+VM Abort Count:  10
+=============================================
+MegaBlock Start From: 18999995
+Transation count:  1024 Task count: 1013
+Pre-Processing time:  47.912807ms
+Graph generation time:  164.85087ms
+Critical Path Length:  24624160
+Schedule Cost: 21.209757ms
+makespan:  24624160
+Parallel Execution Time:  29.832801ms
+System Abort Count:  10
+VM Abort Count:  37
+=============================================
+MegaBlock Start From: 18999998
+Transation count:  344 Task count: 336
+Pre-Processing time:  53.131147ms
+Graph generation time:  22.918234ms
+Critical Path Length:  17780408
+Schedule Cost: 16.170496ms
+makespan:  17780408
+Parallel Execution Time:  68.43287ms
+System Abort Count:  11
+VM Abort Count:  7
+=============================================
+Collect Size:  4
+=============================================
+MegaBlock Start From: 18999950
+Transation count:  717 Task count: 716
+Pre-Processing time:  56.65212ms
+Graph generation time:  44.06074ms
+Critical Path Length:  66000000
+Schedule Cost: 11.05372ms
+makespan:  66000000
+Parallel Execution Time:  49.015437ms
+System Abort Count:  17
+VM Abort Count:  39
+=============================================
+MegaBlock Start From: 18999954
+Transation count:  753 Task count: 751
+Pre-Processing time:  63.565639ms
+Graph generation time:  15.438504ms
+Critical Path Length:  66000000
+Schedule Cost: 11.975874ms
+makespan:  66000000
+Parallel Execution Time:  64.845936ms
+System Abort Count:  32
+VM Abort Count:  31
+=============================================
+MegaBlock Start From: 18999958
+Transation count:  605 Task count: 554
+Pre-Processing time:  56.301813ms
+Graph generation time:  11.096591ms
+Critical Path Length:  88000000
+Schedule Cost: 11.18829ms
+makespan:  88000000
+Parallel Execution Time:  43.75308ms
+System Abort Count:  16
+VM Abort Count:  32
+=============================================
+MegaBlock Start From: 18999962
+Transation count:  657 Task count: 609
+Pre-Processing time:  60.82084ms
+Graph generation time:  10.902375ms
+Critical Path Length:  29124994
+Schedule Cost: 9.68961ms
+makespan:  29124994
+Parallel Execution Time:  45.338874ms
+System Abort Count:  20
+VM Abort Count:  32
+=============================================
+MegaBlock Start From: 18999966
+Transation count:  967 Task count: 963
+Pre-Processing time:  65.934689ms
+Graph generation time:  51.983851ms
+Critical Path Length:  35210000
+Schedule Cost: 13.892246ms
+makespan:  35210000
+Parallel Execution Time:  52.061924ms
+System Abort Count:  26
+VM Abort Count:  13
+=============================================
+MegaBlock Start From: 18999970
+Transation count:  993 Task count: 963
+Pre-Processing time:  61.908326ms
+Graph generation time:  89.642826ms
+Critical Path Length:  26439994
+Schedule Cost: 16.239399ms
+makespan:  26439994
+Parallel Execution Time:  45.708349ms
+System Abort Count:  17
+VM Abort Count:  11
+=============================================
+MegaBlock Start From: 18999974
+Transation count:  585 Task count: 539
+Pre-Processing time:  53.402246ms
+Graph generation time:  9.532581ms
+Critical Path Length:  26786135
+Schedule Cost: 8.460713ms
+makespan:  26786135
+Parallel Execution Time:  44.483717ms
+System Abort Count:  29
+VM Abort Count:  27
+=============================================
+MegaBlock Start From: 18999978
+Transation count:  880 Task count: 876
+Pre-Processing time:  68.744392ms
+Graph generation time:  38.235865ms
+Critical Path Length:  40076186
+Schedule Cost: 12.832938ms
+makespan:  40076186
+Parallel Execution Time:  56.880041ms
+System Abort Count:  24
+VM Abort Count:  12
+=============================================
+MegaBlock Start From: 18999982
+Transation count:  1028 Task count: 1026
+Pre-Processing time:  63.61928ms
+Graph generation time:  114.076718ms
+Critical Path Length:  26378707
+Schedule Cost: 19.412139ms
+makespan:  26378707
+Parallel Execution Time:  43.758526ms
+System Abort Count:  12
+VM Abort Count:  15
+=============================================
+MegaBlock Start From: 18999986
+Transation count:  600 Task count: 519
+Pre-Processing time:  47.139876ms
+Graph generation time:  8.090338ms
+Critical Path Length:  26483434
+Schedule Cost: 8.256836ms
+makespan:  26483434
+Parallel Execution Time:  49.776332ms
+System Abort Count:  14
+VM Abort Count:  13
+=============================================
+MegaBlock Start From: 18999990
+Transation count:  759 Task count: 662
+Pre-Processing time:  50.800268ms
+Graph generation time:  20.58874ms
+Critical Path Length:  24105000
+Schedule Cost: 9.42658ms
+makespan:  24105000
+Parallel Execution Time:  50.316493ms
+System Abort Count:  23
+VM Abort Count:  11
+=============================================
+MegaBlock Start From: 18999994
+Transation count:  1347 Task count: 1345
+Pre-Processing time:  73.347614ms
+Graph generation time:  280.449775ms
+Critical Path Length:  38907905
+Schedule Cost: 40.313653ms
+makespan:  38907905
+Parallel Execution Time:  56.689859ms
+System Abort Count:  21
+VM Abort Count:  43
+=============================================
+MegaBlock Start From: 18999998
+Transation count:  344 Task count: 336
+Pre-Processing time:  27.522515ms
+Graph generation time:  5.875902ms
+Critical Path Length:  17780408
+Schedule Cost: 4.015545ms
+makespan:  17780408
+Parallel Execution Time:  27.092452ms
+System Abort Count:  11
+VM Abort Count:  7
+=============================================
+Collect Size:  5
+=============================================
+MegaBlock Start From: 18999950
+Transation count:  1045 Task count: 1034
+Pre-Processing time:  74.856842ms
+Graph generation time:  50.529431ms
+Critical Path Length:  88000000
+Schedule Cost: 15.780896ms
+makespan:  88000000
+Parallel Execution Time:  63.232682ms
+System Abort Count:  38
+VM Abort Count:  56
+=============================================
+MegaBlock Start From: 18999955
+Transation count:  705 Task count: 667
+Pre-Processing time:  58.839749ms
+Graph generation time:  13.727522ms
+Critical Path Length:  88000000
+Schedule Cost: 10.315289ms
+makespan:  88000000
+Parallel Execution Time:  51.505326ms
+System Abort Count:  25
+VM Abort Count:  33
+=============================================
+MegaBlock Start From: 18999960
+Transation count:  827 Task count: 752
+Pre-Processing time:  76.995772ms
+Graph generation time:  14.762418ms
+Critical Path Length:  66000000
+Schedule Cost: 12.180783ms
+makespan:  66000000
+Parallel Execution Time:  51.763893ms
+System Abort Count:  26
+VM Abort Count:  38
+=============================================
+MegaBlock Start From: 18999965
+Transation count:  1122 Task count: 1047
+Pre-Processing time:  81.067313ms
+Graph generation time:  57.5051ms
+Critical Path Length:  41730151
+Schedule Cost: 18.839613ms
+makespan:  41730151
+Parallel Execution Time:  65.261524ms
+System Abort Count:  34
+VM Abort Count:  22
+=============================================
+MegaBlock Start From: 18999970
+Transation count:  1150 Task count: 1117
+Pre-Processing time:  69.476441ms
+Graph generation time:  91.381524ms
+Critical Path Length:  32307198
+Schedule Cost: 19.26879ms
+makespan:  32307198
+Parallel Execution Time:  53.373329ms
+System Abort Count:  27
+VM Abort Count:  15
+=============================================
+MegaBlock Start From: 18999975
+Transation count:  949 Task count: 916
+Pre-Processing time:  86.070446ms
+Graph generation time:  31.047486ms
+Critical Path Length:  45162981
+Schedule Cost: 13.862643ms
+makespan:  45162981
+Parallel Execution Time:  61.938044ms
+System Abort Count:  45
+VM Abort Count:  28
+=============================================
+MegaBlock Start From: 18999980
+Transation count:  811 Task count: 801
+Pre-Processing time:  61.536497ms
+Graph generation time:  20.590588ms
+Critical Path Length:  34800256
+Schedule Cost: 11.490197ms
+makespan:  34800256
+Parallel Execution Time:  59.693967ms
+System Abort Count:  22
+VM Abort Count:  18
+=============================================
+MegaBlock Start From: 18999985
+Transation count:  1176 Task count: 1128
+Pre-Processing time:  74.372534ms
+Graph generation time:  95.400122ms
+Critical Path Length:  45538521
+Schedule Cost: 21.440506ms
+makespan:  45538521
+Parallel Execution Time:  76.047311ms
+System Abort Count:  27
+VM Abort Count:  18
+=============================================
+MegaBlock Start From: 18999990
+Transation count:  1082 Task count: 972
+Pre-Processing time:  67.54984ms
+Graph generation time:  62.065919ms
+Critical Path Length:  34999125
+Schedule Cost: 21.556827ms
+makespan:  34999125
+Parallel Execution Time:  64.433901ms
+System Abort Count:  30
+VM Abort Count:  15
+=============================================
+MegaBlock Start From: 18999995
+Transation count:  1368 Task count: 1356
+Pre-Processing time:  78.133645ms
+Graph generation time:  177.488063ms
+Critical Path Length:  41117040
+Schedule Cost: 26.423911ms
+makespan:  41117040
+Parallel Execution Time:  53.15422ms
+System Abort Count:  28
+VM Abort Count:  52
+=============================================
+Collect Size:  6
+=============================================
+MegaBlock Start From: 18999950
+Transation count:  1218 Task count: 1205
+Pre-Processing time:  82.573945ms
+Graph generation time:  56.412654ms
+Critical Path Length:  110000000
+Schedule Cost: 19.26046ms
+makespan:  110000000
+Parallel Execution Time:  74.062003ms
+System Abort Count:  47
+VM Abort Count:  67
+=============================================
+MegaBlock Start From: 18999956
+Transation count:  857 Task count: 758
+Pre-Processing time:  75.682278ms
+Graph generation time:  17.416714ms
+Critical Path Length:  110000000
+Schedule Cost: 11.951455ms
+makespan:  110000000
+Parallel Execution Time:  56.066642ms
+System Abort Count:  28
+VM Abort Count:  42
+=============================================
+MegaBlock Start From: 18999962
+Transation count:  1073 Task count: 945
+Pre-Processing time:  88.157504ms
+Graph generation time:  23.436109ms
+Critical Path Length:  43019850
+Schedule Cost: 14.806556ms
+makespan:  43019850
+Parallel Execution Time:  69.888908ms
+System Abort Count:  40
+VM Abort Count:  46
+=============================================
+MegaBlock Start From: 18999968
+Transation count:  1544 Task count: 1520
+Pre-Processing time:  94.612896ms
+Graph generation time:  258.592758ms
+Critical Path Length:  43130855
+Schedule Cost: 35.823308ms
+makespan:  43130855
+Parallel Execution Time:  60.017043ms
+System Abort Count:  35
+VM Abort Count:  18
+=============================================
+MegaBlock Start From: 18999974
+Transation count:  1106 Task count: 1013
+Pre-Processing time:  84.451026ms
+Graph generation time:  31.977433ms
+Critical Path Length:  45683144
+Schedule Cost: 15.988292ms
+makespan:  45683144
+Parallel Execution Time:  90.533708ms
+System Abort Count:  49
+VM Abort Count:  45
+=============================================
+MegaBlock Start From: 18999980
+Transation count:  1387 Task count: 1376
+Pre-Processing time:  96.902673ms
+Graph generation time:  158.922477ms
+Critical Path Length:  44266569
+Schedule Cost: 27.01012ms
+makespan:  44266569
+Parallel Execution Time:  73.377547ms
+System Abort Count:  29
+VM Abort Count:  23
+=============================================
+MegaBlock Start From: 18999986
+Transation count:  875 Task count: 746
+Pre-Processing time:  64.346081ms
+Graph generation time:  13.366839ms
+Critical Path Length:  44105000
+Schedule Cost: 12.022353ms
+makespan:  44105000
+Parallel Execution Time:  62.770199ms
+System Abort Count:  27
+VM Abort Count:  20
+=============================================
+MegaBlock Start From: 18999992
+Transation count:  1831 Task count: 1760
+Pre-Processing time:  101.662427ms
+Graph generation time:  483.553106ms
+Critical Path Length:  47980371
+Schedule Cost: 51.235774ms
+makespan:  47980371
+Parallel Execution Time:  74.981148ms
+System Abort Count:  37
+VM Abort Count:  51
+=============================================
+MegaBlock Start From: 18999998
+Transation count:  344 Task count: 336
+Pre-Processing time:  32.581254ms
+Graph generation time:  6.58858ms
+Critical Path Length:  17780408
+Schedule Cost: 4.067463ms
+makespan:  17780408
+Parallel Execution Time:  27.516945ms
+System Abort Count:  11
+VM Abort Count:  7
+=============================================
+Collect Size:  7
+=============================================
+MegaBlock Start From: 18999950
+Transation count:  1346 Task count: 1328
+Pre-Processing time:  100.941758ms
+Graph generation time:  65.293024ms
+Critical Path Length:  132000000
+Schedule Cost: 21.099879ms
+makespan:  132000000
+Parallel Execution Time:  80.223868ms
+System Abort Count:  51
+VM Abort Count:  76
+=============================================
+MegaBlock Start From: 18999957
+Transation count:  1008 Task count: 862
+Pre-Processing time:  75.614402ms
+Graph generation time:  19.728923ms
+Critical Path Length:  110000000
+Schedule Cost: 14.225177ms
+makespan:  110000000
+Parallel Execution Time:  66.029705ms
+System Abort Count:  41
+VM Abort Count:  53
+=============================================
+MegaBlock Start From: 18999964
+Transation count:  1510 Task count: 1489
+Pre-Processing time:  118.733175ms
+Graph generation time:  78.5437ms
+Critical Path Length:  58175011
+Schedule Cost: 23.47401ms
+makespan:  58175011
+Parallel Execution Time:  85.285685ms
+System Abort Count:  47
+VM Abort Count:  35
+=============================================
+MegaBlock Start From: 18999971
+Transation count:  1413 Task count: 1322
+Pre-Processing time:  101.44691ms
+Graph generation time:  98.097177ms
+Critical Path Length:  42292146
+Schedule Cost: 23.859274ms
+makespan:  42292146
+Parallel Execution Time:  72.671513ms
+System Abort Count:  52
+VM Abort Count:  39
+=============================================
+MegaBlock Start From: 18999978
+Transation count:  1332 Task count: 1311
+Pre-Processing time:  103.32265ms
+Graph generation time:  61.523462ms
+Critical Path Length:  54343330
+Schedule Cost: 28.061426ms
+makespan:  54343330
+Parallel Execution Time:  84.692767ms
+System Abort Count:  42
+VM Abort Count:  29
+=============================================
+MegaBlock Start From: 18999985
+Transation count:  1451 Task count: 1384
+Pre-Processing time:  112.264059ms
+Graph generation time:  113.569552ms
+Critical Path Length:  54460274
+Schedule Cost: 25.896378ms
+makespan:  54460274
+Parallel Execution Time:  88.701978ms
+System Abort Count:  43
+VM Abort Count:  23
+=============================================
+MegaBlock Start From: 18999992
+Transation count:  1979 Task count: 1904
+Pre-Processing time:  125.531506ms
+Graph generation time:  489.856058ms
+Critical Path Length:  56237576
+Schedule Cost: 54.221295ms
+makespan:  56237576
+Parallel Execution Time:  83.800241ms
+System Abort Count:  47
+VM Abort Count:  60
+=============================================
+MegaBlock Start From: 18999999
+Transation count:  196 Task count: 196
+Pre-Processing time:  18.851246ms
+Graph generation time:  2.69293ms
+Critical Path Length:  10123041
+Schedule Cost: 2.744583ms
+makespan:  10123041
+Parallel Execution Time:  19.178267ms
+System Abort Count:  5
+VM Abort Count:  1
+=============================================
+Collect Size:  8
+=============================================
+MegaBlock Start From: 18999950
+Transation count:  1470 Task count: 1449
+Pre-Processing time:  116.84036ms
+Graph generation time:  70.416257ms
+Critical Path Length:  132000000
+Schedule Cost: 25.362496ms
+makespan:  132000000
+Parallel Execution Time:  92.802937ms
+System Abort Count:  65
+VM Abort Count:  84
+=============================================
+MegaBlock Start From: 18999958
+Transation count:  1262 Task count: 1067
+Pre-Processing time:  98.292168ms
+Graph generation time:  23.968932ms
+Critical Path Length:  110000000
+Schedule Cost: 17.664244ms
+makespan:  110000000
+Parallel Execution Time:  74.542372ms
+System Abort Count:  50
+VM Abort Count:  68
+=============================================
+MegaBlock Start From: 18999966
+Transation count:  1960 Task count: 1934
+Pre-Processing time:  149.29312ms
+Graph generation time:  291.721234ms
+Critical Path Length:  59694069
+Schedule Cost: 44.490206ms
+makespan:  59694069
+Parallel Execution Time:  95.381019ms
+System Abort Count:  61
+VM Abort Count:  27
+=============================================
+MegaBlock Start From: 18999974
+Transation count:  1465 Task count: 1354
+Pre-Processing time:  119.597389ms
+Graph generation time:  53.183745ms
+Critical Path Length:  63061300
+Schedule Cost: 23.744061ms
+makespan:  63061300
+Parallel Execution Time:  96.888627ms
+System Abort Count:  63
+VM Abort Count:  55
+=============================================
+MegaBlock Start From: 18999982
+Transation count:  1628 Task count: 1594
+Pre-Processing time:  120.23175ms
+Graph generation time:  138.644717ms
+Critical Path Length:  60984115
+Schedule Cost: 29.885303ms
+makespan:  60984115
+Parallel Execution Time:  99.553286ms
+System Abort Count:  44
+VM Abort Count:  36
+=============================================
+MegaBlock Start From: 18999990
+Transation count:  2106 Task count: 1978
+Pre-Processing time:  125.909989ms
+Graph generation time:  475.367137ms
+Critical Path Length:  56127922
+Schedule Cost: 54.751728ms
+makespan:  56127922
+Parallel Execution Time:  93.217044ms
+System Abort Count:  56
+VM Abort Count:  59
+=============================================
+MegaBlock Start From: 18999998
+Transation count:  344 Task count: 336
+Pre-Processing time:  35.858389ms
+Graph generation time:  6.582972ms
+Critical Path Length:  17780408
+Schedule Cost: 4.577924ms
+makespan:  17780408
+Parallel Execution Time:  28.786095ms
+System Abort Count:  11
+VM Abort Count:  7
+=============================================
+Collect Size:  9
+=============================================
+MegaBlock Start From: 18999950
+Transation count:  1607 Task count: 1562
+Pre-Processing time:  106.60251ms
+Graph generation time:  73.60746ms
+Critical Path Length:  154000000
+Schedule Cost: 27.157555ms
+makespan:  154000000
+Parallel Execution Time:  102.776935ms
+System Abort Count:  73
+VM Abort Count:  95
+=============================================
+MegaBlock Start From: 18999959
+Transation count:  1541 Task count: 1257
+Pre-Processing time:  106.034861ms
+Graph generation time:  83.612369ms
+Critical Path Length:  88000000
+Schedule Cost: 43.924945ms
+makespan:  88000000
+Parallel Execution Time:  128.580302ms
+System Abort Count:  67
+VM Abort Count:  76
+=============================================
+MegaBlock Start From: 18999968
+Transation count:  1978 Task count: 1912
+Pre-Processing time:  129.244524ms
+Graph generation time:  274.615698ms
+Critical Path Length:  60044290
+Schedule Cost: 44.013404ms
+makespan:  60044290
+Parallel Execution Time:  93.417979ms
+System Abort Count:  65
+VM Abort Count:  47
+=============================================
+MegaBlock Start From: 18999977
+Transation count:  2059 Task count: 2008
+Pre-Processing time:  130.301793ms
+Graph generation time:  279.358977ms
+Critical Path Length:  72791534
+Schedule Cost: 43.339706ms
+makespan:  72791534
+Parallel Execution Time:  104.573015ms
+System Abort Count:  61
+VM Abort Count:  41
+=============================================
+MegaBlock Start From: 18999986
+Transation count:  1682 Task count: 1399
+Pre-Processing time:  110.945161ms
+Graph generation time:  79.969837ms
+Critical Path Length:  50557445
+Schedule Cost: 23.566802ms
+makespan:  50557445
+Parallel Execution Time:  83.757515ms
+System Abort Count:  53
+VM Abort Count:  40
+=============================================
+MegaBlock Start From: 18999995
+Transation count:  1368 Task count: 1356
+Pre-Processing time:  82.126079ms
+Graph generation time:  175.345821ms
+Critical Path Length:  41117040
+Schedule Cost: 26.97026ms
+makespan:  41117040
+Parallel Execution Time:  51.875181ms
+System Abort Count:  28
+VM Abort Count:  52
+=============================================
+Collect Size:  10
+=============================================
+MegaBlock Start From: 18999950
+Transation count:  1750 Task count: 1708
+Pre-Processing time:  123.707117ms
+Graph generation time:  87.507154ms
+Critical Path Length:  176000000
+Schedule Cost: 39.676793ms
+makespan:  176000000
+Parallel Execution Time:  109.100573ms
+System Abort Count:  83
+VM Abort Count:  103
+=============================================
+MegaBlock Start From: 18999960
+Transation count:  1949 Task count: 1723
+Pre-Processing time:  121.296061ms
+Graph generation time:  88.818903ms
+Critical Path Length:  66799211
+Schedule Cost: 30.023787ms
+makespan:  66799211
+Parallel Execution Time:  107.001408ms
+System Abort Count:  81
+VM Abort Count:  75
+=============================================
+MegaBlock Start From: 18999970
+Transation count:  2099 Task count: 1936
+Pre-Processing time:  135.823336ms
+Graph generation time:  237.806475ms
+Critical Path Length:  66722452
+Schedule Cost: 41.490138ms
+makespan:  66722452
+Parallel Execution Time:  100.850991ms
+System Abort Count:  90
+VM Abort Count:  57
+=============================================
+MegaBlock Start From: 18999980
+Transation count:  1987 Task count: 1935
+Pre-Processing time:  130.895275ms
+Graph generation time:  179.926232ms
+Critical Path Length:  77768503
+Schedule Cost: 39.271945ms
+makespan:  77768503
+Parallel Execution Time:  138.271046ms
+System Abort Count:  65
+VM Abort Count:  42
+=============================================
+MegaBlock Start From: 18999990
+Transation count:  2450 Task count: 2314
+Pre-Processing time:  145.227023ms
+Graph generation time:  495.626625ms
+Critical Path Length:  71562937
+Schedule Cost: 63.151017ms
+makespan:  71562937
+Parallel Execution Time:  114.062726ms
+System Abort Count:  82
+VM Abort Count:  79
+=============================================

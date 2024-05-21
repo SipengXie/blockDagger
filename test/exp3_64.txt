@@ -1,0 +1,50 @@
+=== RUN   TestPipelineExp
+[INFO] [05-21|17:02:16.022] Starting 
+[INFO] [05-21|17:02:16.023] [db] open                                lable=chaindata sizeLimit=12TB pageSize=8192
+[INFO] [05-21|17:02:16.024] DB opened 
+[INFO] [05-21|17:02:16.024] DB Transaction started 
+[INFO] [05-21|17:02:19.365] Block Reader created 
+=============================================
+Group Num:  25
+Transation count:  10235 Task count: 8462
+eachGroupNum:  338
+Pipeline Execution Time:  1.062548946s
+=============================================
+Group Num:  17
+Transation count:  10235 Task count: 8622
+eachGroupNum:  507
+Pipeline Execution Time:  1.081452979s
+=============================================
+Group Num:  13
+Transation count:  10235 Task count: 8622
+eachGroupNum:  663
+Pipeline Execution Time:  1.12762873s
+=============================================
+Group Num:  10
+Transation count:  10235 Task count: 8622
+eachGroupNum:  862
+Pipeline Execution Time:  1.133698042s
+=============================================
+Group Num:  9
+Transation count:  10235 Task count: 8622
+eachGroupNum:  958
+Pipeline Execution Time:  1.095204455s
+=============================================
+Group Num:  8
+Transation count:  10235 Task count: 8622
+eachGroupNum:  1077
+Pipeline Execution Time:  1.13182247s
+=============================================
+Group Num:  6
+Transation count:  10235 Task count: 8622
+eachGroupNum:  1437
+Pipeline Execution Time:  1.384199543s
+=============================================
+Group Num:  5
+Transation count:  10235 Task count: 8622
+eachGroupNum:  1724
+Pipeline Execution Time:  1.53399598s
+=============================================
+--- PASS: TestPipelineExp (25.76s)
+PASS
+ok  	blockDagger/test	27.027s
