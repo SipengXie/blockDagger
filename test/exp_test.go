@@ -64,7 +64,7 @@ func TestExp(t *testing.T) {
 	workerNum := min(64, runtime.NumCPU())
 	blockNum := uint64(18999950) // 走50个区块
 
-	for collectSize := uint64(1); collectSize <= 10; collectSize++ {
+	for collectSize := uint64(10); collectSize <= 10; collectSize++ {
 		fmt.Println("Collect Size: ", collectSize)
 		fmt.Println("=============================================")
 		for i := blockNum; i < 19000000; i += collectSize {

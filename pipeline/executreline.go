@@ -2,7 +2,9 @@ package pipeline
 
 import (
 	"context"
+	"fmt"
 	"sync"
+	"time"
 
 	"github.com/ledgerwatch/erigon-lib/kv"
 	"github.com/ledgerwatch/erigon/core/types"
@@ -33,9 +35,12 @@ func NewExecuteLine(blockReader *freezeblocks.BlockReader, ctx context.Context, 
 }
 
 func (e *ExecuteLine) Run() {
+	st := time.Now()
 	for input := range e.InputChan {
+		// fmt.Println("executeline")
 		if input.Flag == END {
 			e.Wg.Done()
+			fmt.Println("Exec Cost:", time.Since(st))
 			return
 		}
 

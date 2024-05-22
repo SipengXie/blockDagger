@@ -120,7 +120,7 @@ func TestPipelineSim(t *testing.T) {
 
 func TestPipeline(t *testing.T) {
 	//初始化执行环境与Channel
-	ctx, txwsGroup, db, gvc, blkReader, blk, header := helper.PreparePipeline(18999940, 60, 12)
+	ctx, txwsGroup, db, gvc, blkReader, blk, header := helper.PreparePipeline(18999900, 100, 20)
 	txwsMsgChan := make(chan *pipeline.TxwsMessage, len(txwsGroup)+2)
 	taskMapsAndAccessedByChan := make(chan *pipeline.TaskMapsAndAccessedBy, len(txwsGroup)+2)
 	graphMsgChan := make(chan *pipeline.GraphMessage, len(txwsGroup)+2)
@@ -163,6 +163,6 @@ func TestSerial(t *testing.T) {
 }
 
 func TestSerialMultipleBlocks(t *testing.T) {
-	SerialExecutionKBlocksTime := helper.SerialExecutionKBlocks(18999940, 60)
+	SerialExecutionKBlocksTime := helper.SerialExecutionKBlocks(18999800, 100)
 	fmt.Println("Serial Execution Time: ", SerialExecutionKBlocksTime)
 }

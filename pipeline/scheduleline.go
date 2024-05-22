@@ -2,7 +2,9 @@ package pipeline
 
 import (
 	"blockDagger/schedule"
+	"fmt"
 	"sync"
+	"time"
 )
 
 type ScheduleLine struct {
@@ -22,7 +24,9 @@ func NewScheduleLine(numWorker int, wg *sync.WaitGroup, in chan *GraphMessage, o
 }
 
 func (s *ScheduleLine) Run() {
+	st := time.Now()
 	for input := range s.InputChan {
+		// fmt.Println("scheduleline")
 		if input.Flag == END {
 			outMessage := &ScheduleMessage{
 				Flag: END,
@@ -30,6 +34,7 @@ func (s *ScheduleLine) Run() {
 			s.OutputChan <- outMessage
 			close(s.OutputChan)
 			s.Wg.Done()
+			fmt.Println("Schedule Cost:", time.Since(st))
 			return
 		}
 

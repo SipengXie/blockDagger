@@ -4,7 +4,9 @@ import (
 	"blockDagger/helper"
 	multiversion "blockDagger/multiVersion"
 	"blockDagger/types"
+	"fmt"
 	"sync"
+	"time"
 )
 
 type GVCLine struct {
@@ -24,8 +26,10 @@ func NewGVCLine(gvc *multiversion.GlobalVersionChain, wg *sync.WaitGroup, in cha
 }
 
 func (g *GVCLine) Run() {
+	st := time.Now()
 	for input := range g.InputChan {
 		// 如果是END信号，那么就结束
+		// fmt.Println("gvcline")
 		if input.Flag == END {
 			outMessage := &TaskMapsAndAccessedBy{
 				Flag: END,
@@ -33,6 +37,7 @@ func (g *GVCLine) Run() {
 			g.OutputChan <- outMessage
 			close(g.OutputChan) // 通知下一个Line结束循环
 			g.Wg.Done()
+			fmt.Println("GVC Cost:", time.Since(st))
 			return
 		}
 

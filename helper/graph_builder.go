@@ -22,14 +22,16 @@ func GenerateGraph(taskMap map[int]*types.Task, rwAccessedBy *rwset.RwAccessedBy
 			// 由于有多版本，所以不存在写写冲突
 			for _, rTx := range rTxs {
 				for _, wTx := range wTxs {
-					if rTx > wTx {
-						// 构建数据依赖
-						graph.AddEdge(wTx, rTx)
-						// 还应该据此建立多版本的依赖, 后读依赖先写
-						// 因为多个区块中TxID和TaskID不一定一一对应，我们需要将TaskArray转为TaskMap
-						taskMap[rTx].AddReadVersion(addr, hash, taskMap[wTx].WriteVersions[addr][hash])
+					if wTx >= rTx {
+						break
 					}
+					// 构建数据依赖
+					graph.AddEdge(wTx, rTx)
+					// 还应该据此建立多版本的依赖, 后读依赖先写
+					// 因为多个区块中TxID和TaskID不一定一一对应，我们需要将TaskArray转为TaskMap
+					taskMap[rTx].AddReadVersion(addr, hash, taskMap[wTx].WriteVersions[addr][hash])
 				}
+
 			}
 		}
 
