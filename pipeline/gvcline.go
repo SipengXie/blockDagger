@@ -26,7 +26,7 @@ func NewGVCLine(gvc *multiversion.GlobalVersionChain, wg *sync.WaitGroup, in cha
 }
 
 func (g *GVCLine) Run() {
-	st := time.Now()
+	var elapsed int64
 	for input := range g.InputChan {
 		// 如果是END信号，那么就结束
 		// fmt.Println("gvcline")
@@ -37,11 +37,12 @@ func (g *GVCLine) Run() {
 			g.OutputChan <- outMessage
 			close(g.OutputChan) // 通知下一个Line结束循环
 			g.Wg.Done()
-			fmt.Println("GVC Cost:", time.Since(st))
+			fmt.Println("GVC Cost:", elapsed, "ms")
 			return
 		}
 
 		//否则队Gvc进行更新并把建图所需要的信息传递给GraphLine
+		st := time.Now()
 		txws := input.Txws
 		rwAccessedBy := helper.GenerateAccessedBy(txws)
 		taskMap := make(map[int]*types.Task)
@@ -50,6 +51,7 @@ func (g *GVCLine) Run() {
 			taskMap[task.ID] = task
 		}
 		g.Gvc.UpdateLastBlockTail()
+		elapsed += time.Since(st).Milliseconds()
 
 		outMessage := &TaskMapsAndAccessedBy{
 			Flag:         START,

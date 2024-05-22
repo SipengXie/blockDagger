@@ -24,7 +24,7 @@ func NewScheduleLine(numWorker int, wg *sync.WaitGroup, in chan *GraphMessage, o
 }
 
 func (s *ScheduleLine) Run() {
-	st := time.Now()
+	var elapsed int64
 	for input := range s.InputChan {
 		// fmt.Println("scheduleline")
 		if input.Flag == END {
@@ -34,12 +34,14 @@ func (s *ScheduleLine) Run() {
 			s.OutputChan <- outMessage
 			close(s.OutputChan)
 			s.Wg.Done()
-			fmt.Println("Schedule Cost:", time.Since(st))
+			fmt.Println("Schedule Cost:", elapsed, "ms")
 			return
 		}
 
 		scheduler := schedule.NewScheduler(input.Graph, s.NumWorker)
+		st := time.Now()
 		processors, makespan := scheduler.Schedule()
+		elapsed += time.Since(st).Milliseconds()
 		outMessage := &ScheduleMessage{
 			Flag:       START,
 			Processors: processors,

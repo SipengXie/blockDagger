@@ -111,7 +111,7 @@ func TestExp(t *testing.T) {
 
 func TestPipelineExp(t *testing.T) {
 	ctx, dbTx, blkReader, db := helper.PrepareEnv()
-	workerNum := 64
+	workerNum := min(48, runtime.NumCPU())
 	blockNum := uint64(18999950) // 走50个区块
 	groupNums := []uint64{25, 17, 13, 10, 9, 8, 6, 5}
 	fmt.Println("=============================================")

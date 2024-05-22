@@ -22,7 +22,7 @@ func NewGraphLine(wg *sync.WaitGroup, in chan *TaskMapsAndAccessedBy, out chan *
 }
 
 func (g *GraphLine) Run() {
-	st := time.Now()
+	var elapsed int64
 	for input := range g.InputChan {
 		// fmt.Println("graphline")
 		if input.Flag == END {
@@ -32,11 +32,14 @@ func (g *GraphLine) Run() {
 			g.OutputChan <- outMessage
 			close(g.OutputChan)
 			g.Wg.Done()
-			fmt.Println("Graph Cost:", time.Since(st))
+			fmt.Println("Graph Cost:", elapsed, "ms")
 			return
 		}
 
+		st := time.Now()
 		graph := helper.GenerateGraph(input.TaskMap, input.RwAccessedBy)
+		elapsed += time.Since(st).Milliseconds()
+
 		outMessage := &GraphMessage{
 			Flag:  START,
 			Graph: graph,

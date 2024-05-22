@@ -35,12 +35,12 @@ func NewExecuteLine(blockReader *freezeblocks.BlockReader, ctx context.Context, 
 }
 
 func (e *ExecuteLine) Run() {
-	st := time.Now()
+	var elapsed int64
 	for input := range e.InputChan {
 		// fmt.Println("executeline")
 		if input.Flag == END {
 			e.Wg.Done()
-			fmt.Println("Exec Cost:", time.Since(st))
+			fmt.Println("Exec Cost:", elapsed, "ms")
 			return
 		}
 
@@ -48,6 +48,7 @@ func (e *ExecuteLine) Run() {
 		// makespan := input.Makespan
 		// fmt.Println("makespan: ", makespan)
 
+		st := time.Now()
 		var execwg sync.WaitGroup
 		execwg.Add(len(processors))
 		errMaps := make([]map[int]error, len(processors))
@@ -56,6 +57,7 @@ func (e *ExecuteLine) Run() {
 			go processor.Execute(e.BlkReader, e.Ctx, e.Blk, e.Header, e.Db, &execwg, errMaps[id])
 		}
 		execwg.Wait()
+		elapsed += time.Since(st).Milliseconds()
 		// for id, errMap := range errMaps {
 		// 	if len(errMap) != 0 {
 		// 		fmt.Println("Processor ", id, " has errors: ", len(errMap))

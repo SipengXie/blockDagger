@@ -1,50 +1,82 @@
 === RUN   TestPipelineExp
-[INFO] [05-21|17:00:35.091] Starting 
-[INFO] [05-21|17:00:35.093] [db] open                                lable=chaindata sizeLimit=12TB pageSize=8192
-[INFO] [05-21|17:00:35.093] DB opened 
-[INFO] [05-21|17:00:35.093] DB Transaction started 
-[INFO] [05-21|17:00:40.478] Block Reader created 
+[INFO] [05-22|12:12:40.876] Starting 
+[INFO] [05-22|12:12:40.877] [db] open                                lable=chaindata sizeLimit=12TB pageSize=8192
+[INFO] [05-22|12:12:40.877] DB opened 
+[INFO] [05-22|12:12:40.877] DB Transaction started 
+[INFO] [05-22|12:12:44.080] Block Reader created 
 =============================================
 Group Num:  25
 Transation count:  10235 Task count: 8462
 eachGroupNum:  338
-Pipeline Execution Time:  1.065423774s
+GVC Cost: 952 ms
+Graph Cost: 316 ms
+Schedule Cost: 76 ms
+Exec Cost: 368 ms
+Pipeline Execution Time:  990.636529ms
 =============================================
 Group Num:  17
 Transation count:  10235 Task count: 8622
 eachGroupNum:  507
-Pipeline Execution Time:  1.040106549s
+GVC Cost: 960 ms
+Graph Cost: 394 ms
+Schedule Cost: 98 ms
+Exec Cost: 389 ms
+Pipeline Execution Time:  1.009854355s
 =============================================
 Group Num:  13
 Transation count:  10235 Task count: 8622
 eachGroupNum:  663
-Pipeline Execution Time:  1.010333085s
+GVC Cost: 965 ms
+Graph Cost: 479 ms
+Schedule Cost: 99 ms
+Exec Cost: 391 ms
+Pipeline Execution Time:  1.052144167s
 =============================================
 Group Num:  10
 Transation count:  10235 Task count: 8622
 eachGroupNum:  862
-Pipeline Execution Time:  1.036667067s
+GVC Cost: 949 ms
+Graph Cost: 625 ms
+Schedule Cost: 112 ms
+Exec Cost: 382 ms
+Pipeline Execution Time:  1.104063456s
 =============================================
 Group Num:  9
 Transation count:  10235 Task count: 8622
 eachGroupNum:  958
-Pipeline Execution Time:  1.024583502s
+GVC Cost: 983 ms
+Graph Cost: 663 ms
+Schedule Cost: 120 ms
+Exec Cost: 384 ms
+Pipeline Execution Time:  1.116187302s
 =============================================
 Group Num:  8
 Transation count:  10235 Task count: 8622
 eachGroupNum:  1077
-Pipeline Execution Time:  1.16649427s
+GVC Cost: 1002 ms
+Graph Cost: 648 ms
+Schedule Cost: 121 ms
+Exec Cost: 385 ms
+Pipeline Execution Time:  1.197653913s
 =============================================
 Group Num:  6
 Transation count:  10235 Task count: 8622
 eachGroupNum:  1437
-Pipeline Execution Time:  1.329146547s
+GVC Cost: 954 ms
+Graph Cost: 1005 ms
+Schedule Cost: 152 ms
+Exec Cost: 428 ms
+Pipeline Execution Time:  1.341520778s
 =============================================
 Group Num:  5
 Transation count:  10235 Task count: 8622
 eachGroupNum:  1724
-Pipeline Execution Time:  1.536795276s
+GVC Cost: 915 ms
+Graph Cost: 1086 ms
+Schedule Cost: 151 ms
+Exec Cost: 386 ms
+Pipeline Execution Time:  1.496127714s
 =============================================
---- PASS: TestPipelineExp (27.59s)
+--- PASS: TestPipelineExp (25.60s)
 PASS
-ok  	blockDagger/test	28.861s
+ok  	blockDagger/test	26.842s
