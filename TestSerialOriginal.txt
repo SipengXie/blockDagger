@@ -1,0 +1,1501 @@
+=============================================
+BlockNumber: 18999500
+Serial Execution Cost: 1.127649888s
+=============================================
+BlockNumber: 18999501
+Serial Execution Cost: 1.989349423s
+=============================================
+BlockNumber: 18999502
+Serial Execution Cost: 1.780663737s
+=============================================
+BlockNumber: 18999503
+Serial Execution Cost: 2.58404169s
+=============================================
+BlockNumber: 18999504
+Serial Execution Cost: 1.604613854s
+=============================================
+BlockNumber: 18999505
+Serial Execution Cost: 993.37495ms
+=============================================
+BlockNumber: 18999506
+Serial Execution Cost: 1.451500552s
+=============================================
+BlockNumber: 18999507
+Serial Execution Cost: 1.418449668s
+=============================================
+BlockNumber: 18999508
+Serial Execution Cost: 1.937276248s
+=============================================
+BlockNumber: 18999509
+Serial Execution Cost: 881.236497ms
+=============================================
+BlockNumber: 18999510
+Serial Execution Cost: 880.668517ms
+=============================================
+BlockNumber: 18999511
+Serial Execution Cost: 1.462883256s
+=============================================
+BlockNumber: 18999512
+Serial Execution Cost: 912.23992ms
+=============================================
+BlockNumber: 18999513
+Serial Execution Cost: 1.826224983s
+=============================================
+BlockNumber: 18999514
+Serial Execution Cost: 1.202882913s
+=============================================
+BlockNumber: 18999515
+Serial Execution Cost: 808.478388ms
+=============================================
+BlockNumber: 18999516
+Serial Execution Cost: 785.153091ms
+=============================================
+BlockNumber: 18999517
+Serial Execution Cost: 1.337205273s
+=============================================
+BlockNumber: 18999518
+Serial Execution Cost: 1.083796657s
+=============================================
+BlockNumber: 18999519
+Serial Execution Cost: 876.145659ms
+=============================================
+BlockNumber: 18999520
+Serial Execution Cost: 1.665774005s
+=============================================
+BlockNumber: 18999521
+Serial Execution Cost: 923.321284ms
+=============================================
+BlockNumber: 18999522
+Serial Execution Cost: 1.041050876s
+=============================================
+BlockNumber: 18999523
+Serial Execution Cost: 1.014626581s
+=============================================
+BlockNumber: 18999524
+Serial Execution Cost: 914.77335ms
+=============================================
+BlockNumber: 18999525
+Serial Execution Cost: 1.202864255s
+=============================================
+BlockNumber: 18999526
+Serial Execution Cost: 1.020700897s
+=============================================
+BlockNumber: 18999527
+Serial Execution Cost: 1.936437028s
+=============================================
+BlockNumber: 18999528
+Serial Execution Cost: 511.309728ms
+=============================================
+BlockNumber: 18999529
+Serial Execution Cost: 1.00586161s
+=============================================
+BlockNumber: 18999530
+Serial Execution Cost: 623.204916ms
+=============================================
+BlockNumber: 18999531
+Serial Execution Cost: 725.600287ms
+=============================================
+BlockNumber: 18999532
+Serial Execution Cost: 1.026312032s
+=============================================
+BlockNumber: 18999533
+Serial Execution Cost: 1.110914253s
+=============================================
+BlockNumber: 18999534
+Serial Execution Cost: 673.031012ms
+=============================================
+BlockNumber: 18999535
+Serial Execution Cost: 852.561045ms
+=============================================
+BlockNumber: 18999536
+Serial Execution Cost: 2.420533244s
+=============================================
+BlockNumber: 18999537
+Serial Execution Cost: 543.001728ms
+=============================================
+BlockNumber: 18999538
+Serial Execution Cost: 563.586003ms
+=============================================
+BlockNumber: 18999539
+Serial Execution Cost: 945.227642ms
+=============================================
+BlockNumber: 18999540
+Serial Execution Cost: 575.319989ms
+=============================================
+BlockNumber: 18999541
+Serial Execution Cost: 528.281143ms
+=============================================
+BlockNumber: 18999542
+Serial Execution Cost: 2.364867663s
+=============================================
+BlockNumber: 18999543
+Serial Execution Cost: 608.000131ms
+=============================================
+BlockNumber: 18999544
+Serial Execution Cost: 1.059720236s
+=============================================
+BlockNumber: 18999545
+Serial Execution Cost: 887.73323ms
+=============================================
+BlockNumber: 18999546
+Serial Execution Cost: 749.380688ms
+=============================================
+BlockNumber: 18999547
+Serial Execution Cost: 1.135598901s
+=============================================
+BlockNumber: 18999548
+Serial Execution Cost: 916.56503ms
+=============================================
+BlockNumber: 18999549
+Serial Execution Cost: 1.087084971s
+=============================================
+BlockNumber: 18999550
+Serial Execution Cost: 680.739878ms
+=============================================
+BlockNumber: 18999551
+Serial Execution Cost: 1.144870303s
+=============================================
+BlockNumber: 18999552
+Serial Execution Cost: 503.397944ms
+=============================================
+BlockNumber: 18999553
+Serial Execution Cost: 1.261471759s
+=============================================
+BlockNumber: 18999554
+Serial Execution Cost: 918.61783ms
+=============================================
+BlockNumber: 18999555
+Serial Execution Cost: 81.564255ms
+=============================================
+BlockNumber: 18999556
+Serial Execution Cost: 2.659356023s
+=============================================
+BlockNumber: 18999557
+Serial Execution Cost: 1.393216287s
+=============================================
+BlockNumber: 18999558
+Serial Execution Cost: 474.195673ms
+=============================================
+BlockNumber: 18999559
+Serial Execution Cost: 1.040822257s
+=============================================
+BlockNumber: 18999560
+Serial Execution Cost: 675.867005ms
+=============================================
+BlockNumber: 18999561
+Serial Execution Cost: 807.596129ms
+=============================================
+BlockNumber: 18999562
+Serial Execution Cost: 434.822282ms
+=============================================
+BlockNumber: 18999563
+Serial Execution Cost: 409.287814ms
+=============================================
+BlockNumber: 18999564
+Serial Execution Cost: 940.238044ms
+=============================================
+BlockNumber: 18999565
+Serial Execution Cost: 506.884473ms
+=============================================
+BlockNumber: 18999566
+Serial Execution Cost: 797.625402ms
+=============================================
+BlockNumber: 18999567
+Serial Execution Cost: 591.757729ms
+=============================================
+BlockNumber: 18999568
+Serial Execution Cost: 428.353506ms
+=============================================
+BlockNumber: 18999569
+Serial Execution Cost: 1.035816463s
+=============================================
+BlockNumber: 18999570
+Serial Execution Cost: 692.279987ms
+=============================================
+BlockNumber: 18999571
+Serial Execution Cost: 680.57314ms
+=============================================
+BlockNumber: 18999572
+Serial Execution Cost: 1.13516155s
+=============================================
+BlockNumber: 18999573
+Serial Execution Cost: 459.720781ms
+=============================================
+BlockNumber: 18999574
+Serial Execution Cost: 656.501778ms
+=============================================
+BlockNumber: 18999575
+Serial Execution Cost: 683.348556ms
+=============================================
+BlockNumber: 18999576
+Serial Execution Cost: 887.44474ms
+=============================================
+BlockNumber: 18999577
+Serial Execution Cost: 863.972322ms
+=============================================
+BlockNumber: 18999578
+Serial Execution Cost: 638.647861ms
+=============================================
+BlockNumber: 18999579
+Serial Execution Cost: 809.081997ms
+=============================================
+BlockNumber: 18999580
+Serial Execution Cost: 623.31217ms
+=============================================
+BlockNumber: 18999581
+Serial Execution Cost: 855.279169ms
+=============================================
+BlockNumber: 18999582
+Serial Execution Cost: 685.437557ms
+=============================================
+BlockNumber: 18999583
+Serial Execution Cost: 466.639891ms
+=============================================
+BlockNumber: 18999584
+Serial Execution Cost: 581.787042ms
+=============================================
+BlockNumber: 18999585
+Serial Execution Cost: 700.369729ms
+=============================================
+BlockNumber: 18999586
+Serial Execution Cost: 787.437575ms
+=============================================
+BlockNumber: 18999587
+Serial Execution Cost: 679.657543ms
+=============================================
+BlockNumber: 18999588
+Serial Execution Cost: 797.71171ms
+=============================================
+BlockNumber: 18999589
+Serial Execution Cost: 576.484608ms
+=============================================
+BlockNumber: 18999590
+Serial Execution Cost: 854.568423ms
+=============================================
+BlockNumber: 18999591
+Serial Execution Cost: 676.075751ms
+=============================================
+BlockNumber: 18999592
+Serial Execution Cost: 514.773832ms
+=============================================
+BlockNumber: 18999593
+Serial Execution Cost: 549.514592ms
+=============================================
+BlockNumber: 18999594
+Serial Execution Cost: 435.267011ms
+=============================================
+BlockNumber: 18999595
+Serial Execution Cost: 1.082708833s
+=============================================
+BlockNumber: 18999596
+Serial Execution Cost: 604.835426ms
+=============================================
+BlockNumber: 18999597
+Serial Execution Cost: 577.849987ms
+=============================================
+BlockNumber: 18999598
+Serial Execution Cost: 733.527946ms
+=============================================
+BlockNumber: 18999599
+Serial Execution Cost: 657.206099ms
+=============================================
+BlockNumber: 18999600
+Serial Execution Cost: 636.315356ms
+=============================================
+BlockNumber: 18999601
+Serial Execution Cost: 868.305335ms
+=============================================
+BlockNumber: 18999602
+Serial Execution Cost: 465.378372ms
+=============================================
+BlockNumber: 18999603
+Serial Execution Cost: 676.248616ms
+=============================================
+BlockNumber: 18999604
+Serial Execution Cost: 456.746488ms
+=============================================
+BlockNumber: 18999605
+Serial Execution Cost: 640.43507ms
+=============================================
+BlockNumber: 18999606
+Serial Execution Cost: 697.863284ms
+=============================================
+BlockNumber: 18999607
+Serial Execution Cost: 583.237796ms
+=============================================
+BlockNumber: 18999608
+Serial Execution Cost: 657.424741ms
+=============================================
+BlockNumber: 18999609
+Serial Execution Cost: 553.049628ms
+=============================================
+BlockNumber: 18999610
+Serial Execution Cost: 541.015399ms
+=============================================
+BlockNumber: 18999611
+Serial Execution Cost: 604.425497ms
+=============================================
+BlockNumber: 18999612
+Serial Execution Cost: 806.626419ms
+=============================================
+BlockNumber: 18999613
+Serial Execution Cost: 369.697854ms
+=============================================
+BlockNumber: 18999614
+Serial Execution Cost: 54.605938ms
+=============================================
+BlockNumber: 18999615
+Serial Execution Cost: 1.452562635s
+=============================================
+BlockNumber: 18999616
+Serial Execution Cost: 1.388611413s
+=============================================
+BlockNumber: 18999617
+Serial Execution Cost: 984.728978ms
+=============================================
+BlockNumber: 18999618
+Serial Execution Cost: 689.478887ms
+=============================================
+BlockNumber: 18999619
+Serial Execution Cost: 408.020354ms
+=============================================
+BlockNumber: 18999620
+Serial Execution Cost: 621.175903ms
+=============================================
+BlockNumber: 18999621
+Serial Execution Cost: 573.165318ms
+=============================================
+BlockNumber: 18999622
+Serial Execution Cost: 626.192504ms
+=============================================
+BlockNumber: 18999623
+Serial Execution Cost: 487.444619ms
+=============================================
+BlockNumber: 18999624
+Serial Execution Cost: 373.352091ms
+=============================================
+BlockNumber: 18999625
+Serial Execution Cost: 546.881991ms
+=============================================
+BlockNumber: 18999626
+Serial Execution Cost: 669.05136ms
+=============================================
+BlockNumber: 18999627
+Serial Execution Cost: 543.129862ms
+=============================================
+BlockNumber: 18999628
+Serial Execution Cost: 289.21712ms
+=============================================
+BlockNumber: 18999629
+Serial Execution Cost: 668.595407ms
+=============================================
+BlockNumber: 18999630
+Serial Execution Cost: 525.661447ms
+=============================================
+BlockNumber: 18999631
+Serial Execution Cost: 507.431122ms
+=============================================
+BlockNumber: 18999632
+Serial Execution Cost: 358.943919ms
+=============================================
+BlockNumber: 18999633
+Serial Execution Cost: 552.320499ms
+=============================================
+BlockNumber: 18999634
+Serial Execution Cost: 906.087558ms
+=============================================
+BlockNumber: 18999635
+Serial Execution Cost: 502.760383ms
+=============================================
+BlockNumber: 18999636
+Serial Execution Cost: 553.671734ms
+=============================================
+BlockNumber: 18999637
+Serial Execution Cost: 692.94812ms
+=============================================
+BlockNumber: 18999638
+Serial Execution Cost: 463.783788ms
+=============================================
+BlockNumber: 18999639
+Serial Execution Cost: 335.42517ms
+=============================================
+BlockNumber: 18999640
+Serial Execution Cost: 606.512498ms
+=============================================
+BlockNumber: 18999641
+Serial Execution Cost: 621.951187ms
+=============================================
+BlockNumber: 18999642
+Serial Execution Cost: 569.655613ms
+=============================================
+BlockNumber: 18999643
+Serial Execution Cost: 639.015366ms
+=============================================
+BlockNumber: 18999644
+Serial Execution Cost: 544.607501ms
+=============================================
+BlockNumber: 18999645
+Serial Execution Cost: 466.14177ms
+=============================================
+BlockNumber: 18999646
+Serial Execution Cost: 1.097152155s
+=============================================
+BlockNumber: 18999647
+Serial Execution Cost: 564.147548ms
+=============================================
+BlockNumber: 18999648
+Serial Execution Cost: 633.281031ms
+=============================================
+BlockNumber: 18999649
+Serial Execution Cost: 600.159465ms
+=============================================
+BlockNumber: 18999650
+Serial Execution Cost: 605.573756ms
+=============================================
+BlockNumber: 18999651
+Serial Execution Cost: 812.035293ms
+=============================================
+BlockNumber: 18999652
+Serial Execution Cost: 602.844168ms
+=============================================
+BlockNumber: 18999653
+Serial Execution Cost: 568.536636ms
+=============================================
+BlockNumber: 18999654
+Serial Execution Cost: 469.476411ms
+=============================================
+BlockNumber: 18999655
+Serial Execution Cost: 2.07383689s
+=============================================
+BlockNumber: 18999656
+Serial Execution Cost: 553.463302ms
+=============================================
+BlockNumber: 18999657
+Serial Execution Cost: 568.011821ms
+=============================================
+BlockNumber: 18999658
+Serial Execution Cost: 443.124425ms
+=============================================
+BlockNumber: 18999659
+Serial Execution Cost: 559.361278ms
+=============================================
+BlockNumber: 18999660
+Serial Execution Cost: 449.59134ms
+=============================================
+BlockNumber: 18999661
+Serial Execution Cost: 663.636204ms
+=============================================
+BlockNumber: 18999662
+Serial Execution Cost: 369.503709ms
+=============================================
+BlockNumber: 18999663
+Serial Execution Cost: 392.765243ms
+=============================================
+BlockNumber: 18999664
+Serial Execution Cost: 256.169985ms
+=============================================
+BlockNumber: 18999665
+Serial Execution Cost: 547.385349ms
+=============================================
+BlockNumber: 18999666
+Serial Execution Cost: 653.681364ms
+=============================================
+BlockNumber: 18999667
+Serial Execution Cost: 496.550718ms
+=============================================
+BlockNumber: 18999668
+Serial Execution Cost: 498.142943ms
+=============================================
+BlockNumber: 18999669
+Serial Execution Cost: 242.227064ms
+=============================================
+BlockNumber: 18999670
+Serial Execution Cost: 89.946622ms
+=============================================
+BlockNumber: 18999671
+Serial Execution Cost: 1.331463949s
+=============================================
+BlockNumber: 18999672
+Serial Execution Cost: 276.631345ms
+=============================================
+BlockNumber: 18999673
+Serial Execution Cost: 724.116724ms
+=============================================
+BlockNumber: 18999674
+Serial Execution Cost: 540.878536ms
+=============================================
+BlockNumber: 18999675
+Serial Execution Cost: 459.02059ms
+=============================================
+BlockNumber: 18999676
+Serial Execution Cost: 650.340665ms
+=============================================
+BlockNumber: 18999677
+Serial Execution Cost: 519.977442ms
+=============================================
+BlockNumber: 18999678
+Serial Execution Cost: 579.520196ms
+=============================================
+BlockNumber: 18999679
+Serial Execution Cost: 447.894788ms
+=============================================
+BlockNumber: 18999680
+Serial Execution Cost: 492.090803ms
+=============================================
+BlockNumber: 18999681
+Serial Execution Cost: 457.059337ms
+=============================================
+BlockNumber: 18999682
+Serial Execution Cost: 612.392385ms
+=============================================
+BlockNumber: 18999683
+Serial Execution Cost: 634.277074ms
+=============================================
+BlockNumber: 18999684
+Serial Execution Cost: 620.384566ms
+=============================================
+BlockNumber: 18999685
+Serial Execution Cost: 530.366477ms
+=============================================
+BlockNumber: 18999686
+Serial Execution Cost: 716.851885ms
+=============================================
+BlockNumber: 18999687
+Serial Execution Cost: 393.152964ms
+=============================================
+BlockNumber: 18999688
+Serial Execution Cost: 557.483323ms
+=============================================
+BlockNumber: 18999689
+Serial Execution Cost: 361.596028ms
+=============================================
+BlockNumber: 18999690
+Serial Execution Cost: 618.23738ms
+=============================================
+BlockNumber: 18999691
+Serial Execution Cost: 523.099421ms
+=============================================
+BlockNumber: 18999692
+Serial Execution Cost: 475.443042ms
+=============================================
+BlockNumber: 18999693
+Serial Execution Cost: 462.064823ms
+=============================================
+BlockNumber: 18999694
+Serial Execution Cost: 329.326069ms
+=============================================
+BlockNumber: 18999695
+Serial Execution Cost: 340.55705ms
+=============================================
+BlockNumber: 18999696
+Serial Execution Cost: 940.386985ms
+=============================================
+BlockNumber: 18999697
+Serial Execution Cost: 614.951521ms
+=============================================
+BlockNumber: 18999698
+Serial Execution Cost: 443.166852ms
+=============================================
+BlockNumber: 18999699
+Serial Execution Cost: 485.411732ms
+=============================================
+BlockNumber: 18999700
+Serial Execution Cost: 555.371382ms
+=============================================
+BlockNumber: 18999701
+Serial Execution Cost: 645.412323ms
+=============================================
+BlockNumber: 18999702
+Serial Execution Cost: 629.045678ms
+=============================================
+BlockNumber: 18999703
+Serial Execution Cost: 591.169055ms
+=============================================
+BlockNumber: 18999704
+Serial Execution Cost: 393.524785ms
+=============================================
+BlockNumber: 18999705
+Serial Execution Cost: 626.328886ms
+=============================================
+BlockNumber: 18999706
+Serial Execution Cost: 787.897181ms
+=============================================
+BlockNumber: 18999707
+Serial Execution Cost: 344.488908ms
+=============================================
+BlockNumber: 18999708
+Serial Execution Cost: 566.88948ms
+=============================================
+BlockNumber: 18999709
+Serial Execution Cost: 698.438829ms
+=============================================
+BlockNumber: 18999710
+Serial Execution Cost: 428.856624ms
+=============================================
+BlockNumber: 18999711
+Serial Execution Cost: 636.479099ms
+=============================================
+BlockNumber: 18999712
+Serial Execution Cost: 541.757011ms
+=============================================
+BlockNumber: 18999713
+Serial Execution Cost: 362.930305ms
+=============================================
+BlockNumber: 18999714
+Serial Execution Cost: 365.64665ms
+=============================================
+BlockNumber: 18999715
+Serial Execution Cost: 583.561715ms
+=============================================
+BlockNumber: 18999716
+Serial Execution Cost: 574.106187ms
+=============================================
+BlockNumber: 18999717
+Serial Execution Cost: 235.925893ms
+=============================================
+BlockNumber: 18999718
+Serial Execution Cost: 748.273703ms
+=============================================
+BlockNumber: 18999719
+Serial Execution Cost: 539.846315ms
+=============================================
+BlockNumber: 18999720
+Serial Execution Cost: 264.901892ms
+=============================================
+BlockNumber: 18999721
+Serial Execution Cost: 766.767696ms
+=============================================
+BlockNumber: 18999722
+Serial Execution Cost: 471.044422ms
+=============================================
+BlockNumber: 18999723
+Serial Execution Cost: 558.978126ms
+=============================================
+BlockNumber: 18999724
+Serial Execution Cost: 350.427692ms
+=============================================
+BlockNumber: 18999725
+Serial Execution Cost: 580.405907ms
+=============================================
+BlockNumber: 18999726
+Serial Execution Cost: 339.927052ms
+=============================================
+BlockNumber: 18999727
+Serial Execution Cost: 459.771758ms
+=============================================
+BlockNumber: 18999728
+Serial Execution Cost: 435.366147ms
+=============================================
+BlockNumber: 18999729
+Serial Execution Cost: 516.915894ms
+=============================================
+BlockNumber: 18999730
+Serial Execution Cost: 365.888878ms
+=============================================
+BlockNumber: 18999731
+Serial Execution Cost: 369.539895ms
+=============================================
+BlockNumber: 18999732
+Serial Execution Cost: 1.131232725s
+=============================================
+BlockNumber: 18999733
+Serial Execution Cost: 345.789501ms
+=============================================
+BlockNumber: 18999734
+Serial Execution Cost: 671.361328ms
+=============================================
+BlockNumber: 18999735
+Serial Execution Cost: 566.958672ms
+=============================================
+BlockNumber: 18999736
+Serial Execution Cost: 581.555279ms
+=============================================
+BlockNumber: 18999737
+Serial Execution Cost: 501.365318ms
+=============================================
+BlockNumber: 18999738
+Serial Execution Cost: 387.330849ms
+=============================================
+BlockNumber: 18999739
+Serial Execution Cost: 637.516374ms
+=============================================
+BlockNumber: 18999740
+Serial Execution Cost: 459.729137ms
+=============================================
+BlockNumber: 18999741
+Serial Execution Cost: 414.397066ms
+=============================================
+BlockNumber: 18999742
+Serial Execution Cost: 565.727448ms
+=============================================
+BlockNumber: 18999743
+Serial Execution Cost: 469.755775ms
+=============================================
+BlockNumber: 18999744
+Serial Execution Cost: 532.231768ms
+=============================================
+BlockNumber: 18999745
+Serial Execution Cost: 482.982821ms
+=============================================
+BlockNumber: 18999746
+Serial Execution Cost: 1.071122281s
+=============================================
+BlockNumber: 18999747
+Serial Execution Cost: 644.362837ms
+=============================================
+BlockNumber: 18999748
+Serial Execution Cost: 278.02388ms
+=============================================
+BlockNumber: 18999749
+Serial Execution Cost: 474.725106ms
+=============================================
+BlockNumber: 18999750
+Serial Execution Cost: 477.084282ms
+=============================================
+BlockNumber: 18999751
+Serial Execution Cost: 447.879749ms
+=============================================
+BlockNumber: 18999752
+Serial Execution Cost: 656.726498ms
+=============================================
+BlockNumber: 18999753
+Serial Execution Cost: 338.09767ms
+=============================================
+BlockNumber: 18999754
+Serial Execution Cost: 355.307573ms
+=============================================
+BlockNumber: 18999755
+Serial Execution Cost: 489.802938ms
+=============================================
+BlockNumber: 18999756
+Serial Execution Cost: 600.821131ms
+=============================================
+BlockNumber: 18999757
+Serial Execution Cost: 421.986569ms
+=============================================
+BlockNumber: 18999758
+Serial Execution Cost: 324.584286ms
+=============================================
+BlockNumber: 18999759
+Serial Execution Cost: 369.725815ms
+=============================================
+BlockNumber: 18999760
+Serial Execution Cost: 545.165734ms
+=============================================
+BlockNumber: 18999761
+Serial Execution Cost: 375.386473ms
+=============================================
+BlockNumber: 18999762
+Serial Execution Cost: 296.605516ms
+=============================================
+BlockNumber: 18999763
+Serial Execution Cost: 458.319324ms
+=============================================
+BlockNumber: 18999764
+Serial Execution Cost: 433.736213ms
+=============================================
+BlockNumber: 18999765
+Serial Execution Cost: 459.360294ms
+=============================================
+BlockNumber: 18999766
+Serial Execution Cost: 525.100662ms
+=============================================
+BlockNumber: 18999767
+Serial Execution Cost: 510.14813ms
+=============================================
+BlockNumber: 18999768
+Serial Execution Cost: 647.24798ms
+=============================================
+BlockNumber: 18999769
+Serial Execution Cost: 435.096734ms
+=============================================
+BlockNumber: 18999770
+Serial Execution Cost: 592.493639ms
+=============================================
+BlockNumber: 18999771
+Serial Execution Cost: 386.420591ms
+=============================================
+BlockNumber: 18999772
+Serial Execution Cost: 440.669171ms
+=============================================
+BlockNumber: 18999773
+Serial Execution Cost: 552.404692ms
+=============================================
+BlockNumber: 18999774
+Serial Execution Cost: 364.580906ms
+=============================================
+BlockNumber: 18999775
+Serial Execution Cost: 416.54592ms
+=============================================
+BlockNumber: 18999776
+Serial Execution Cost: 451.792071ms
+=============================================
+BlockNumber: 18999777
+Serial Execution Cost: 408.792383ms
+=============================================
+BlockNumber: 18999778
+Serial Execution Cost: 325.264583ms
+=============================================
+BlockNumber: 18999779
+Serial Execution Cost: 344.43987ms
+=============================================
+BlockNumber: 18999780
+Serial Execution Cost: 334.192786ms
+=============================================
+BlockNumber: 18999781
+Serial Execution Cost: 535.549872ms
+=============================================
+BlockNumber: 18999782
+Serial Execution Cost: 485.644699ms
+=============================================
+BlockNumber: 18999783
+Serial Execution Cost: 373.829354ms
+=============================================
+BlockNumber: 18999784
+Serial Execution Cost: 309.79997ms
+=============================================
+BlockNumber: 18999785
+Serial Execution Cost: 407.105608ms
+=============================================
+BlockNumber: 18999786
+Serial Execution Cost: 447.696445ms
+=============================================
+BlockNumber: 18999787
+Serial Execution Cost: 490.804524ms
+=============================================
+BlockNumber: 18999788
+Serial Execution Cost: 402.14932ms
+=============================================
+BlockNumber: 18999789
+Serial Execution Cost: 269.345973ms
+=============================================
+BlockNumber: 18999790
+Serial Execution Cost: 525.765446ms
+=============================================
+BlockNumber: 18999791
+Serial Execution Cost: 549.330824ms
+=============================================
+BlockNumber: 18999792
+Serial Execution Cost: 627.328771ms
+=============================================
+BlockNumber: 18999793
+Serial Execution Cost: 253.246646ms
+=============================================
+BlockNumber: 18999794
+Serial Execution Cost: 533.309295ms
+=============================================
+BlockNumber: 18999795
+Serial Execution Cost: 403.475217ms
+=============================================
+BlockNumber: 18999796
+Serial Execution Cost: 489.207895ms
+=============================================
+BlockNumber: 18999797
+Serial Execution Cost: 458.996398ms
+=============================================
+BlockNumber: 18999798
+Serial Execution Cost: 374.906893ms
+=============================================
+BlockNumber: 18999799
+Serial Execution Cost: 248.966971ms
+=============================================
+BlockNumber: 18999800
+Serial Execution Cost: 471.840489ms
+=============================================
+BlockNumber: 18999801
+Serial Execution Cost: 276.402278ms
+=============================================
+BlockNumber: 18999802
+Serial Execution Cost: 698.049628ms
+=============================================
+BlockNumber: 18999803
+Serial Execution Cost: 340.080567ms
+=============================================
+BlockNumber: 18999804
+Serial Execution Cost: 360.256175ms
+=============================================
+BlockNumber: 18999805
+Serial Execution Cost: 288.649342ms
+=============================================
+BlockNumber: 18999806
+Serial Execution Cost: 468.841362ms
+=============================================
+BlockNumber: 18999807
+Serial Execution Cost: 221.438996ms
+=============================================
+BlockNumber: 18999808
+Serial Execution Cost: 52.122408ms
+=============================================
+BlockNumber: 18999809
+Serial Execution Cost: 964.7674ms
+=============================================
+BlockNumber: 18999810
+Serial Execution Cost: 436.373323ms
+=============================================
+BlockNumber: 18999811
+Serial Execution Cost: 465.288826ms
+=============================================
+BlockNumber: 18999812
+Serial Execution Cost: 415.790783ms
+=============================================
+BlockNumber: 18999813
+Serial Execution Cost: 464.17644ms
+=============================================
+BlockNumber: 18999814
+Serial Execution Cost: 337.376131ms
+=============================================
+BlockNumber: 18999815
+Serial Execution Cost: 611.94058ms
+=============================================
+BlockNumber: 18999816
+Serial Execution Cost: 339.727632ms
+=============================================
+BlockNumber: 18999817
+Serial Execution Cost: 402.88698ms
+=============================================
+BlockNumber: 18999818
+Serial Execution Cost: 342.062138ms
+=============================================
+BlockNumber: 18999819
+Serial Execution Cost: 295.81177ms
+=============================================
+BlockNumber: 18999820
+Serial Execution Cost: 349.313553ms
+=============================================
+BlockNumber: 18999821
+Serial Execution Cost: 449.374039ms
+=============================================
+BlockNumber: 18999822
+Serial Execution Cost: 372.881747ms
+=============================================
+BlockNumber: 18999823
+Serial Execution Cost: 562.34546ms
+=============================================
+BlockNumber: 18999824
+Serial Execution Cost: 348.9635ms
+=============================================
+BlockNumber: 18999825
+Serial Execution Cost: 369.394841ms
+=============================================
+BlockNumber: 18999826
+Serial Execution Cost: 404.074777ms
+=============================================
+BlockNumber: 18999827
+Serial Execution Cost: 372.718211ms
+=============================================
+BlockNumber: 18999828
+Serial Execution Cost: 315.487187ms
+=============================================
+BlockNumber: 18999829
+Serial Execution Cost: 301.40786ms
+=============================================
+BlockNumber: 18999830
+Serial Execution Cost: 327.222684ms
+=============================================
+BlockNumber: 18999831
+Serial Execution Cost: 508.656325ms
+=============================================
+BlockNumber: 18999832
+Serial Execution Cost: 202.153378ms
+=============================================
+BlockNumber: 18999833
+Serial Execution Cost: 540.896932ms
+=============================================
+BlockNumber: 18999834
+Serial Execution Cost: 325.902827ms
+=============================================
+BlockNumber: 18999835
+Serial Execution Cost: 456.927263ms
+=============================================
+BlockNumber: 18999836
+Serial Execution Cost: 640.038564ms
+=============================================
+BlockNumber: 18999837
+Serial Execution Cost: 275.176917ms
+=============================================
+BlockNumber: 18999838
+Serial Execution Cost: 519.529028ms
+=============================================
+BlockNumber: 18999839
+Serial Execution Cost: 417.632737ms
+=============================================
+BlockNumber: 18999840
+Serial Execution Cost: 260.867535ms
+=============================================
+BlockNumber: 18999841
+Serial Execution Cost: 423.861909ms
+=============================================
+BlockNumber: 18999842
+Serial Execution Cost: 498.100186ms
+=============================================
+BlockNumber: 18999843
+Serial Execution Cost: 367.11592ms
+=============================================
+BlockNumber: 18999844
+Serial Execution Cost: 443.787053ms
+=============================================
+BlockNumber: 18999845
+Serial Execution Cost: 355.021651ms
+=============================================
+BlockNumber: 18999846
+Serial Execution Cost: 315.538326ms
+=============================================
+BlockNumber: 18999847
+Serial Execution Cost: 687.059669ms
+=============================================
+BlockNumber: 18999848
+Serial Execution Cost: 350.193119ms
+=============================================
+BlockNumber: 18999849
+Serial Execution Cost: 317.186486ms
+=============================================
+BlockNumber: 18999850
+Serial Execution Cost: 359.595458ms
+=============================================
+BlockNumber: 18999851
+Serial Execution Cost: 374.880008ms
+=============================================
+BlockNumber: 18999852
+Serial Execution Cost: 365.713342ms
+=============================================
+BlockNumber: 18999853
+Serial Execution Cost: 424.192882ms
+=============================================
+BlockNumber: 18999854
+Serial Execution Cost: 443.16321ms
+=============================================
+BlockNumber: 18999855
+Serial Execution Cost: 559.231446ms
+=============================================
+BlockNumber: 18999856
+Serial Execution Cost: 454.009672ms
+=============================================
+BlockNumber: 18999857
+Serial Execution Cost: 506.465912ms
+=============================================
+BlockNumber: 18999858
+Serial Execution Cost: 352.823478ms
+=============================================
+BlockNumber: 18999859
+Serial Execution Cost: 313.220771ms
+=============================================
+BlockNumber: 18999860
+Serial Execution Cost: 536.821589ms
+=============================================
+BlockNumber: 18999861
+Serial Execution Cost: 385.762669ms
+=============================================
+BlockNumber: 18999862
+Serial Execution Cost: 245.474118ms
+=============================================
+BlockNumber: 18999863
+Serial Execution Cost: 459.202926ms
+=============================================
+BlockNumber: 18999864
+Serial Execution Cost: 346.035611ms
+=============================================
+BlockNumber: 18999865
+Serial Execution Cost: 473.944753ms
+=============================================
+BlockNumber: 18999866
+Serial Execution Cost: 346.779672ms
+=============================================
+BlockNumber: 18999867
+Serial Execution Cost: 465.536255ms
+=============================================
+BlockNumber: 18999868
+Serial Execution Cost: 349.189809ms
+=============================================
+BlockNumber: 18999869
+Serial Execution Cost: 295.145651ms
+=============================================
+BlockNumber: 18999870
+Serial Execution Cost: 366.381544ms
+=============================================
+BlockNumber: 18999871
+Serial Execution Cost: 458.487075ms
+=============================================
+BlockNumber: 18999872
+Serial Execution Cost: 447.463454ms
+=============================================
+BlockNumber: 18999873
+Serial Execution Cost: 197.085045ms
+=============================================
+BlockNumber: 18999874
+Serial Execution Cost: 339.298126ms
+=============================================
+BlockNumber: 18999875
+Serial Execution Cost: 439.234623ms
+=============================================
+BlockNumber: 18999876
+Serial Execution Cost: 375.417404ms
+=============================================
+BlockNumber: 18999877
+Serial Execution Cost: 308.1622ms
+=============================================
+BlockNumber: 18999878
+Serial Execution Cost: 337.709477ms
+=============================================
+BlockNumber: 18999879
+Serial Execution Cost: 270.269488ms
+=============================================
+BlockNumber: 18999880
+Serial Execution Cost: 390.092843ms
+=============================================
+BlockNumber: 18999881
+Serial Execution Cost: 323.540702ms
+=============================================
+BlockNumber: 18999882
+Serial Execution Cost: 564.093543ms
+=============================================
+BlockNumber: 18999883
+Serial Execution Cost: 238.179162ms
+=============================================
+BlockNumber: 18999884
+Serial Execution Cost: 405.288148ms
+=============================================
+BlockNumber: 18999885
+Serial Execution Cost: 281.326653ms
+=============================================
+BlockNumber: 18999886
+Serial Execution Cost: 349.419099ms
+=============================================
+BlockNumber: 18999887
+Serial Execution Cost: 333.622198ms
+=============================================
+BlockNumber: 18999888
+Serial Execution Cost: 212.797371ms
+=============================================
+BlockNumber: 18999889
+Serial Execution Cost: 342.333843ms
+=============================================
+BlockNumber: 18999890
+Serial Execution Cost: 487.668546ms
+=============================================
+BlockNumber: 18999891
+Serial Execution Cost: 577.180372ms
+=============================================
+BlockNumber: 18999892
+Serial Execution Cost: 352.748774ms
+=============================================
+BlockNumber: 18999893
+Serial Execution Cost: 538.975335ms
+=============================================
+BlockNumber: 18999894
+Serial Execution Cost: 499.939783ms
+=============================================
+BlockNumber: 18999895
+Serial Execution Cost: 631.534461ms
+=============================================
+BlockNumber: 18999896
+Serial Execution Cost: 230.995249ms
+=============================================
+BlockNumber: 18999897
+Serial Execution Cost: 229.975395ms
+=============================================
+BlockNumber: 18999898
+Serial Execution Cost: 297.532656ms
+=============================================
+BlockNumber: 18999899
+Serial Execution Cost: 303.367078ms
+=============================================
+BlockNumber: 18999900
+Serial Execution Cost: 324.283781ms
+=============================================
+BlockNumber: 18999901
+Serial Execution Cost: 250.696805ms
+=============================================
+BlockNumber: 18999902
+Serial Execution Cost: 431.799059ms
+=============================================
+BlockNumber: 18999903
+Serial Execution Cost: 325.930533ms
+=============================================
+BlockNumber: 18999904
+Serial Execution Cost: 425.086328ms
+=============================================
+BlockNumber: 18999905
+Serial Execution Cost: 680.032992ms
+=============================================
+BlockNumber: 18999906
+Serial Execution Cost: 252.271128ms
+=============================================
+BlockNumber: 18999907
+Serial Execution Cost: 376.487004ms
+=============================================
+BlockNumber: 18999908
+Serial Execution Cost: 572.15062ms
+=============================================
+BlockNumber: 18999909
+Serial Execution Cost: 335.634486ms
+=============================================
+BlockNumber: 18999910
+Serial Execution Cost: 287.912623ms
+=============================================
+BlockNumber: 18999911
+Serial Execution Cost: 327.899055ms
+=============================================
+BlockNumber: 18999912
+Serial Execution Cost: 389.728864ms
+=============================================
+BlockNumber: 18999913
+Serial Execution Cost: 398.978997ms
+=============================================
+BlockNumber: 18999914
+Serial Execution Cost: 986.635163ms
+=============================================
+BlockNumber: 18999915
+Serial Execution Cost: 428.329302ms
+=============================================
+BlockNumber: 18999916
+Serial Execution Cost: 316.176145ms
+=============================================
+BlockNumber: 18999917
+Serial Execution Cost: 349.85486ms
+=============================================
+BlockNumber: 18999918
+Serial Execution Cost: 310.497199ms
+=============================================
+BlockNumber: 18999919
+Serial Execution Cost: 279.832927ms
+=============================================
+BlockNumber: 18999920
+Serial Execution Cost: 424.586914ms
+=============================================
+BlockNumber: 18999921
+Serial Execution Cost: 249.826741ms
+=============================================
+BlockNumber: 18999922
+Serial Execution Cost: 509.787071ms
+=============================================
+BlockNumber: 18999923
+Serial Execution Cost: 401.411838ms
+=============================================
+BlockNumber: 18999924
+Serial Execution Cost: 315.106967ms
+=============================================
+BlockNumber: 18999925
+Serial Execution Cost: 408.794674ms
+=============================================
+BlockNumber: 18999926
+Serial Execution Cost: 323.930715ms
+=============================================
+BlockNumber: 18999927
+Serial Execution Cost: 431.423234ms
+=============================================
+BlockNumber: 18999928
+Serial Execution Cost: 516.975129ms
+=============================================
+BlockNumber: 18999929
+Serial Execution Cost: 215.890327ms
+=============================================
+BlockNumber: 18999930
+Serial Execution Cost: 557.684485ms
+=============================================
+BlockNumber: 18999931
+Serial Execution Cost: 318.249444ms
+=============================================
+BlockNumber: 18999932
+Serial Execution Cost: 268.326795ms
+=============================================
+BlockNumber: 18999933
+Serial Execution Cost: 423.938402ms
+=============================================
+BlockNumber: 18999934
+Serial Execution Cost: 369.761716ms
+=============================================
+BlockNumber: 18999935
+Serial Execution Cost: 277.836ms
+=============================================
+BlockNumber: 18999936
+Serial Execution Cost: 426.649143ms
+=============================================
+BlockNumber: 18999937
+Serial Execution Cost: 399.656969ms
+=============================================
+BlockNumber: 18999938
+Serial Execution Cost: 273.722188ms
+=============================================
+BlockNumber: 18999939
+Serial Execution Cost: 439.585745ms
+=============================================
+BlockNumber: 18999940
+Serial Execution Cost: 264.81024ms
+=============================================
+BlockNumber: 18999941
+Serial Execution Cost: 356.411925ms
+=============================================
+BlockNumber: 18999942
+Serial Execution Cost: 270.91999ms
+=============================================
+BlockNumber: 18999943
+Serial Execution Cost: 290.913521ms
+=============================================
+BlockNumber: 18999944
+Serial Execution Cost: 355.21518ms
+=============================================
+BlockNumber: 18999945
+Serial Execution Cost: 469.969859ms
+=============================================
+BlockNumber: 18999946
+Serial Execution Cost: 350.808194ms
+=============================================
+BlockNumber: 18999947
+Serial Execution Cost: 467.082789ms
+=============================================
+BlockNumber: 18999948
+Serial Execution Cost: 195.477083ms
+=============================================
+BlockNumber: 18999949
+Serial Execution Cost: 517.011658ms
+=============================================
+BlockNumber: 18999950
+Serial Execution Cost: 223.382317ms
+=============================================
+BlockNumber: 18999951
+Serial Execution Cost: 355.767594ms
+=============================================
+BlockNumber: 18999952
+Serial Execution Cost: 239.92235ms
+=============================================
+BlockNumber: 18999953
+Serial Execution Cost: 12.88834ms
+=============================================
+BlockNumber: 18999954
+Serial Execution Cost: 678.178333ms
+=============================================
+BlockNumber: 18999955
+Serial Execution Cost: 303.46134ms
+=============================================
+BlockNumber: 18999956
+Serial Execution Cost: 333.241655ms
+=============================================
+BlockNumber: 18999957
+Serial Execution Cost: 383.290741ms
+=============================================
+BlockNumber: 18999958
+Serial Execution Cost: 309.429695ms
+=============================================
+BlockNumber: 18999959
+Serial Execution Cost: 400.177972ms
+=============================================
+BlockNumber: 18999960
+Serial Execution Cost: 415.595375ms
+=============================================
+BlockNumber: 18999961
+Serial Execution Cost: 329.866657ms
+=============================================
+BlockNumber: 18999962
+Serial Execution Cost: 244.309761ms
+=============================================
+BlockNumber: 18999963
+Serial Execution Cost: 374.150066ms
+=============================================
+BlockNumber: 18999964
+Serial Execution Cost: 510.313448ms
+=============================================
+BlockNumber: 18999965
+Serial Execution Cost: 289.348587ms
+=============================================
+BlockNumber: 18999966
+Serial Execution Cost: 493.308346ms
+=============================================
+BlockNumber: 18999967
+Serial Execution Cost: 330.764852ms
+=============================================
+BlockNumber: 18999968
+Serial Execution Cost: 220.687753ms
+=============================================
+BlockNumber: 18999969
+Serial Execution Cost: 384.357186ms
+=============================================
+BlockNumber: 18999970
+Serial Execution Cost: 435.125392ms
+=============================================
+BlockNumber: 18999971
+Serial Execution Cost: 249.861036ms
+=============================================
+BlockNumber: 18999972
+Serial Execution Cost: 277.05799ms
+=============================================
+BlockNumber: 18999973
+Serial Execution Cost: 304.008908ms
+=============================================
+BlockNumber: 18999974
+Serial Execution Cost: 325.083556ms
+=============================================
+BlockNumber: 18999975
+Serial Execution Cost: 479.096208ms
+=============================================
+BlockNumber: 18999976
+Serial Execution Cost: 292.32849ms
+=============================================
+BlockNumber: 18999977
+Serial Execution Cost: 415.832148ms
+=============================================
+BlockNumber: 18999978
+Serial Execution Cost: 411.964841ms
+=============================================
+BlockNumber: 18999979
+Serial Execution Cost: 447.872032ms
+=============================================
+BlockNumber: 18999980
+Serial Execution Cost: 668.826683ms
+=============================================
+BlockNumber: 18999981
+Serial Execution Cost: 275.972349ms
+=============================================
+BlockNumber: 18999982
+Serial Execution Cost: 304.462533ms
+=============================================
+BlockNumber: 18999983
+Serial Execution Cost: 208.01238ms
+=============================================
+BlockNumber: 18999984
+Serial Execution Cost: 223.493984ms
+=============================================
+BlockNumber: 18999985
+Serial Execution Cost: 478.440911ms
+=============================================
+BlockNumber: 18999986
+Serial Execution Cost: 327.53038ms
+=============================================
+BlockNumber: 18999987
+Serial Execution Cost: 270.61981ms
+=============================================
+BlockNumber: 18999988
+Serial Execution Cost: 454.063522ms
+=============================================
+BlockNumber: 18999989
+Serial Execution Cost: 408.099827ms
+=============================================
+BlockNumber: 18999990
+Serial Execution Cost: 26.807703ms
+=============================================
+BlockNumber: 18999991
+Serial Execution Cost: 28.396722ms
+=============================================
+BlockNumber: 18999992
+Serial Execution Cost: 30.161065ms
+=============================================
+BlockNumber: 18999993
+Serial Execution Cost: 60.097139ms
+=============================================
+BlockNumber: 18999994
+Serial Execution Cost: 56.841295ms
+=============================================
+BlockNumber: 18999995
+Serial Execution Cost: 25.068223ms
+=============================================
+BlockNumber: 18999996
+Serial Execution Cost: 39.83853ms
+=============================================
+BlockNumber: 18999997
+Serial Execution Cost: 32.323042ms
+=============================================
+BlockNumber: 18999998
+Serial Execution Cost: 33.326585ms
+=============================================
+BlockNumber: 18999999
+Serial Execution Cost: 38.195624ms
+=============================================

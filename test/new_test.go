@@ -19,9 +19,9 @@ import (
 	"github.com/ledgerwatch/erigon/params"
 )
 
-var blockSize []int = []int{200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000}
-var processorNum []int = []int{2 /*4, 8, 16, 32, 64*/} // serial单独测
-const blockCount = 20                                  // 运行blockCount个区块
+var blockSize []int = []int{200 /*, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000*/}
+var processorNum []int = []int{ /*2, 4,*/ 8, 16 /*, 32, 64*/} // serial单独测
+const blockCount = 500                                        // 运行blockCount个区块
 
 func TestSerialOriginal(t *testing.T) {
 	ctx, dbTx, blkReader, _ := helper.PrepareEnv()

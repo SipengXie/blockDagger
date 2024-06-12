@@ -21,9 +21,9 @@ import (
 	"golang.org/x/sync/semaphore"
 )
 
-const PATH = "/mnt/chaindata/erigondata/chaindata"
+const PATH = "/chaindata/erigondata/chaindata"
 const LABEL = kv.ChainDB
-const SNAPSHOT = "/mnt/chaindata/erigondata/snapshots"
+const SNAPSHOT = "/chaindata/erigondata/snapshots"
 
 func dbCfg(label kv.Label, path string) mdbx.MdbxOpts {
 	const ThreadsLimit = 9_000
