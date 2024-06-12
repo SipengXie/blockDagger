@@ -12,19 +12,25 @@ import (
 	"testing"
 	"time"
 
+	"github.com/ledgerwatch/erigon-lib/kv"
 	originCore "github.com/ledgerwatch/erigon/core"
 	originTypes "github.com/ledgerwatch/erigon/core/types"
 	originVm "github.com/ledgerwatch/erigon/core/vm"
 	originEvmTypes "github.com/ledgerwatch/erigon/core/vm/evmtypes"
 	"github.com/ledgerwatch/erigon/params"
+	"github.com/panjf2000/ants/v2"
 )
 
-var blockSize []int = []int{200 /*, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000*/}
-var processorNum []int = []int{ /*2, 4,*/ 8, 16 /*, 32, 64*/} // serial单独测
-const blockCount = 500                                        // 运行blockCount个区块
+var blockSize []int = []int{200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000}
+var processorNum []int = []int{2, 4, 8, 16, 32, 64} // serial单独测
+const blockCount = 500                              // 运行blockCount个区块
 
 func TestSerialOriginal(t *testing.T) {
-	ctx, dbTx, blkReader, _ := helper.PrepareEnv()
+	ctx, blkReader, db := helper.PrepareEnv()
+	dbTx, err := db.BeginRo(ctx)
+	if err != nil {
+		t.Fatal(err)
+	}
 	endNum := uint64(19000000)
 	startNum := endNum - blockCount
 
@@ -54,7 +60,11 @@ func TestSerialOriginal(t *testing.T) {
 // 该函数测试了在MegaBlock情况下的Serial执行情况
 // 我们还需要测试一下原生block的Serial执行情况
 func TestSerial(t *testing.T) {
-	ctx, dbTx, blkReader, _ := helper.PrepareEnv()
+	ctx, blkReader, db := helper.PrepareEnv()
+	dbTx, err := db.BeginRo(ctx)
+	if err != nil {
+		t.Fatal(err)
+	}
 	endNum := uint64(19000000)
 	startNum := endNum - blockCount
 
@@ -95,8 +105,13 @@ func TestSerial(t *testing.T) {
 }
 
 // 该函数测试在MegaBlock情况下的并行执行情况
+// TODO:对于DBTX的优化只在NoPipeline做了，Pipeline那边还要做
 func TestNoPipeline(t *testing.T) {
-	ctx, dbTx, blkReader, db := helper.PrepareEnv()
+	ctx, blkReader, db := helper.PrepareEnv()
+	dbTx, err := db.BeginRo(ctx)
+	if err != nil {
+		t.Fatal(err)
+	}
 	endNum := uint64(19000000)
 	startNum := endNum - blockCount
 	for _, size := range blockSize {
@@ -111,10 +126,21 @@ func TestNoPipeline(t *testing.T) {
 		for _, threadNum := range processorNum {
 			fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 			fmt.Println("Processor Number: ", threadNum)
+
+			// 为每一个processor准备dbtx
+			dbTxs := make([]kv.Tx, threadNum)
+			for i := 0; i < threadNum; i++ {
+				dbTxs[i], err = db.BeginRo(ctx)
+				if err != nil {
+					t.Fatal(err)
+				}
+			}
+
 			// 为执行准备环境
 			ibs := helper.GetState(params.MainnetChainConfig, dbTx, startNum)
 			gvc := multiversion.NewGlobalVersionChain(ibs)
 
+			pool, _ := ants.NewPool(threadNum)
 			for i, txws := range txwsArray {
 				fmt.Println("---------------------------------------------")
 				fmt.Println("Block Number:", i)
@@ -140,6 +166,9 @@ func TestNoPipeline(t *testing.T) {
 				processors, makespan := scheduler.Schedule()
 				fmt.Println("Parallel Schedule Cost:", time.Since(st))
 
+				for id, processor := range processors {
+					processor.DbTx = dbTxs[id]
+				}
 				// Concurrent Execution
 				st = time.Now()
 				var wg sync.WaitGroup
@@ -147,7 +176,14 @@ func TestNoPipeline(t *testing.T) {
 				errMaps := make([]map[int]error, len(processors))
 				for id, processor := range processors {
 					errMaps[id] = make(map[int]error)
-					go processor.Execute(blkReader, ctx, startBlock, startHeader, db, &wg, errMaps[id])
+					// err := pool.Submit(func() {
+					// 	processor.Execute(blkReader, ctx, startBlock, startHeader, db, &wg, errMaps[id], out)
+					// })
+					// if err != nil {
+					// 	fmt.Println("Error Submitting Task")
+					// 	wg.Done()
+					// }
+					go processor.Execute(id, blkReader, ctx, startBlock, startHeader, &wg, errMaps[id])
 				}
 				wg.Wait()
 				fmt.Println("Concurrent Execution Cost:", time.Since(st))
@@ -172,6 +208,7 @@ func TestNoPipeline(t *testing.T) {
 				fmt.Println("System Abort Count: ", systemAbortCnt)
 				fmt.Println("VM Abort Count: ", vmAbort)
 			}
+			pool.Release()
 		}
 	}
 	fmt.Println("=============================================")
@@ -179,7 +216,11 @@ func TestNoPipeline(t *testing.T) {
 
 // 该函数测试在MegaBlock情况下Pipeline的并行执行情况
 func TestPipeline(t *testing.T) {
-	ctx, dbTx, blkReader, db := helper.PrepareEnv()
+	ctx, blkReader, db := helper.PrepareEnv()
+	dbTx, err := db.BeginRo(ctx)
+	if err != nil {
+		t.Fatal(err)
+	}
 	endNum := uint64(19000000)
 	startNum := endNum - blockCount
 
@@ -195,6 +236,16 @@ func TestPipeline(t *testing.T) {
 		for _, threadNum := range processorNum {
 			fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 			fmt.Println("Processor Number: ", threadNum)
+
+			// 为每一个processor准备dbtx
+			dbTxs := make([]kv.Tx, threadNum)
+			for i := 0; i < threadNum; i++ {
+				dbTxs[i], err = db.BeginRo(ctx)
+				if err != nil {
+					t.Fatal(err)
+				}
+			}
+
 			// 为执行准备环境
 			ibs := helper.GetState(params.MainnetChainConfig, dbTx, startNum)
 			gvc := multiversion.NewGlobalVersionChain(ibs)
@@ -209,7 +260,7 @@ func TestPipeline(t *testing.T) {
 			gvcLine := pipeline.NewGVCLine(gvc, &wg, txwsMsgChan, taskMapsAndAccessedByChan)
 			graphLine := pipeline.NewGraphLine(&wg, taskMapsAndAccessedByChan, graphMsgChan)
 			scheduleLine := pipeline.NewScheduleLine(threadNum, &wg, graphMsgChan, scheduleMsgChan)
-			executeLine := pipeline.NewExecuteLine(blkReader, ctx, startBlock, startHeader, db, &wg, scheduleMsgChan)
+			executeLine := pipeline.NewExecuteLine(blkReader, ctx, startBlock, startHeader, dbTxs, &wg, scheduleMsgChan)
 
 			//向第一条流水线填充交易
 			for _, txws := range txwsArray {
@@ -238,7 +289,11 @@ func TestPipeline(t *testing.T) {
 }
 
 func TestSize(t *testing.T) {
-	ctx, dbTx, blkReader, _ := helper.PrepareEnv()
+	ctx, blkReader, db := helper.PrepareEnv()
+	dbTx, err := db.BeginRo(ctx)
+	if err != nil {
+		t.Fatal(err)
+	}
 	endNum := uint64(19000000)
 	intervals := []uint64{100, 200, 300, 400, 500}
 

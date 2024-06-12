@@ -26,10 +26,14 @@ type Version struct {
 	// 为Gria调度准备的变量
 	Readby    map[int]struct{}
 	MaxReadby int
+
+	// 用以读写Version的互斥锁
+	Mu   sync.Mutex
+	Cond *sync.Cond
 }
 
 func NewVersion(data interface{}, tid int, status Status) *Version {
-	return &Version{
+	v := &Version{
 		Data:      data,
 		Tid:       tid,
 		Status:    status,
@@ -39,7 +43,10 @@ func NewVersion(data interface{}, tid int, status Status) *Version {
 		Prev:      nil,
 		Plock:     sync.Mutex{},
 		Nlock:     sync.Mutex{},
+		Mu:        sync.Mutex{},
 	}
+	v.Cond = sync.NewCond(&v.Mu)
+	return v
 }
 
 func (v *Version) InsertOrNext(iv *Version) *Version {

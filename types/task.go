@@ -43,10 +43,14 @@ func (t *Task) AddWriteVersion(addr common.Address, hash common.Hash, version *m
 func (t *Task) Wait() {
 	for _, versions := range t.ReadVersions {
 		for _, version := range versions {
+			version.Mu.Lock()
+
+			// 每一个version等5s再输出一次
 			for version.Status == multiversion.Pending {
-				// fmt.Println(t.ID, "waiting for read version", version.Tid)
-				continue
+				version.Cond.Wait()
 			}
+
+			version.Mu.Unlock()
 		}
 	}
 }

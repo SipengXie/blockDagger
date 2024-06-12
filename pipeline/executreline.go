@@ -17,18 +17,18 @@ type ExecuteLine struct {
 	Ctx       context.Context
 	Blk       *types.Block
 	Header    *types.Header
-	Db        kv.RoDB
 	Wg        *sync.WaitGroup
+	DbTxs     []kv.Tx
 	InputChan chan *ScheduleMessage
 }
 
-func NewExecuteLine(blockReader *freezeblocks.BlockReader, ctx context.Context, blk *types.Block, header *types.Header, db kv.RoDB, wg *sync.WaitGroup, in chan *ScheduleMessage) *ExecuteLine {
+func NewExecuteLine(blockReader *freezeblocks.BlockReader, ctx context.Context, blk *types.Block, header *types.Header, dbTxs []kv.Tx, wg *sync.WaitGroup, in chan *ScheduleMessage) *ExecuteLine {
 	return &ExecuteLine{
 		BlkReader: blockReader,
 		Ctx:       ctx,
 		Blk:       blk,
 		Header:    header,
-		Db:        db,
+		DbTxs:     dbTxs,
 		Wg:        wg,
 		InputChan: in,
 	}
@@ -45,6 +45,9 @@ func (e *ExecuteLine) Run() {
 		}
 
 		processors := input.Processors
+		for id, processor := range processors {
+			processor.DbTx = e.DbTxs[id]
+		}
 
 		st := time.Now()
 		var execwg sync.WaitGroup
@@ -52,7 +55,7 @@ func (e *ExecuteLine) Run() {
 		errMaps := make([]map[int]error, len(processors))
 		for id, processor := range processors {
 			errMaps[id] = make(map[int]error)
-			go processor.Execute(e.BlkReader, e.Ctx, e.Blk, e.Header, e.Db, &execwg, errMaps[id])
+			go processor.Execute(id, e.BlkReader, e.Ctx, e.Blk, e.Header, &execwg, errMaps[id])
 		}
 		execwg.Wait()
 		elapsed += time.Since(st).Milliseconds()

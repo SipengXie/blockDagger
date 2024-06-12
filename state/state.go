@@ -459,7 +459,10 @@ func (s *State) SlotInAccessList(addr common.Address, slot common.Hash) (address
 func (s *State) TotallyAbort() {
 	for _, data := range s.taskCtx.WriteVersions {
 		for _, version := range data {
+			version.Mu.Lock()
 			version.Status = multiversion.Ignore
+			version.Mu.Unlock()
+			version.Cond.Broadcast()
 		}
 	}
 	s.localWrite = newLocalWrite()
@@ -471,6 +474,7 @@ func (s *State) TotallyAbort() {
 func (s *State) CommitLocalWrite() {
 	for addr, data := range s.taskCtx.WriteVersions {
 		for hash, version := range data {
+			version.Mu.Lock()
 			if s.localWrite.contains(addr, hash) {
 				// 这里version应该加锁
 				version.Status = multiversion.Committed
@@ -478,6 +482,8 @@ func (s *State) CommitLocalWrite() {
 			} else {
 				version.Status = multiversion.Ignore
 			}
+			version.Mu.Unlock()
+			version.Cond.Broadcast()
 		}
 	}
 	s.localWrite = newLocalWrite()

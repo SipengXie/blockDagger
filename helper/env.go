@@ -54,7 +54,7 @@ func newBlockReader(cfg ethconfig.Config) *freezeblocks.BlockReader {
 	return freezeblocks.NewBlockReader(blockSnaps, borSnaps)
 }
 
-func PrepareEnv() (context.Context, kv.Tx, *freezeblocks.BlockReader, kv.RoDB) {
+func PrepareEnv() (context.Context, *freezeblocks.BlockReader, kv.RoDB) {
 	// consoleHandler := log.LvlFilterHandler(log.LvlInfo, log.StdoutHandler)
 	// log.Root().SetHandler(consoleHandler)
 	log.Info("Starting")
@@ -63,17 +63,10 @@ func PrepareEnv() (context.Context, kv.Tx, *freezeblocks.BlockReader, kv.RoDB) {
 	cfg := ethconfig.Defaults
 	db := openDB()
 	log.Info("DB opened")
-	dbTx, err := db.BeginRo(ctx)
-	if err != nil {
-		log.Error("Failed to begin transaction", "err", err)
-		return nil, nil, nil, nil
-	}
-	log.Info("DB Transaction started")
-
 	blockReader := newBlockReader(cfg)
 	log.Info("Block Reader created")
 
-	return ctx, dbTx, blockReader, db
+	return ctx, blockReader, db
 }
 
 func GetBlockAndHeader(blockReader *freezeblocks.BlockReader, ctx context.Context, dbTx kv.Tx, blockNumber uint64) (*types.Block, *types.Header) {
