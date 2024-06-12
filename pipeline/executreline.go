@@ -40,13 +40,11 @@ func (e *ExecuteLine) Run() {
 		// fmt.Println("executeline")
 		if input.Flag == END {
 			e.Wg.Done()
-			fmt.Println("Exec Cost:", elapsed, "ms")
+			fmt.Println("Concurrent Execution Cost:", elapsed, "ms")
 			return
 		}
 
 		processors := input.Processors
-		// makespan := input.Makespan
-		// fmt.Println("makespan: ", makespan)
 
 		st := time.Now()
 		var execwg sync.WaitGroup
@@ -58,10 +56,5 @@ func (e *ExecuteLine) Run() {
 		}
 		execwg.Wait()
 		elapsed += time.Since(st).Milliseconds()
-		// for id, errMap := range errMaps {
-		// 	if len(errMap) != 0 {
-		// 		fmt.Println("Processor ", id, " has errors: ", len(errMap))
-		// 	}
-		// }
 	}
 }

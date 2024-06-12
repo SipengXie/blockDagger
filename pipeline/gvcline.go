@@ -37,7 +37,7 @@ func (g *GVCLine) Run() {
 			g.OutputChan <- outMessage
 			close(g.OutputChan) // 通知下一个Line结束循环
 			g.Wg.Done()
-			fmt.Println("GVC Cost:", elapsed, "ms")
+			fmt.Println("Pre-Processing Cost:", elapsed, "ms")
 			return
 		}
 
@@ -51,7 +51,8 @@ func (g *GVCLine) Run() {
 			taskMap[task.ID] = task
 		}
 		g.Gvc.UpdateLastBlockTail()
-		elapsed += time.Since(st).Milliseconds()
+		since := time.Since(st)
+		elapsed += since.Milliseconds()
 
 		outMessage := &TaskMapsAndAccessedBy{
 			Flag:         START,

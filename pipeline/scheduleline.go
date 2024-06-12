@@ -34,7 +34,7 @@ func (s *ScheduleLine) Run() {
 			s.OutputChan <- outMessage
 			close(s.OutputChan)
 			s.Wg.Done()
-			fmt.Println("Schedule Cost:", elapsed, "ms")
+			fmt.Println("Parallel Schedule Cost:", elapsed, "ms")
 			return
 		}
 

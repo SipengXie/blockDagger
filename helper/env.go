@@ -21,9 +21,9 @@ import (
 	"golang.org/x/sync/semaphore"
 )
 
-const PATH = "/chaindata/erigondata/chaindata"
+const PATH = "/mnt/chaindata/erigondata/chaindata"
 const LABEL = kv.ChainDB
-const SNAPSHOT = "/chaindata/erigondata/snapshots"
+const SNAPSHOT = "/mnt/chaindata/erigondata/snapshots"
 
 func dbCfg(label kv.Label, path string) mdbx.MdbxOpts {
 	const ThreadsLimit = 9_000
@@ -55,8 +55,8 @@ func newBlockReader(cfg ethconfig.Config) *freezeblocks.BlockReader {
 }
 
 func PrepareEnv() (context.Context, kv.Tx, *freezeblocks.BlockReader, kv.RoDB) {
-	consoleHandler := log.LvlFilterHandler(log.LvlInfo, log.StdoutHandler)
-	log.Root().SetHandler(consoleHandler)
+	// consoleHandler := log.LvlFilterHandler(log.LvlInfo, log.StdoutHandler)
+	// log.Root().SetHandler(consoleHandler)
 	log.Info("Starting")
 	ctx := context.Background()
 
