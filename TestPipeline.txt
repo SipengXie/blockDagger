@@ -1,0 +1,472 @@
+=== RUN   TestPipeline
+=============================================
+Block Size:  200
+Total Number of Original Txs  86431 Cannot Predict: 19
+Block Number: 433
+Total Number of Txs: 86412
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  2
+Pre-Processing Cost: 56970 ms
+Graph Generation Cost: 1450 ms
+Parallel Schedule Cost: 226 ms
+Concurrent Execution Cost: 8589 ms
+Pipeline Execution Time:  57.199796934s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  4
+Pre-Processing Cost: 56954 ms
+Graph Generation Cost: 1385 ms
+Parallel Schedule Cost: 189 ms
+Concurrent Execution Cost: 5831 ms
+Pipeline Execution Time:  57.186968126s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  8
+Pre-Processing Cost: 55748 ms
+Graph Generation Cost: 1399 ms
+Parallel Schedule Cost: 380 ms
+Concurrent Execution Cost: 5382 ms
+Pipeline Execution Time:  55.976594856s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  16
+Pre-Processing Cost: 57392 ms
+Graph Generation Cost: 1362 ms
+Parallel Schedule Cost: 449 ms
+Concurrent Execution Cost: 5365 ms
+Pipeline Execution Time:  57.614281082s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  32
+Pre-Processing Cost: 56333 ms
+Graph Generation Cost: 1384 ms
+Parallel Schedule Cost: 605 ms
+Concurrent Execution Cost: 5376 ms
+Pipeline Execution Time:  56.556727733s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  64
+Pre-Processing Cost: 55108 ms
+Graph Generation Cost: 1370 ms
+Parallel Schedule Cost: 956 ms
+Concurrent Execution Cost: 5347 ms
+Pipeline Execution Time:  55.323430248s
+=============================================
+Block Size:  400
+Total Number of Original Txs  86431 Cannot Predict: 19
+Block Number: 217
+Total Number of Txs: 86412
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  2
+Pre-Processing Cost: 40396 ms
+Graph Generation Cost: 1915 ms
+Parallel Schedule Cost: 295 ms
+Concurrent Execution Cost: 8347 ms
+Pipeline Execution Time:  40.5093679s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  4
+Pre-Processing Cost: 40988 ms
+Graph Generation Cost: 1887 ms
+Parallel Schedule Cost: 305 ms
+Concurrent Execution Cost: 5819 ms
+Pipeline Execution Time:  41.103402453s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  8
+Pre-Processing Cost: 40683 ms
+Graph Generation Cost: 1877 ms
+Parallel Schedule Cost: 441 ms
+Concurrent Execution Cost: 5305 ms
+Pipeline Execution Time:  40.79565343s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  16
+Pre-Processing Cost: 40150 ms
+Graph Generation Cost: 1852 ms
+Parallel Schedule Cost: 521 ms
+Concurrent Execution Cost: 5245 ms
+Pipeline Execution Time:  40.259087351s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  32
+Pre-Processing Cost: 40891 ms
+Graph Generation Cost: 1926 ms
+Parallel Schedule Cost: 803 ms
+Concurrent Execution Cost: 5376 ms
+Pipeline Execution Time:  41.001455314s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  64
+Pre-Processing Cost: 40522 ms
+Graph Generation Cost: 1874 ms
+Parallel Schedule Cost: 1194 ms
+Concurrent Execution Cost: 5278 ms
+Pipeline Execution Time:  40.63069134s
+=============================================
+Block Size:  600
+Total Number of Original Txs  86431 Cannot Predict: 19
+Block Number: 145
+Total Number of Txs: 86412
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  2
+Pre-Processing Cost: 34687 ms
+Graph Generation Cost: 2286 ms
+Parallel Schedule Cost: 397 ms
+Concurrent Execution Cost: 8411 ms
+Pipeline Execution Time:  34.761531042s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  4
+Pre-Processing Cost: 34674 ms
+Graph Generation Cost: 2283 ms
+Parallel Schedule Cost: 397 ms
+Concurrent Execution Cost: 5700 ms
+Pipeline Execution Time:  34.750479573s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  8
+Pre-Processing Cost: 34443 ms
+Graph Generation Cost: 2307 ms
+Parallel Schedule Cost: 508 ms
+Concurrent Execution Cost: 5336 ms
+Pipeline Execution Time:  34.523347181s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  16
+Pre-Processing Cost: 34781 ms
+Graph Generation Cost: 2292 ms
+Parallel Schedule Cost: 622 ms
+Concurrent Execution Cost: 5283 ms
+Pipeline Execution Time:  34.855460712s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  32
+Pre-Processing Cost: 34689 ms
+Graph Generation Cost: 2338 ms
+Parallel Schedule Cost: 880 ms
+Concurrent Execution Cost: 5382 ms
+Pipeline Execution Time:  34.76310441s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  64
+Pre-Processing Cost: 35503 ms
+Graph Generation Cost: 2339 ms
+Parallel Schedule Cost: 1331 ms
+Concurrent Execution Cost: 5373 ms
+Pipeline Execution Time:  35.575682192s
+=============================================
+Block Size:  800
+Total Number of Original Txs  86431 Cannot Predict: 19
+Block Number: 109
+Total Number of Txs: 86412
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  2
+Pre-Processing Cost: 31762 ms
+Graph Generation Cost: 2703 ms
+Parallel Schedule Cost: 426 ms
+Concurrent Execution Cost: 8237 ms
+Pipeline Execution Time:  31.816589396s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  4
+Pre-Processing Cost: 32118 ms
+Graph Generation Cost: 2686 ms
+Parallel Schedule Cost: 477 ms
+Concurrent Execution Cost: 5733 ms
+Pipeline Execution Time:  32.173968994s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  8
+Pre-Processing Cost: 32038 ms
+Graph Generation Cost: 2688 ms
+Parallel Schedule Cost: 502 ms
+Concurrent Execution Cost: 5371 ms
+Pipeline Execution Time:  32.094800205s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  16
+Pre-Processing Cost: 32172 ms
+Graph Generation Cost: 2733 ms
+Parallel Schedule Cost: 696 ms
+Concurrent Execution Cost: 5427 ms
+Pipeline Execution Time:  32.229306774s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  32
+Pre-Processing Cost: 32378 ms
+Graph Generation Cost: 2761 ms
+Parallel Schedule Cost: 960 ms
+Concurrent Execution Cost: 5464 ms
+Pipeline Execution Time:  32.432809977s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  64
+Pre-Processing Cost: 31996 ms
+Graph Generation Cost: 2727 ms
+Parallel Schedule Cost: 1416 ms
+Concurrent Execution Cost: 5403 ms
+Pipeline Execution Time:  32.051518334s
+=============================================
+Block Size:  1000
+Total Number of Original Txs  86431 Cannot Predict: 19
+Block Number: 87
+Total Number of Txs: 86412
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  2
+Pre-Processing Cost: 29307 ms
+Graph Generation Cost: 3030 ms
+Parallel Schedule Cost: 459 ms
+Concurrent Execution Cost: 8162 ms
+Pipeline Execution Time:  29.390913711s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  4
+Pre-Processing Cost: 30120 ms
+Graph Generation Cost: 3062 ms
+Parallel Schedule Cost: 471 ms
+Concurrent Execution Cost: 5767 ms
+Pipeline Execution Time:  30.206342716s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  8
+Pre-Processing Cost: 30608 ms
+Graph Generation Cost: 3186 ms
+Parallel Schedule Cost: 629 ms
+Concurrent Execution Cost: 5615 ms
+Pipeline Execution Time:  30.700979778s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  16
+Pre-Processing Cost: 30493 ms
+Graph Generation Cost: 3199 ms
+Parallel Schedule Cost: 757 ms
+Concurrent Execution Cost: 5530 ms
+Pipeline Execution Time:  30.576203608s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  32
+Pre-Processing Cost: 30453 ms
+Graph Generation Cost: 3097 ms
+Parallel Schedule Cost: 983 ms
+Concurrent Execution Cost: 5422 ms
+Pipeline Execution Time:  30.537041842s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  64
+Pre-Processing Cost: 30658 ms
+Graph Generation Cost: 3166 ms
+Parallel Schedule Cost: 1498 ms
+Concurrent Execution Cost: 5449 ms
+Pipeline Execution Time:  30.744436587s
+=============================================
+Block Size:  1200
+Total Number of Original Txs  86431 Cannot Predict: 19
+Block Number: 73
+Total Number of Txs: 86412
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  2
+Pre-Processing Cost: 29088 ms
+Graph Generation Cost: 3502 ms
+Parallel Schedule Cost: 497 ms
+Concurrent Execution Cost: 8150 ms
+Pipeline Execution Time:  29.199110483s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  4
+Pre-Processing Cost: 29145 ms
+Graph Generation Cost: 3485 ms
+Parallel Schedule Cost: 608 ms
+Concurrent Execution Cost: 6010 ms
+Pipeline Execution Time:  29.270269072s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  8
+Pre-Processing Cost: 29165 ms
+Graph Generation Cost: 3656 ms
+Parallel Schedule Cost: 662 ms
+Concurrent Execution Cost: 5569 ms
+Pipeline Execution Time:  29.268277563s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  16
+Pre-Processing Cost: 29433 ms
+Graph Generation Cost: 3587 ms
+Parallel Schedule Cost: 827 ms
+Concurrent Execution Cost: 5676 ms
+Pipeline Execution Time:  29.535911353s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  32
+Pre-Processing Cost: 29393 ms
+Graph Generation Cost: 3604 ms
+Parallel Schedule Cost: 1049 ms
+Concurrent Execution Cost: 5494 ms
+Pipeline Execution Time:  29.512942596s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  64
+Pre-Processing Cost: 30041 ms
+Graph Generation Cost: 3595 ms
+Parallel Schedule Cost: 1509 ms
+Concurrent Execution Cost: 5505 ms
+Pipeline Execution Time:  30.156764367s
+=============================================
+Block Size:  1400
+Total Number of Original Txs  86431 Cannot Predict: 19
+Block Number: 62
+Total Number of Txs: 86412
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  2
+Pre-Processing Cost: 27774 ms
+Graph Generation Cost: 3859 ms
+Parallel Schedule Cost: 562 ms
+Concurrent Execution Cost: 8206 ms
+Pipeline Execution Time:  27.941613759s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  4
+Pre-Processing Cost: 27992 ms
+Graph Generation Cost: 3893 ms
+Parallel Schedule Cost: 606 ms
+Concurrent Execution Cost: 5891 ms
+Pipeline Execution Time:  28.152227988s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  8
+Pre-Processing Cost: 28220 ms
+Graph Generation Cost: 3844 ms
+Parallel Schedule Cost: 666 ms
+Concurrent Execution Cost: 5574 ms
+Pipeline Execution Time:  28.382053007s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  16
+Pre-Processing Cost: 28455 ms
+Graph Generation Cost: 3937 ms
+Parallel Schedule Cost: 825 ms
+Concurrent Execution Cost: 5563 ms
+Pipeline Execution Time:  28.615112234s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  32
+Pre-Processing Cost: 28771 ms
+Graph Generation Cost: 4063 ms
+Parallel Schedule Cost: 1102 ms
+Concurrent Execution Cost: 5567 ms
+Pipeline Execution Time:  28.941880446s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  64
+Pre-Processing Cost: 29172 ms
+Graph Generation Cost: 3984 ms
+Parallel Schedule Cost: 1555 ms
+Concurrent Execution Cost: 5536 ms
+Pipeline Execution Time:  29.398683428s
+=============================================
+Block Size:  1600
+Total Number of Original Txs  86431 Cannot Predict: 19
+Block Number: 55
+Total Number of Txs: 86412
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  2
+Pre-Processing Cost: 27717 ms
+Graph Generation Cost: 4339 ms
+Parallel Schedule Cost: 603 ms
+Concurrent Execution Cost: 8210 ms
+Pipeline Execution Time:  28.006356393s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  4
+Pre-Processing Cost: 27779 ms
+Graph Generation Cost: 4354 ms
+Parallel Schedule Cost: 624 ms
+Concurrent Execution Cost: 5813 ms
+Pipeline Execution Time:  28.068377879s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  8
+Pre-Processing Cost: 27336 ms
+Graph Generation Cost: 4325 ms
+Parallel Schedule Cost: 691 ms
+Concurrent Execution Cost: 5395 ms
+Pipeline Execution Time:  27.604781804s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  16
+Pre-Processing Cost: 27214 ms
+Graph Generation Cost: 4534 ms
+Parallel Schedule Cost: 881 ms
+Concurrent Execution Cost: 5575 ms
+Pipeline Execution Time:  27.596858572s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  32
+Pre-Processing Cost: 28022 ms
+Graph Generation Cost: 4381 ms
+Parallel Schedule Cost: 1125 ms
+Concurrent Execution Cost: 5604 ms
+Pipeline Execution Time:  28.321169827s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  64
+Pre-Processing Cost: 27806 ms
+Graph Generation Cost: 4329 ms
+Parallel Schedule Cost: 1624 ms
+Concurrent Execution Cost: 5461 ms
+Pipeline Execution Time:  28.104268868s
+=============================================
+Block Size:  1800
+Total Number of Original Txs  86431 Cannot Predict: 19
+Block Number: 49
+Total Number of Txs: 86412
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  2
+Pre-Processing Cost: 27101 ms
+Graph Generation Cost: 5063 ms
+Parallel Schedule Cost: 648 ms
+Concurrent Execution Cost: 8317 ms
+Pipeline Execution Time:  27.53927412s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  4
+Pre-Processing Cost: 27016 ms
+Graph Generation Cost: 4953 ms
+Parallel Schedule Cost: 666 ms
+Concurrent Execution Cost: 5812 ms
+Pipeline Execution Time:  27.419787819s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  8
+Pre-Processing Cost: 26704 ms
+Graph Generation Cost: 4949 ms
+Parallel Schedule Cost: 706 ms
+Concurrent Execution Cost: 5385 ms
+Pipeline Execution Time:  27.093338117s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  16
+Pre-Processing Cost: 27243 ms
+Graph Generation Cost: 4979 ms
+Parallel Schedule Cost: 909 ms
+Concurrent Execution Cost: 5611 ms
+Pipeline Execution Time:  27.65821614s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  32
+Pre-Processing Cost: 27620 ms
+Graph Generation Cost: 5044 ms
+Parallel Schedule Cost: 1185 ms
+Concurrent Execution Cost: 5556 ms
+Pipeline Execution Time:  28.021301467s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  64
+Pre-Processing Cost: 27650 ms
+Graph Generation Cost: 5091 ms
+Parallel Schedule Cost: 1690 ms
+Concurrent Execution Cost: 5581 ms
+Pipeline Execution Time:  28.144621747s
+=============================================
+Block Size:  2000
+Total Number of Original Txs  86431 Cannot Predict: 19
+Block Number: 44
+Total Number of Txs: 86412
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  2
+Pre-Processing Cost: 27098 ms
+Graph Generation Cost: 4922 ms
+Parallel Schedule Cost: 646 ms
+Concurrent Execution Cost: 8199 ms
+Pipeline Execution Time:  27.299362499s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  4
+Pre-Processing Cost: 25960 ms
+Graph Generation Cost: 4896 ms
+Parallel Schedule Cost: 655 ms
+Concurrent Execution Cost: 5716 ms
+Pipeline Execution Time:  26.161459473s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  8
+Pre-Processing Cost: 26833 ms
+Graph Generation Cost: 5096 ms
+Parallel Schedule Cost: 734 ms
+Concurrent Execution Cost: 5464 ms
+Pipeline Execution Time:  26.945827484s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  16
+Pre-Processing Cost: 27371 ms
+Graph Generation Cost: 5264 ms
+Parallel Schedule Cost: 912 ms
+Concurrent Execution Cost: 5473 ms
+Pipeline Execution Time:  27.550338861s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  32
+Pre-Processing Cost: 27491 ms
+Graph Generation Cost: 5180 ms
+Parallel Schedule Cost: 1170 ms
+Concurrent Execution Cost: 5549 ms
+Pipeline Execution Time:  27.624004032s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  64
+Pre-Processing Cost: 27250 ms
+Graph Generation Cost: 5023 ms
+Parallel Schedule Cost: 1696 ms
+Concurrent Execution Cost: 5488 ms
+Pipeline Execution Time:  27.412810407s
+=============================================
