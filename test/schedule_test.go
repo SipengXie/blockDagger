@@ -3,6 +3,7 @@ package test
 import (
 	dag "blockDagger/graph"
 	"blockDagger/schedule"
+	"blockDagger/scheduleOrigin"
 	"blockDagger/types"
 	"fmt"
 	"testing"
@@ -77,6 +78,7 @@ func TestEFT(t *testing.T) {
 	}
 
 	graph.GenerateProperties()
+
 	listScheduler := schedule.NewScheduler(graph, 4)
 	processors, makespan := listScheduler.Schedule()
 	for id, p := range processors {
@@ -84,6 +86,15 @@ func TestEFT(t *testing.T) {
 		for _, task := range p.Tasks {
 			fmt.Printf("%d ", task.Task.ID)
 		}
+		fmt.Println()
+	}
+	fmt.Println("makespan: ", makespan)
+
+	originScheduler := scheduleOrigin.NewScheduler(graph, 4)
+	ops, makespan := originScheduler.Schedule()
+	for id, p := range ops {
+		fmt.Printf("Processor %d: ", id)
+		p.Print()
 		fmt.Println()
 	}
 	fmt.Println("makespan: ", makespan)

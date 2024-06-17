@@ -1,4 +1,4 @@
-package schedule
+package scheduleOrigin
 
 import (
 	"blockDagger/graph"
@@ -8,6 +8,7 @@ import (
 
 type Method int
 
+const MAXUINT64 = ^uint64(0) >> 1
 const (
 	EFT Method = iota
 	CPTL
@@ -27,7 +28,7 @@ func NewScheduler(graph *graph.Graph, numWorkers int) *Scheduler {
 	}
 }
 
-func (s *Scheduler) taskPrioritize(m Method) (timespan uint64, pq PriorityTaskQueue, tWrapMap map[int]*TaskWrapper) {
+func (s *Scheduler) taskPrioritize(m Method) (pq PriorityTaskQueue, tWrapMap map[int]*TaskWrapper) {
 	tWrapMap = make(map[int]*TaskWrapper)
 
 	for _, v := range s.Graph.Vertices {
@@ -41,24 +42,21 @@ func (s *Scheduler) taskPrioritize(m Method) (timespan uint64, pq PriorityTaskQu
 		tWrap := &TaskWrapper{
 			Task:     v.Task,
 			Priority: priority,
-			AST:      0,
 			EST:      0,
 			EFT:      0,
 		}
 
 		pq = append(pq, tWrap)
 		tWrapMap[v.Task.ID] = tWrap
-
-		timespan += v.Task.Cost
 	}
 	return
 }
 
-func (s *Scheduler) processorSelection(timespan uint64, pq PriorityTaskQueue, tWrapMap map[int]*TaskWrapper) (processors []*Processor, makespan uint64) {
+func (s *Scheduler) processorSelection(pq PriorityTaskQueue, tWrapMap map[int]*TaskWrapper) (processors []*Processor, makespan uint64) {
 	heap.Init(&pq)
 	processors = make([]*Processor, s.NumWorkers)
 	for i := 0; i < s.NumWorkers; i++ {
-		processors[i] = NewProcessor(timespan)
+		processors[i] = NewProcessor()
 	}
 
 	for pq.Len() > 0 {
@@ -79,30 +77,28 @@ func (s *Scheduler) selectBestProcessor(processors []*Processor, tWrap *TaskWrap
 	if tWrap.Task.ID == -1 || tWrap.Task.ID == graph.MAXINT {
 		return
 	}
-	var pid int = 0            // 记录选中哪一个processor
-	var st, length uint64      // 记录选中该processor中哪一个slot
-	var eft uint64 = MAXUINT64 // 记录最小EFT
+	var pid int = 0                 // 记录选中哪一个processor
+	var prev *TaskWrapperNode = nil // 记录插入位置的前一个节点
+	var eft uint64 = MAXUINT64      // 记录最小EFT
 	for id, p := range processors {
-		tempSt, tempLength, tempEft := p.FindEFT(tWrap.EST, tWrap.Task.Cost)
+		tempPrev, tempEft := p.FindEFT(tWrap)
 		if tempEft < eft {
 			pid = id
-			st = tempSt
-			length = tempLength
+			prev = tempPrev
 			eft = tempEft
 		}
 	}
 	tWrap.EFT = eft
-	tWrap.AST = eft - tWrap.Task.Cost
-	processors[pid].AddTask(tWrap, st, length) // 添加任务
+	processors[pid].AddTask(tWrap, prev) // 添加任务
 }
 
 func (s *Scheduler) listSchedule(m Method, retProcessors *[]*Processor, retMakespan *uint64, wg *sync.WaitGroup) {
 	defer wg.Done()
 	// ------------------ task priority calculation ------------------
-	timespan, pq, tWrapMap := s.taskPrioritize(m)
+	pq, tWrapMap := s.taskPrioritize(m)
 
 	// ------------------ processor selection ------------------
-	processors, makespan := s.processorSelection(timespan, pq, tWrapMap)
+	processors, makespan := s.processorSelection(pq, tWrapMap)
 
 	*retProcessors = append(*retProcessors, processors...)
 	*retMakespan = makespan
@@ -134,7 +130,6 @@ func (s *Scheduler) pqSchedule(m Method, retProcessors *[]*Processor, retMakespa
 		tWrap := &TaskWrapper{
 			Task:     v.Task,
 			Priority: priority,
-			AST:      0,
 			EST:      0,
 			EFT:      0,
 		}
@@ -143,7 +138,7 @@ func (s *Scheduler) pqSchedule(m Method, retProcessors *[]*Processor, retMakespa
 
 	processors := make([]*Processor, s.NumWorkers)
 	for i := 0; i < s.NumWorkers; i++ {
-		processors[i] = NewProcessor(timespan)
+		processors[i] = NewProcessor()
 	}
 	cpProcesser := processors[0]
 
@@ -155,10 +150,9 @@ func (s *Scheduler) pqSchedule(m Method, retProcessors *[]*Processor, retMakespa
 	for pq.Len() != 0 {
 		tWrap := heap.Pop(&pq).(*TaskWrapper)
 		if _, ok := isCP[tWrap.Task.ID]; ok && tWrap.Task.ID != -1 && tWrap.Task.ID != graph.MAXINT {
-			st, length, eft := cpProcesser.FindEFT(tWrap.EST, tWrap.Task.Cost)
+			prev, eft := cpProcesser.FindEFT(tWrap)
 			tWrap.EFT = eft
-			tWrap.AST = eft - tWrap.Task.Cost
-			cpProcesser.AddTask(tWrap, st, length)
+			cpProcesser.AddTask(tWrap, prev)
 		} else {
 			s.selectBestProcessor(processors, tWrap)
 		}
@@ -203,66 +197,3 @@ func (s *Scheduler) Schedule() ([]*Processor, uint64) {
 	}
 	return processors, makespan
 }
-
-// Deprecated
-// func (s *Scheduler) TopoSchedule() ([]*Processor, uint64) {
-// 	// Topo Sort, get levels
-// 	mapIndegree := make(map[int]uint)
-// 	degreeZero := make([]int, 0)
-// 	for _, v := range s.Graph.Vertices {
-// 		mapIndegree[v.Task.ID] = v.InDegree
-// 		if v.InDegree == 0 {
-// 			degreeZero = append(degreeZero, v.Task.ID)
-// 		}
-// 	}
-// 	levels := make([][]int, 0)
-// 	levels = append(levels, degreeZero)
-
-// 	for {
-// 		newDegreeZero := make([]int, 0)
-// 		for _, vid := range degreeZero {
-// 			for succId := range s.Graph.AdjacencyMap[vid] {
-// 				mapIndegree[succId]--
-// 				if mapIndegree[succId] == 0 {
-// 					newDegreeZero = append(newDegreeZero, succId)
-// 				}
-// 			}
-// 		}
-// 		degreeZero = newDegreeZero
-// 		if len(degreeZero) == 0 {
-// 			break
-// 		} else {
-// 			levels = append(levels, degreeZero)
-// 		}
-// 	}
-
-// 	// converse Int in levels into types.Task
-// 	levelsTask := make([][]*types.Task, 0)
-// 	for _, level := range levels {
-// 		temp := make([]*types.Task, 0)
-// 		for _, id := range level {
-// 			temp = append(temp, s.Graph.Vertices[id].Task)
-// 		}
-// 		levelsTask = append(levelsTask, temp)
-// 	}
-
-// 	// A greedy algorithm to schedule tasks in levels
-// 	processors := make([]*Processor, s.NumWorkers)
-// 	for i := 0; i < s.NumWorkers; i++ {
-// 		processors[i] = NewProcessor(s.Graph.CriticalPathLen)
-// 	}
-
-// 	// 顺便计算makespan
-// 	var makespan uint64 = 0
-// 	for _, level := range levelsTask {
-// 		// TODO: 如果|level| < workers, 我们可以不走贪心
-// 		groups, maxSum := greedy.Greedy(level, s.NumWorkers)
-// 		makespan += maxSum
-// 		for i, group := range groups {
-// 			// TODO: 这里需要更改
-// 			// processors[i].Tasks = append(processors[i].Tasks, group...)
-// 		}
-// 	}
-
-// 	return processors, makespan
-// }

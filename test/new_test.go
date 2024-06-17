@@ -34,6 +34,9 @@ func TestSerialOriginal(t *testing.T) {
 	endNum := uint64(19000000)
 	startNum := endNum - blockCount
 
+	fatalAborts := 0
+	vmAborts := 0
+
 	for i := startNum; i < 19000000; i++ {
 		fmt.Println("=============================================")
 		fmt.Println("BlockNumber:", i)
@@ -50,11 +53,18 @@ func TestSerialOriginal(t *testing.T) {
 			msg.SetCheckNonce(false)
 			txCtx := originCore.NewEVMTxContext(msg)
 			evm.TxContext = txCtx
-			originCore.ApplyMessage(evm, msg, new(originCore.GasPool).AddGas(header.GasLimit), true /* refunds */, false /* gasBailout */)
+			res, err := originCore.ApplyMessage(evm, msg, new(originCore.GasPool).AddGas(header.GasLimit), true /* refunds */, false /* gasBailout */)
+			if err != nil {
+				fatalAborts++
+			} else if res.Err != nil {
+				vmAborts++
+			}
 		}
 		fmt.Println("Serial Execution Cost:", time.Since(st))
 	}
 	fmt.Println("=============================================")
+	fmt.Println("Fatal Abort:", fatalAborts)
+	fmt.Println("VM Abort:", vmAborts)
 }
 
 // 该函数测试了在MegaBlock情况下的Serial执行情况
@@ -326,4 +336,58 @@ func TestSize(t *testing.T) {
 		fmt.Println("Average Transaction Length:", float64(totalTxLen)/float64(totalTx))
 		fmt.Println("Average RwSet Length:", float64(totalRwSetLen)/float64(totalTx))
 	}
+}
+
+func TestOriginSchedule(t *testing.T) {
+	ctx, blkReader, db := helper.PrepareEnv()
+	dbTx, err := db.BeginRo(ctx)
+	if err != nil {
+		t.Fatal(err)
+	}
+	endNum := uint64(19000000)
+	startNum := endNum - blockCount
+	for _, size := range blockSize {
+		fmt.Println("=============================================")
+		fmt.Println("Block Size: ", size)
+		// 准备分组交易
+		txwsArray, _, _ := helper.PrepareTransactions(ctx, dbTx, blkReader, startNum, endNum, uint64(size), true /*need rwset*/)
+
+		for _, threadNum := range processorNum {
+			fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+			fmt.Println("Processor Number: ", threadNum)
+
+			// 为执行准备环境
+			ibs := helper.GetState(params.MainnetChainConfig, dbTx, startNum)
+			gvc := multiversion.NewGlobalVersionChain(ibs)
+
+			for i, txws := range txwsArray {
+				fmt.Println("---------------------------------------------")
+				fmt.Println("Block Number:", i)
+
+				// Pre-Processing
+				rwAccessedBy := helper.GenerateAccessedBy(txws)
+				taskMap := make(map[int]*types.Task)
+				for _, txw := range txws {
+					task := helper.TransferTxToTask(*txw, gvc)
+					taskMap[task.ID] = task
+				}
+				gvc.UpdateLastBlockTail()
+
+				// Graph Generation
+				graph := helper.GenerateGraph(taskMap, rwAccessedBy)
+
+				// Parallel Schedule
+				st := time.Now()
+				// scheduler := scheduleOrigin.NewScheduler(graph, threadNum)
+				scheduler := schedule.NewScheduler(graph, threadNum)
+				_, makespan := scheduler.Schedule()
+				fmt.Println("Original Parallel Schedule Cost:", time.Since(st))
+
+				// Schedule Result
+				fmt.Println("Critical Path Length:", graph.CriticalPathLen)
+				fmt.Println("Makespan:", makespan)
+			}
+		}
+	}
+	fmt.Println("=============================================")
 }
