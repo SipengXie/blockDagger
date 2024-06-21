@@ -1,0 +1,87 @@
+=== RUN   TestScheduleCost
+=============================================
+Block Size:  20000
+Total Number of Original Txs  853663 Cannot Predict: 234
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Processor Number:  2
+---------------------------------------------
+Block Number: 0
+Efficient Parallel Schedule Cost: 687.981146ms
+Origin Parallel Schedule Cost: 1.668610776s
+Total Cost: 4709764462
+---------------------------------------------
+Block Number: 1
+Efficient Parallel Schedule Cost: 583.47686ms
+Origin Parallel Schedule Cost: 1.528810577s
+Total Cost: 5167822439
+---------------------------------------------
+Block Number: 2
+Efficient Parallel Schedule Cost: 609.849672ms
+Origin Parallel Schedule Cost: 1.473635094s
+Total Cost: 5608952304
+---------------------------------------------
+Block Number: 3
+Efficient Parallel Schedule Cost: 614.723373ms
+Origin Parallel Schedule Cost: 2.308681416s
+Total Cost: 7203690434
+---------------------------------------------
+Block Number: 4
+Efficient Parallel Schedule Cost: 615.905537ms
+Origin Parallel Schedule Cost: 1.802559532s
+Total Cost: 7588537246
+---------------------------------------------
+Block Number: 5
+Efficient Parallel Schedule Cost: 602.20968ms
+Origin Parallel Schedule Cost: 1.523244s
+Total Cost: 5776338374
+---------------------------------------------
+Block Number: 6
+Efficient Parallel Schedule Cost: 632.870825ms
+Origin Parallel Schedule Cost: 1.566894275s
+Total Cost: 5321589837
+---------------------------------------------
+Block Number: 7
+Efficient Parallel Schedule Cost: 600.734974ms
+Origin Parallel Schedule Cost: 1.478235695s
+Total Cost: 6062004882
+---------------------------------------------
+Block Number: 8
+Efficient Parallel Schedule Cost: 775.908121ms
+Origin Parallel Schedule Cost: 2.830476108s
+Total Cost: 7853742231
+---------------------------------------------
+Block Number: 9
+Efficient Parallel Schedule Cost: 644.011648ms
+Origin Parallel Schedule Cost: 1.826760568s
+Total Cost: 6056810968
+---------------------------------------------
+Block Number: 10
+Efficient Parallel Schedule Cost: 597.553926ms
+Origin Parallel Schedule Cost: 1.790832536s
+Total Cost: 5594179871
+---------------------------------------------
+Block Number: 11
+Efficient Parallel Schedule Cost: 673.516844ms
+Origin Parallel Schedule Cost: 1.599123643s
+Total Cost: 5834202510
+---------------------------------------------
+Block Number: 12
+Efficient Parallel Schedule Cost: 821.881162ms
+Origin Parallel Schedule Cost: 2.759172857s
+Total Cost: 5759618064
+---------------------------------------------
+Block Number: 13
+Efficient Parallel Schedule Cost: 712.425211ms
+Origin Parallel Schedule Cost: 2.248665715s
+Total Cost: 5753212258
+---------------------------------------------
+Block Number: 14
+Efficient Parallel Schedule Cost: 666.238129ms
+Origin Parallel Schedule Cost: 2.118914461s
+Total Cost: 7771920806
+---------------------------------------------
+Block Number: 15
+Efficient Parallel Schedule Cost: 723.759613ms
+Origin Parallel Schedule Cost: 3.037684417s
+Total Cost: 6658493736
+

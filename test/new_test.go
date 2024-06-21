@@ -6,6 +6,7 @@ import (
 	multiversion "blockDagger/multiVersion"
 	"blockDagger/pipeline"
 	"blockDagger/schedule"
+	"blockDagger/scheduleOrigin"
 	"blockDagger/types"
 	"fmt"
 	"sync"
@@ -338,7 +339,7 @@ func TestSize(t *testing.T) {
 	}
 }
 
-func TestOriginSchedule(t *testing.T) {
+func TestScheduleCost(t *testing.T) {
 	ctx, blkReader, db := helper.PrepareEnv()
 	dbTx, err := db.BeginRo(ctx)
 	if err != nil {
@@ -367,9 +368,11 @@ func TestOriginSchedule(t *testing.T) {
 				// Pre-Processing
 				rwAccessedBy := helper.GenerateAccessedBy(txws)
 				taskMap := make(map[int]*types.Task)
+				var cost uint64
 				for _, txw := range txws {
 					task := helper.TransferTxToTask(*txw, gvc)
 					taskMap[task.ID] = task
+					cost += task.Cost
 				}
 				gvc.UpdateLastBlockTail()
 
@@ -378,14 +381,19 @@ func TestOriginSchedule(t *testing.T) {
 
 				// Parallel Schedule
 				st := time.Now()
-				// scheduler := scheduleOrigin.NewScheduler(graph, threadNum)
 				scheduler := schedule.NewScheduler(graph, threadNum)
-				_, makespan := scheduler.Schedule()
-				fmt.Println("Original Parallel Schedule Cost:", time.Since(st))
+				scheduler.Schedule()
+				fmt.Println("Efficient Parallel Schedule Cost:", time.Since(st))
 
-				// Schedule Result
-				fmt.Println("Critical Path Length:", graph.CriticalPathLen)
-				fmt.Println("Makespan:", makespan)
+				st = time.Now()
+				schedulerOrigin := scheduleOrigin.NewScheduler(graph, threadNum)
+				schedulerOrigin.Schedule()
+				fmt.Println("Origin Parallel Schedule Cost:", time.Since(st))
+
+				// Auxilary output
+				fmt.Println("Total Cost:", cost)
+				// fmt.Println("Critical Path Length:", graph.CriticalPathLen)
+				// fmt.Println("Makespan:", makespan)
 			}
 		}
 	}
